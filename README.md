@@ -32,5 +32,5 @@ The project includes:
 
 ## 📓 Notebooks
 
-- **minimax.ipynb** – Main algorithm with game state simulation and performance metrics.
-- **archive/mcts.ipynb** – An initial experiment using MCTS with UCB1 scoring and rollouts. Eventually replaced by minimax for deterministic optimization.
+- **baloot_minimax.ipynb** – Main algorithm with game state simulation and performance metrics.
+- **archive/baloot_mcts.ipynb** – An initial experiment using MCTS with UCB1 scoring and rollouts. Eventually replaced by minimax for deterministic optimization.
