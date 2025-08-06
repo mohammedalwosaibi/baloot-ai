@@ -11,8 +11,7 @@ OPTIONS = [f"{rank}{suit}" for rank in RANKS for suit in SUITS]
 st.title("Baloot AI")
 
 st.markdown("""
-**Baloot** is a popular strategic card game widely played in Saudi Arabia.  
-This tool simulates all possible outcomes and calculates the **optimal sequence of plays** that maximizes the score for each team based on the current state of the game.
+**Baloot** is a popular and strategic 4-player card game widely played in Saudi Arabia, especially in social settings and friendly competitions. Played in teams of two, it emphasizes coordination, memory, and decision-making, making it both engaging and intellectually challenging.
 
 ---
 
@@ -121,34 +120,42 @@ if calculate:
 
     st.markdown("""
     <style>
-    .card {
-        display: inline-block;
-        padding: 8px 12px;
-        border: 1px solid rgba(0,0,0,.12);
-        border-radius: 10px;
-        background: rgba(0,0,0,.23);
-        font-weight: 600;
-        margin: 0 auto;
-        min-width: 64px;
-        text-align: center;
-        width: 100%;
-    }
-    .red { color: #d11a2a; }
-    .blk { color: #ddd; }
-    .trick-title {
-        margin: 10px 0 6px;
-        padding: 6px 10px;
-        border-left: 4px solid var(--primary-color, #2b6cb0);
-        background: rgba(43,108,176,.06);
-        border-radius: 6px;
-        font-weight: 600;
-    }
-    .player-label {
-        font-size: 0.85rem;
-        opacity: 0.75;
-        margin-bottom: 4px;
-        text-align: center;
-    }
+        .card {
+            display: inline-block;
+            padding: 8px 12px;
+            border: 1px solid rgba(0,0,0,.12);
+            border-radius: 10px;
+            background: #ffffff;
+            font-weight: 600;
+            margin: 0 auto;
+            min-width: 64px;
+            text-align: center;
+            width: 100%;
+        }
+                
+        .red {
+            color: #d11a2a;
+        }
+
+        .blk {
+            color: #000000;
+        }
+                
+        .trick-title {
+            margin: 10px 0 6px;
+            padding: 6px 10px;
+            border-left: 4px solid var(--primary-color,#32916F);
+            background: rgba(50,145,111,.06);
+            border-radius: 6px;
+            font-weight: 600;
+        }
+                
+        .player-label {
+            font-size: .85rem;
+            opacity: .75;
+            margin-bottom: 4px;
+            text-align: center;
+        }
     </style>
     """, unsafe_allow_html=True)
 
@@ -176,6 +183,6 @@ if calculate:
         cols = st.columns(4)
         for p in range(4):
             with cols[p]:
-                st.markdown(f"<div class='player-label'>Player {p+1}</div>", unsafe_allow_html=True)
+                st.markdown(f"<div class='player-label'>Card {p+1}</div>", unsafe_allow_html=True)
                 card_html = render_card_html(int(best_path[t*4 + p]))
                 st.markdown(card_html, unsafe_allow_html=True)
