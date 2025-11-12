@@ -15,11 +15,27 @@ const std::unordered_map<uint8_t, uint8_t> RANK_VALUES = {
     {13, 4},
 };
 
+uint8_t get_suit(const uint8_t card) {
+    return (card - 1) / 13; // integer division
+}
+
+uint8_t get_rank(const uint8_t card) {
+    return card % 13;
+}
+
 uint8_t calculate_score(const std::array<uint8_t, 32>& round) {
     uint8_t winner = 0;
     for (int i = 0; i < 32; i += 4) {
-        uint8_t round_suit = (round[i] - 1) / 13; // integer division
-
+        uint8_t round_card = round[i];
+        uint8_t round_suit = get_suit(round_card);
+        uint8_t max_rank = get_rank(round_card);
+        for (int j = 1; j < 4; j++) {
+            uint8_t cur_card = round[i + j];
+            uint8_t cur_rank = get_rank(cur_card);
+            if (round_suit == get_suit(cur_card) && get_rank(cur_card) > max_rank) {
+                max_rank = cur_rank;
+            }
+        }
     }
     return 100;
 }
