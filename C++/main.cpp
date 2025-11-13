@@ -25,23 +25,32 @@ uint8_t get_rank(const uint8_t card) {
 
 uint8_t calculate_score(const std::array<uint8_t, 32>& round) {
     uint8_t winner = 0;
+    uint8_t round_score = 0;
     for (int i = 0; i < 32; i += 4) {
-        uint8_t round_card = round[i];
-        uint8_t round_suit = get_suit(round_card);
-        uint8_t max_rank = get_rank(round_card);
+        uint8_t trick_card = round[i];
+        uint8_t trick_suit = get_suit(trick_card);
+        uint8_t max_rank = get_rank(trick_card);
+        uint8_t trick_winner = 0;
+
         for (int j = 1; j < 4; j++) {
             uint8_t cur_card = round[i + j];
             uint8_t cur_rank = get_rank(cur_card);
-            if (round_suit == get_suit(cur_card) && get_rank(cur_card) > max_rank) {
+            if (trick_suit == get_suit(cur_card) && get_rank(cur_card) > max_rank) {
                 max_rank = cur_rank;
+                trick_winner = j;
             }
         }
+
+        winner = (winner + trick_winner) % 4;
+        if (winner == 0 || winner == 2) {
+            round_score += 1;
+        }
     }
-    return 100;
+    return round_score;
 }
 
 int main() {
     const std::array<uint8_t, 32> round = {40, 27, 9, 34, 47, 24, 38, 8, 46, 22, 37, 52, 20, 26, 7, 12, 36, 11, 13, 23, 21, 33, 35, 1, 25, 48, 50, 10, 49, 14, 51, 39};
-    calculate_score(round);
+    std::cout << +calculate_score(round) << std::endl;
     return 0;
 }
