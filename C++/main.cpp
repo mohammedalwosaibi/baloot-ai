@@ -15,12 +15,23 @@ const std::unordered_map<uint8_t, uint8_t> RANK_VALUES = {
     {13, 4},
 };
 
+const std::unordered_map<uint8_t, uint8_t> RANK_ORDER = {
+    {7, 0},
+    {8, 1},
+    {9, 2},
+    {11, 3},
+    {12, 4},
+    {13, 5},
+    {10, 6},
+    {1, 7},
+};
+
 uint8_t get_suit(const uint8_t card) {
     return (card - 1) / 13; // integer division
 }
 
 uint8_t get_rank(const uint8_t card) {
-    return card % 13;
+    return ((card - 1) % 13) + 1;
 }
 
 uint8_t calculate_score(const std::array<uint8_t, 32>& round) {
@@ -31,26 +42,29 @@ uint8_t calculate_score(const std::array<uint8_t, 32>& round) {
         uint8_t trick_suit = get_suit(trick_card);
         uint8_t max_rank = get_rank(trick_card);
         uint8_t trick_winner = 0;
-
+        uint8_t trick_score = RANK_VALUES.at(max_rank);
         for (int j = 1; j < 4; j++) {
             uint8_t cur_card = round[i + j];
             uint8_t cur_rank = get_rank(cur_card);
-            if (trick_suit == get_suit(cur_card) && get_rank(cur_card) > max_rank) {
+            trick_score += RANK_VALUES.at(cur_rank);
+            if (trick_suit == get_suit(cur_card) && RANK_ORDER.at(cur_rank) > RANK_ORDER.at(max_rank)) {
                 max_rank = cur_rank;
                 trick_winner = j;
             }
         }
-
         winner = (winner + trick_winner) % 4;
         if (winner == 0 || winner == 2) {
-            round_score += 1;
+            round_score += trick_score;
         }
+    }
+    if (winner == 0 || winner == 2) {
+        round_score += 10;
     }
     return round_score;
 }
 
 int main() {
-    const std::array<uint8_t, 32> round = {40, 27, 9, 34, 47, 24, 38, 8, 46, 22, 37, 52, 20, 26, 7, 12, 36, 11, 13, 23, 21, 33, 35, 1, 25, 48, 50, 10, 49, 14, 51, 39};
+    const std::array<uint8_t, 32> round = {1, 24, 51, 35, 14, 22, 38, 7, 27, 48, 33, 12, 40, 25, 52, 11, 10, 9, 20, 34, 23, 46, 37, 50, 36, 13, 47, 21, 49, 39, 8, 26};
     std::cout << +calculate_score(round) << std::endl;
     return 0;
 }
