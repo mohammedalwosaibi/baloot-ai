@@ -4,6 +4,10 @@
 #include <tuple>
 #include <unordered_map>
 
+/*
+TODO: Implement randomness
+*/
+
 const std::unordered_map<uint8_t, uint8_t> RANK_VALUES = {
     {1, 11},
     {7, 0},
@@ -32,6 +36,15 @@ uint8_t get_suit(const uint8_t card) {
 
 uint8_t get_rank(const uint8_t card) {
     return ((card - 1) % 13) + 1;
+}
+
+bool has_suit(const std::array<uint8_t, 8> cards, uint8_t suit) {
+    for (uint8_t card : cards) {
+        if (get_suit(card) == suit) {
+            return true;
+        }
+    }
+    return false;
 }
 
 uint8_t calculate_score(const std::array<uint8_t, 32>& round) {
@@ -66,5 +79,14 @@ uint8_t calculate_score(const std::array<uint8_t, 32>& round) {
 int main() {
     const std::array<uint8_t, 32> round = {1, 24, 51, 35, 14, 22, 38, 7, 27, 48, 33, 12, 40, 25, 52, 11, 10, 9, 20, 34, 23, 46, 37, 50, 36, 13, 47, 21, 49, 39, 8, 26};
     std::cout << +calculate_score(round) << std::endl;
+
+    std::array<std::array<uint8_t, 8>, 4> player_cards = {{
+        {1, 14, 27, 40, 10, 23, 36, 49},
+        {24, 22, 48, 25, 9, 46, 13, 39},
+        {51, 38, 33, 52, 20, 37, 47, 8},
+        {35, 7, 12, 11, 34, 50, 21, 26}
+    }};
+
+    std::cout << has_suit(player_cards[1], 3) << std::endl;
     return 0;
 }
