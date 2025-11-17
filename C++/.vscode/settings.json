@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "unordered_map": "cpp",
         "__bit_reference": "cpp",
         "__bits": "cpp",
         "__config": "cpp",
@@ -53,7 +54,6 @@
         "tuple": "cpp",
         "type_traits": "cpp",
         "typeinfo": "cpp",
-        "unordered_map": "cpp",
         "variant": "cpp",
         "__split_buffer": "cpp",
         "complex": "cpp",
