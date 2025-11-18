@@ -3,6 +3,7 @@
 #include <array>
 #include <tuple>
 #include "utils.h"
+#include "GameState.h"
 
 void make_move(std::array<std::array<uint8_t, 8>, 4>& player_cards, uint8_t player, uint8_t card) {
     for (int i = 0; i < 8; i++) {
@@ -23,13 +24,7 @@ int main() {
         {35, 7, 12, 11, 34, 50, 21, 26}
     }};
 
-    make_move(player_cards, 0, 14);
-    
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 8; j++) {
-            std::cout << +player_cards[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
+    GameState game_state(player_cards);
+    game_state.view_player_cards();
     return 0;
 }
