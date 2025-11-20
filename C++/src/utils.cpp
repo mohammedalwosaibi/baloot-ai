@@ -18,7 +18,21 @@ bool has_suit(const std::array<uint8_t, 8>& cards, uint8_t suit) {
     return false;
 }
 
-// Implement get_trick_winner to shorten calculate_score
+uint8_t get_trick_winner(const std::array<uint8_t, 4>& trick) {
+    uint8_t trick_suit = get_suit(trick[0]);
+    uint8_t max_rank = get_rank(trick[0]);
+    uint8_t winner = 0;
+
+    for (int i = 1; i < 4; i++) {
+        uint8_t cur_rank = get_rank(trick[i]);
+        if (get_suit(trick[i]) == trick_suit && RANK_ORDER.at(cur_rank) > RANK_ORDER.at(max_rank)) {
+            max_rank = cur_rank;
+            winner = i;
+        }
+    }
+    
+    return winner;
+}
 
 uint8_t calculate_score(const std::array<uint8_t, 32>& round) {
     uint8_t winner = 0;

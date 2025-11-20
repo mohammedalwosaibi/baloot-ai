@@ -16,8 +16,6 @@ int main() {
     }};
 
     GameState game_state(player_cards);
-    game_state.view_player_cards();
-    game_state.make_move(27);
-    game_state.view_player_cards();
+    std::cout << +get_trick_winner({10, 13, 12, 14});
     return 0;
 }
