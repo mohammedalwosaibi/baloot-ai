@@ -1,6 +1,7 @@
 #include "GameState.h"
 #include "utils.h"
 #include <iostream>
+#include <span>
 
 GameState::GameState(const std::array<std::array<uint8_t, 8>, 4>& player_cards) :
 player_cards_(player_cards),
@@ -27,8 +28,10 @@ void GameState::make_move(uint8_t card) {
             current_player_cards[i] = 0;
             // update game state
             played_cards_[num_of_played_cards_++] = card;
-            if (num_of_played_cards_ % 4 == 3) {
-                // update according to trick winner
+            if (num_of_played_cards_ % 4 == 0) {
+                auto [trick_winner, _] = get_trick_stats(std::span(played_cards_).subspan(num_of_played_cards_ - 4, 4));
+                current_player_ = (current_player_ + 1 + trick_winner) % 4;
+                std::cout << "Trick Winner: " << +trick_winner << "\n";
             } else {
                 current_player_ = (current_player_ + 1) % 4;
             }
