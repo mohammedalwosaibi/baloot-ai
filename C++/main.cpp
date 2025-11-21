@@ -16,6 +16,6 @@ int main() {
     }};
 
     GameState game_state(player_cards);
-    std::cout << +get_trick_winner({10, 13, 12, 14});
+    std::cout << +calculate_score(round) << "\n";
     return 0;
 }

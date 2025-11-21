@@ -18,40 +18,30 @@ bool has_suit(const std::array<uint8_t, 8>& cards, uint8_t suit) {
     return false;
 }
 
-uint8_t get_trick_winner(const std::array<uint8_t, 4>& trick) {
+std::pair<uint8_t, uint8_t> get_trick_stats(std::span<const uint8_t> trick) {
     uint8_t trick_suit = get_suit(trick[0]);
     uint8_t max_rank = get_rank(trick[0]);
     uint8_t winner = 0;
+    uint8_t score = RANK_VALUES.at(max_rank);
 
     for (int i = 1; i < 4; i++) {
         uint8_t cur_rank = get_rank(trick[i]);
+        score += RANK_VALUES.at(cur_rank);
         if (get_suit(trick[i]) == trick_suit && RANK_ORDER.at(cur_rank) > RANK_ORDER.at(max_rank)) {
             max_rank = cur_rank;
             winner = i;
         }
     }
     
-    return winner;
+    return {winner, score};
 }
 
 uint8_t calculate_score(const std::array<uint8_t, 32>& round) {
     uint8_t winner = 0;
     uint8_t round_score = 0;
     for (int i = 0; i < 32; i += 4) {
-        uint8_t trick_card = round[i];
-        uint8_t trick_suit = get_suit(trick_card);
-        uint8_t max_rank = get_rank(trick_card);
-        uint8_t trick_winner = 0;
-        uint8_t trick_score = RANK_VALUES.at(max_rank);
-        for (int j = 1; j < 4; j++) {
-            uint8_t cur_card = round[i + j];
-            uint8_t cur_rank = get_rank(cur_card);
-            trick_score += RANK_VALUES.at(cur_rank);
-            if (trick_suit == get_suit(cur_card) && RANK_ORDER.at(cur_rank) > RANK_ORDER.at(max_rank)) {
-                max_rank = cur_rank;
-                trick_winner = j;
-            }
-        }
+        auto [trick_winner, trick_score] = get_trick_stats(std::span(round).subspan(i, 4));
+
         winner = (winner + trick_winner) % 4;
         if (winner == 0 || winner == 2) {
             round_score += trick_score;
