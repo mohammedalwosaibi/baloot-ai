@@ -17,8 +17,10 @@ int main() {
 
     GameState game_state(player_cards);
     game_state.make_move(9);
-    game_state.make_move(20);
-    game_state.make_move(10);
-    game_state.make_move(7);
+    game_state.make_move(46);
+    game_state.view_player_cards();
+    game_state.undo_move();
+    game_state.undo_move();
+    game_state.view_player_cards();
     return 0;
 }
