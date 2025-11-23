@@ -47,10 +47,10 @@ void GameState::undo_move() {
     std::array<uint8_t, 8>& last_player_cards = player_cards_[last_player];
 
     last_player_cards[card_indices_[num_of_played_cards_]] = played_cards_[num_of_played_cards_];
-
-    card_indices_[num_of_played_cards_ + 1] = 0;
-    player_indices_[num_of_played_cards_ + 1] = 0;
-    played_cards_[num_of_played_cards_ + 1] = 0;
+    
+    card_indices_[num_of_played_cards_] = 0;
+    player_indices_[num_of_played_cards_] = 0;
+    played_cards_[num_of_played_cards_] = 0;
 
     current_player_ = last_player;
 }
