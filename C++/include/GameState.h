@@ -1,5 +1,6 @@
 #pragma once
 #include <array>
+#include <vector>
 #include <cstdint>
 
 class GameState {
@@ -8,6 +9,7 @@ public:
     void view_player_cards();
     void make_move(uint8_t card);
     void undo_move();
+    std::vector<uint8_t> get_legal_moves();
 
 private:
     std::array<std::array<uint8_t, 8>, 4> player_cards_;

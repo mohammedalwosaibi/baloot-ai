@@ -17,10 +17,13 @@ int main() {
 
     GameState game_state(player_cards);
     game_state.make_move(9);
-    game_state.make_move(46);
+    game_state.make_move(13);
     game_state.view_player_cards();
-    game_state.undo_move();
-    game_state.undo_move();
+    // game_state.undo_move();
     game_state.view_player_cards();
+    std::vector<uint8_t> legal_moves = game_state.get_legal_moves();
+    std::cout << "\n";
+    for (int i = 0; i < legal_moves.size(); i++) std::cout << +legal_moves[i] << " ";
+    std::cout << "\n";
     return 0;
 }
