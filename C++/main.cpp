@@ -4,6 +4,7 @@
 #include <tuple>
 #include "utils.h"
 #include "GameState.h"
+#include "search.h"
 
 int main() {
     const std::array<uint8_t, 32> round = {1, 24, 51, 35, 14, 22, 38, 7, 27, 48, 33, 12, 40, 25, 52, 11, 10, 9, 20, 34, 23, 46, 37, 50, 36, 13, 47, 21, 49, 39, 8, 26};
@@ -16,14 +17,7 @@ int main() {
     }};
 
     GameState game_state(player_cards);
-    game_state.make_move(9);
-    game_state.make_move(13);
-    game_state.view_player_cards();
-    // game_state.undo_move();
-    game_state.view_player_cards();
-    std::vector<uint8_t> legal_moves = game_state.get_legal_moves();
-    std::cout << "\n";
-    for (int i = 0; i < legal_moves.size(); i++) std::cout << +legal_moves[i] << " ";
-    std::cout << "\n";
+    uint8_t score = minimax(game_state, 32, 0, 130, true);
+    std::cout << +score << "\n";
     return 0;
 }

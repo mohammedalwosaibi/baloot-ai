@@ -11,7 +11,7 @@ uint8_t get_rank(const uint8_t card) {
 
 bool has_suit(const std::array<uint8_t, 8>& cards, uint8_t suit) {
     for (uint8_t card : cards) {
-        if (get_suit(card) == suit) {
+        if (card != 0 && get_suit(card) == suit) {
             return true;
         }
     }

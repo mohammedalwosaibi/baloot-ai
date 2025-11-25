@@ -37,6 +37,7 @@ void GameState::make_move(uint8_t card) {
             } else {
                 current_player_ = (current_player_ + 1) % 4;
             }
+            break;
         }
     }
 }
@@ -82,3 +83,5 @@ std::vector<uint8_t> GameState::get_legal_moves() {
 
     return legal_moves;
 }
+
+std::array<uint8_t, 32> GameState::played_cards() const { return played_cards_; }
