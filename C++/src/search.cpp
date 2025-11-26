@@ -1,10 +1,20 @@
 #include "search.h"
 #include "utils.h"
-#include <iostream>
+#include <array>
+
+extern std::array<uint64_t, 8> nodes_visited;
+
+int8_t current_move = -1;
 
 uint8_t minimax(GameState& game_state, uint8_t depth, uint8_t alpha, uint8_t beta, bool maximizing) {
     if (depth == 0) {
         return calculate_score(game_state.played_cards());
+    }
+
+    if (depth == 31) {
+        current_move++;
+    } else if (depth != 32) {
+        nodes_visited[current_move] += 1;
     }
 
     if (maximizing) {
