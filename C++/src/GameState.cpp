@@ -8,8 +8,10 @@ player_cards_(player_cards),
 played_cards_{},
 player_indices_{},
 card_indices_{},
+trick_scores_{},
 current_player_(0),
-num_of_played_cards_(0)
+num_of_played_cards_(0),
+score_(0)
 {}
 
 void GameState::view_player_cards() {
@@ -32,8 +34,15 @@ void GameState::make_move(uint8_t card) {
             card_indices_[num_of_played_cards_] = i;
             played_cards_[num_of_played_cards_++] = card;
             if (num_of_played_cards_ % 4 == 0) {
-                auto [trick_winner, _] = get_trick_stats(std::span(played_cards_).subspan(num_of_played_cards_ - 4, 4));
+                auto [trick_winner, trick_score] = get_trick_stats(std::span(played_cards_).subspan(num_of_played_cards_ - 4, 4));
                 current_player_ = (current_player_ + 1 + trick_winner) % 4;
+                if (current_player_ == 0 || current_player_ == 2) {
+                    if (num_of_played_cards_ == 32) trick_score += 10;
+                    score_ += trick_score;
+                    trick_scores_[(num_of_played_cards_ / 4) - 1] = trick_score;
+                } else {
+                    trick_scores_[(num_of_played_cards_ / 4) - 1] = 0;
+                }
             } else {
                 current_player_ = (current_player_ + 1) % 4;
             }
@@ -43,6 +52,10 @@ void GameState::make_move(uint8_t card) {
 }
 
 void GameState::undo_move() {
+    if (num_of_played_cards_ % 4 == 0) {
+        score_ -= trick_scores_[(num_of_played_cards_ / 4) - 1];
+    }
+
     num_of_played_cards_--;
     uint8_t last_player = player_indices_[num_of_played_cards_];
     std::array<uint8_t, 8>& last_player_cards = player_cards_[last_player];
@@ -79,3 +92,5 @@ uint8_t GameState::get_legal_moves(std::array<uint8_t, 8>& moves) {
 }
 
 const std::array<uint8_t, 32>& GameState::played_cards() const { return played_cards_; }
+
+uint8_t GameState::score() const { return score_; }

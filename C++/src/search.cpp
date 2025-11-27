@@ -9,7 +9,7 @@ int8_t current_move = -1;
 
 uint8_t minimax(GameState& game_state, uint8_t depth, uint8_t alpha, uint8_t beta, bool maximizing) {
     if (depth == 0) {
-        return calculate_score(game_state.played_cards());
+        return game_state.score();
     }
 
     if (depth == 31) {
