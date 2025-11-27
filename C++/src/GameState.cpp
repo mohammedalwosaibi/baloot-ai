@@ -48,23 +48,17 @@ void GameState::undo_move() {
     std::array<uint8_t, 8>& last_player_cards = player_cards_[last_player];
 
     last_player_cards[card_indices_[num_of_played_cards_]] = played_cards_[num_of_played_cards_];
-    
-    card_indices_[num_of_played_cards_] = 0;
-    player_indices_[num_of_played_cards_] = 0;
-    played_cards_[num_of_played_cards_] = 0;
 
     current_player_ = last_player;
 }
 
-std::vector<uint8_t> GameState::get_legal_moves() {
-    std::vector<uint8_t> legal_moves;
-    legal_moves.reserve(8);
-
+uint8_t GameState::get_legal_moves(std::array<uint8_t, 8>& moves) {
     std::array<uint8_t, 8>& current_player_cards = player_cards_[current_player_];
+    uint8_t num_moves = 0;
 
     if (num_of_played_cards_ % 4 == 0) {
         for (int i = 0; i < current_player_cards.size(); i++) {
-            if (current_player_cards[i] != 0) legal_moves.push_back(current_player_cards[i]);
+            if (current_player_cards[i] != 0) moves[num_moves++] = current_player_cards[i];
         }
     } else {
         uint8_t trick_leader_idx = num_of_played_cards_ - (num_of_played_cards_ % 4);
@@ -74,14 +68,14 @@ std::vector<uint8_t> GameState::get_legal_moves() {
             uint8_t card = current_player_cards[i];
             if (card == 0) continue;
             if (player_has_suit && get_suit(card) == trick_suit) {
-                legal_moves.push_back(card);
+                moves[num_moves++] = card;
             } else if (!player_has_suit) {
-                legal_moves.push_back(card);
+                moves[num_moves++] = card;
             }
         }
     }
 
-    return legal_moves;
+    return num_moves;
 }
 
-std::array<uint8_t, 32> GameState::played_cards() const { return played_cards_; }
+const std::array<uint8_t, 32>& GameState::played_cards() const { return played_cards_; }

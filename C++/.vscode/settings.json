@@ -60,6 +60,8 @@
         "complex": "cpp",
         "sstream": "cpp",
         "vector": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "__tree": "cpp",
+        "set": "cpp"
     }
 }

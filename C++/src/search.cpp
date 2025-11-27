@@ -1,6 +1,7 @@
 #include "search.h"
 #include "utils.h"
 #include <array>
+#include <cstdint>
 
 extern std::array<uint64_t, 8> nodes_visited;
 
@@ -19,7 +20,10 @@ uint8_t minimax(GameState& game_state, uint8_t depth, uint8_t alpha, uint8_t bet
 
     if (maximizing) {
         uint8_t max_eval = 0;
-        for (uint8_t move : game_state.get_legal_moves()) {
+        std::array<uint8_t, 8> legal_moves;
+        uint8_t num_moves = game_state.get_legal_moves(legal_moves);
+        for (int i = 0; i < num_moves; i++) {
+            uint8_t move = legal_moves[i];
             game_state.make_move(move);
             uint8_t eval = minimax(game_state, depth - 1, alpha, beta, false);
             game_state.undo_move();
@@ -34,7 +38,10 @@ uint8_t minimax(GameState& game_state, uint8_t depth, uint8_t alpha, uint8_t bet
         return max_eval;
     } else {
         uint8_t min_eval = 130;
-        for (uint8_t move : game_state.get_legal_moves()) {
+        std::array<uint8_t, 8> legal_moves;
+        uint8_t num_moves = game_state.get_legal_moves(legal_moves);
+        for (int i = 0; i < num_moves; i++) {
+            uint8_t move = legal_moves[i];
             game_state.make_move(move);
             uint8_t eval = minimax(game_state, depth - 1, alpha, beta, true);
             game_state.undo_move();
