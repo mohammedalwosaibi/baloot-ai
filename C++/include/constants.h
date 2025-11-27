@@ -1,7 +1,7 @@
 #pragma once
 
-#include <unordered_map>
+#include <array>
 #include <cstdint>
 
-extern const std::unordered_map<uint8_t, uint8_t> RANK_VALUES;
-extern const std::unordered_map<uint8_t, uint8_t> RANK_ORDER;
+extern const std::array<uint8_t, 14> RANK_VALUES;
+extern const std::array<uint8_t, 14> RANK_ORDER;

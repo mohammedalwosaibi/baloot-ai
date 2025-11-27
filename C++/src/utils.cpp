@@ -22,12 +22,12 @@ std::pair<uint8_t, uint8_t> get_trick_stats(std::span<const uint8_t> trick) {
     uint8_t trick_suit = get_suit(trick[0]);
     uint8_t max_rank = get_rank(trick[0]);
     uint8_t winner = 0;
-    uint8_t score = RANK_VALUES.at(max_rank);
+    uint8_t score = RANK_VALUES[max_rank];
 
     for (int i = 1; i < 4; i++) {
         uint8_t cur_rank = get_rank(trick[i]);
-        score += RANK_VALUES.at(cur_rank);
-        if (get_suit(trick[i]) == trick_suit && RANK_ORDER.at(cur_rank) > RANK_ORDER.at(max_rank)) {
+        score += RANK_VALUES[cur_rank];
+        if (get_suit(trick[i]) == trick_suit && RANK_ORDER[cur_rank] > RANK_ORDER[max_rank]) {
             max_rank = cur_rank;
             winner = i;
         }
