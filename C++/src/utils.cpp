@@ -1,5 +1,6 @@
 #include "utils.h"
 #include "constants.h"
+#include <random>
 
 uint8_t get_suit(const uint8_t card) {
     return (card - 1) / 13; // integer division
@@ -51,4 +52,8 @@ uint8_t calculate_score(const std::array<uint8_t, 32>& round) {
         round_score += 10;
     }
     return round_score;
+}
+
+uint64_t random_hash() {
+    return (uint64_t(rand()) << 33) ^ (uint64_t(rand()) << 2) ^ (uint64_t(rand()) >> 29);
 }

@@ -5,6 +5,7 @@
 #include <cstdint>
 #include <array>
 #include <chrono>
+#include <random>
 
 std::array<uint64_t, 8> nodes_visited = {};
 

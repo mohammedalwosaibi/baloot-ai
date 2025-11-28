@@ -1,5 +1,6 @@
 #include "GameState.h"
 #include "utils.h"
+#include "constants.h"
 #include <iostream>
 #include <span>
 
@@ -11,8 +12,12 @@ card_indices_{},
 trick_scores_{},
 current_player_(0),
 num_of_played_cards_(0),
-score_(0)
-{}
+score_(0),
+hash_(0)
+{
+    init_hashes();
+    hash_ ^= PLAYER_KEY[current_player_];
+}
 
 void GameState::view_player_cards() {
     for (int i = 0; i < 4; i++) {
@@ -33,9 +38,12 @@ void GameState::make_move(uint8_t card) {
             player_indices_[num_of_played_cards_] = current_player_;
             card_indices_[num_of_played_cards_] = i;
             played_cards_[num_of_played_cards_++] = card;
+            hash_ ^= CARD_KEY[card];
+            hash_ ^= PLAYER_KEY[current_player_];
             if (num_of_played_cards_ % 4 == 0) {
                 auto [trick_winner, trick_score] = get_trick_stats(std::span(played_cards_).subspan(num_of_played_cards_ - 4, 4));
                 current_player_ = (current_player_ + 1 + trick_winner) % 4;
+                hash_ ^= SCORE_KEY[score_];
                 if (current_player_ == 0 || current_player_ == 2) {
                     if (num_of_played_cards_ == 32) trick_score += 10;
                     score_ += trick_score;
@@ -43,9 +51,11 @@ void GameState::make_move(uint8_t card) {
                 } else {
                     trick_scores_[(num_of_played_cards_ / 4) - 1] = 0;
                 }
+                hash_ ^= SCORE_KEY[score_];
             } else {
                 current_player_ = (current_player_ + 1) % 4;
             }
+            hash_ ^= PLAYER_KEY[current_player_];
             break;
         }
     }
@@ -53,7 +63,9 @@ void GameState::make_move(uint8_t card) {
 
 void GameState::undo_move() {
     if (num_of_played_cards_ % 4 == 0) {
+        hash_ ^= SCORE_KEY[score_];
         score_ -= trick_scores_[(num_of_played_cards_ / 4) - 1];
+        hash_ ^= SCORE_KEY[score_];
     }
 
     num_of_played_cards_--;
@@ -61,8 +73,11 @@ void GameState::undo_move() {
     std::array<uint8_t, 8>& last_player_cards = player_cards_[last_player];
 
     last_player_cards[card_indices_[num_of_played_cards_]] = played_cards_[num_of_played_cards_];
+    hash_ ^= CARD_KEY[played_cards_[num_of_played_cards_]];
 
+    hash_ ^= PLAYER_KEY[current_player_];
     current_player_ = last_player;
+    hash_ ^= PLAYER_KEY[current_player_];
 }
 
 uint8_t GameState::get_legal_moves(std::array<uint8_t, 8>& moves) {

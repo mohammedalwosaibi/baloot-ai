@@ -22,4 +22,5 @@ private:
     uint8_t current_player_;
     uint8_t num_of_played_cards_;
     uint8_t score_;
+    uint64_t hash_;
 };
