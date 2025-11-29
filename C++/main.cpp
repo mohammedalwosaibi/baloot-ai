@@ -7,7 +7,7 @@
 #include <chrono>
 #include <random>
 
-std::array<uint64_t, 8> nodes_visited = {};
+std::array<int, 8> nodes_visited = {};
 
 int main() {
     const std::array<std::array<uint8_t, 8>, 4> player_cards = {{
@@ -24,6 +24,11 @@ int main() {
     std::chrono::duration<double> duration = end - start;
     std::cout << "Time taken: " << duration.count() << " seconds" << std::endl;
     std::cout << +score << "\n";
-    for (int i = 0; i < 8; i++) std::cout << nodes_visited[i] << (i == 7 ? "\n" : " ");
+    int total_nodes = 0;
+    for (int i = 0; i < 8; i++) {
+        total_nodes += nodes_visited[i];
+        std::cout << nodes_visited[i] << (i == 7 ? "\n" : " ");
+    }
+    std::cout << "Total Nodes: " << total_nodes << "\n";
     return 0;
 }

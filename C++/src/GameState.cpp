@@ -17,6 +17,7 @@ hash_(0)
 {
     init_hashes();
     hash_ ^= PLAYER_KEY[current_player_];
+    hash_ ^= SCORE_KEY[current_player_];
 }
 
 void GameState::view_player_cards() {
@@ -78,6 +79,11 @@ void GameState::undo_move() {
     hash_ ^= PLAYER_KEY[current_player_];
     current_player_ = last_player;
     hash_ ^= PLAYER_KEY[current_player_];
+
+
+    card_indices_[num_of_played_cards_] = 0;
+    player_indices_[num_of_played_cards_] = 0;
+    played_cards_[num_of_played_cards_] = 0;
 }
 
 uint8_t GameState::get_legal_moves(std::array<uint8_t, 8>& moves) {
@@ -106,6 +112,26 @@ uint8_t GameState::get_legal_moves(std::array<uint8_t, 8>& moves) {
     return num_moves;
 }
 
+uint64_t GameState::recompute_hash_debug() const {
+    uint64_t h = 0;
+
+    // recompute from first principles:
+    // 1. side to move
+    h ^= PLAYER_KEY[current_player_];
+
+    // 2. score
+    h ^= SCORE_KEY[score_];
+
+    // 3. all played cards
+    for (int i = 0; i < num_of_played_cards_; i++) {
+        h ^= CARD_KEY[played_cards_[i]];
+    }
+
+    return h;
+}
+
 const std::array<uint8_t, 32>& GameState::played_cards() const { return played_cards_; }
 
 uint8_t GameState::score() const { return score_; }
+
+uint64_t GameState::hash() const { return hash_; }
