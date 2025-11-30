@@ -13,6 +13,7 @@ public:
     const std::array<uint8_t, 32>& played_cards() const;
     uint8_t score() const;
     uint64_t hash() const;
+    uint8_t current_player() const;
 
 private:
     std::array<std::array<uint8_t, 8>, 4> player_cards_;

@@ -2,9 +2,12 @@
 
 #include <array>
 #include <cstdint>
+#include <string>
 
 extern const std::array<uint8_t, 14> RANK_VALUES;
 extern const std::array<uint8_t, 14> RANK_ORDER;
+extern const std::array<std::string, 14> RANK_NAMES;
+extern const std::array<std::string, 4> SUIT_NAMES;
 
 inline constexpr uint8_t NUM_CARDS = 52;
 inline constexpr uint8_t NUM_PLAYERS = 4;

@@ -5,6 +5,10 @@ const std::array<uint8_t, 14> RANK_VALUES = {0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 10, 
 
 const std::array<uint8_t, 14> RANK_ORDER = {0, 7, 0, 0, 0, 0, 0, 0, 1, 2, 6, 3, 4, 5};
 
+const std::array<std::string, 14> RANK_NAMES = {"", "Ace", "", "", "", "", "", "7", "8", "9", "10", "Jack", "Queen", "King"};
+
+const std::array<std::string, 4> SUIT_NAMES = {"Hearts", "Spades", "Diamonds", "Clubs"};
+
 uint64_t CARD_KEY[NUM_CARDS + 1];
 uint64_t PLAYER_KEY[NUM_PLAYERS];
 uint64_t SCORE_KEY[MAX_SCORE + 1];

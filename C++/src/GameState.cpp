@@ -116,3 +116,5 @@ const std::array<uint8_t, 32>& GameState::played_cards() const { return played_c
 uint8_t GameState::score() const { return score_; }
 
 uint64_t GameState::hash() const { return hash_; }
+
+uint8_t GameState::current_player() const { return current_player_; }

@@ -10,6 +10,7 @@ enum TTType {UPPER, LOWER, EXACT};
 struct TTEntry {
     uint8_t score;
     TTType type;
+    uint8_t best_move;
 };
 
 std::unordered_map<uint64_t, TTEntry> transposition_table;
@@ -28,7 +29,7 @@ uint8_t minimax(GameState& game_state, uint8_t depth, uint8_t alpha, uint8_t bet
 
     if (depth == 31) {
         current_move++;
-    } else if (depth != 32) {
+    } else {
         nodes_visited[current_move] += 1;
     }
 
@@ -51,53 +52,75 @@ uint8_t minimax(GameState& game_state, uint8_t depth, uint8_t alpha, uint8_t bet
         uint8_t max_eval = 0;
         std::array<uint8_t, 8> legal_moves;
         uint8_t num_moves = game_state.get_legal_moves(legal_moves);
+        uint8_t best_move = legal_moves[0];
         for (int i = 0; i < num_moves; i++) {
             uint8_t move = legal_moves[i];
             game_state.make_move(move);
-            uint8_t eval = minimax(game_state, depth - 1, alpha, beta, false);
+            uint8_t next_player = game_state.current_player();
+            bool maximizing_player = next_player == 0 || next_player == 2;
+            uint8_t eval = minimax(game_state, depth - 1, alpha, beta, maximizing_player);
             game_state.undo_move();
             if (eval > max_eval) {
                 max_eval = eval;
+                best_move = move;
                 if (max_eval > alpha) {
                     alpha = max_eval;
                     if (beta <= max_eval) break;
                 }
             }
         }
-        if (depth % 4 == 0) {
-            TTEntry entry;
-            entry.score = max_eval;
-            if (max_eval >= original_beta) entry.type = LOWER;
-            else if (max_eval > original_alpha) entry.type = EXACT;
-            else entry.type = UPPER;
-            transposition_table[hash] = entry;
-        }
+        TTEntry entry;
+        entry.score = max_eval;
+        entry.best_move = best_move;
+        if (max_eval >= original_beta) entry.type = LOWER;
+        else if (max_eval > original_alpha) entry.type = EXACT;
+        else entry.type = UPPER;
+        transposition_table[hash] = entry;
         return max_eval;
     } else {
         uint8_t min_eval = 130;
         std::array<uint8_t, 8> legal_moves;
         uint8_t num_moves = game_state.get_legal_moves(legal_moves);
+        uint8_t best_move = legal_moves[0];
         for (int i = 0; i < num_moves; i++) {
             uint8_t move = legal_moves[i];
             game_state.make_move(move);
-            uint8_t eval = minimax(game_state, depth - 1, alpha, beta, true);
+            uint8_t next_player = game_state.current_player();
+            bool maximizing_player = next_player == 0 || next_player == 2;
+            uint8_t eval = minimax(game_state, depth - 1, alpha, beta, maximizing_player);
             game_state.undo_move();
             if (eval < min_eval) {
                 min_eval = eval;
+                best_move = move;
                 if (min_eval < beta) {
                     beta = min_eval;
                     if (min_eval <= alpha) break;
                 }
             }
         }
-        if (depth % 4 == 0) {
-            TTEntry entry;
-            entry.score = min_eval;
-            if (min_eval >= original_beta) entry.type = LOWER;
-            else if (min_eval > original_alpha) entry.type = EXACT;
-            else entry.type = UPPER;
-            transposition_table[hash] = entry;
-        }
+        TTEntry entry;
+        entry.score = min_eval;
+        entry.best_move = best_move;
+        if (min_eval >= original_beta) entry.type = LOWER;
+        else if (min_eval > original_alpha) entry.type = EXACT;
+        else entry.type = UPPER;
+        transposition_table[hash] = entry;
         return min_eval;
     }
+}
+
+std::array<uint8_t, 32> extract_pv(const GameState& root) {
+    GameState state = root;
+
+    std::array<uint8_t, 32> pv = {};
+
+    for (int i = 0; i < 32; i++) {
+        uint64_t hash = state.hash();
+        std::unordered_map<uint64_t, TTEntry>::iterator it = transposition_table.find(hash);
+        uint8_t best_move = it->second.best_move;
+        pv[i] = best_move;
+        state.make_move(best_move);
+    }
+
+    return pv;
 }
