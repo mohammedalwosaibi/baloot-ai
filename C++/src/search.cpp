@@ -101,8 +101,3 @@ uint8_t minimax(GameState& game_state, uint8_t depth, uint8_t alpha, uint8_t bet
         return min_eval;
     }
 }
-
-// No TT: 66,898,419
-// TT Exact Scores: 51,031,819
-// TT Exact Scores (Inclusive): 26,522,770
-// TT All Hits: 1,769,405

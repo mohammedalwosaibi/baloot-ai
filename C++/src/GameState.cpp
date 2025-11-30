@@ -2,7 +2,6 @@
 #include "utils.h"
 #include "constants.h"
 #include <iostream>
-#include <span>
 
 GameState::GameState(const std::array<std::array<uint8_t, 8>, 4>& player_cards) :
 player_cards_(player_cards),
@@ -42,7 +41,7 @@ void GameState::make_move(uint8_t card) {
             hash_ ^= CARD_KEY[card];
             hash_ ^= PLAYER_KEY[current_player_];
             if (num_of_played_cards_ % 4 == 0) {
-                auto [trick_winner, trick_score] = get_trick_stats(std::span(played_cards_).subspan(num_of_played_cards_ - 4, 4));
+                auto [trick_winner, trick_score] = get_trick_stats(&played_cards_[num_of_played_cards_ - 4]);
                 current_player_ = (current_player_ + 1 + trick_winner) % 4;
                 hash_ ^= SCORE_KEY[score_];
                 if (current_player_ == 0 || current_player_ == 2) {
@@ -110,24 +109,6 @@ uint8_t GameState::get_legal_moves(std::array<uint8_t, 8>& moves) {
     }
 
     return num_moves;
-}
-
-uint64_t GameState::recompute_hash_debug() const {
-    uint64_t h = 0;
-
-    // recompute from first principles:
-    // 1. side to move
-    h ^= PLAYER_KEY[current_player_];
-
-    // 2. score
-    h ^= SCORE_KEY[score_];
-
-    // 3. all played cards
-    for (int i = 0; i < num_of_played_cards_; i++) {
-        h ^= CARD_KEY[played_cards_[i]];
-    }
-
-    return h;
 }
 
 const std::array<uint8_t, 32>& GameState::played_cards() const { return played_cards_; }

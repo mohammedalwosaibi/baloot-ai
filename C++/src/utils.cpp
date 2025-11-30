@@ -19,7 +19,7 @@ bool has_suit(const std::array<uint8_t, 8>& cards, uint8_t suit) {
     return false;
 }
 
-std::pair<uint8_t, uint8_t> get_trick_stats(std::span<const uint8_t> trick) {
+std::pair<uint8_t, uint8_t> get_trick_stats(const uint8_t* trick) {
     uint8_t trick_suit = get_suit(trick[0]);
     uint8_t max_rank = get_rank(trick[0]);
     uint8_t winner = 0;
@@ -35,23 +35,6 @@ std::pair<uint8_t, uint8_t> get_trick_stats(std::span<const uint8_t> trick) {
     }
     
     return {winner, score};
-}
-
-uint8_t calculate_score(const std::array<uint8_t, 32>& round) {
-    uint8_t winner = 0;
-    uint8_t round_score = 0;
-    for (int i = 0; i < 32; i += 4) {
-        auto [trick_winner, trick_score] = get_trick_stats(std::span(round).subspan(i, 4));
-
-        winner = (winner + trick_winner) % 4;
-        if (winner == 0 || winner == 2) {
-            round_score += trick_score;
-        }
-    }
-    if (winner == 0 || winner == 2) {
-        round_score += 10;
-    }
-    return round_score;
 }
 
 uint64_t random_hash() {
