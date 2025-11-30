@@ -5,7 +5,14 @@
 #include <unordered_map>
 #include <iostream>
 
-std::unordered_map<uint64_t, uint8_t> transposition_table;
+enum TTType {UPPER, LOWER, EXACT};
+
+struct TTEntry {
+    uint8_t score;
+    TTType type;
+};
+
+std::unordered_map<uint64_t, TTEntry> transposition_table;
 
 extern std::array<int, 8> nodes_visited;
 
@@ -27,9 +34,16 @@ uint8_t minimax(GameState& game_state, uint8_t depth, uint8_t alpha, uint8_t bet
 
     
     if (depth % 4 == 0) {
-        std::unordered_map<uint64_t, uint8_t>::iterator it = transposition_table.find(hash);
+        std::unordered_map<uint64_t, TTEntry>::iterator it = transposition_table.find(hash);
         if (it != transposition_table.end()) {
-            return it->second;
+            if (it->second.type == TTType::EXACT) return it->second.score;
+            else if (it->second.type == TTType::LOWER) {
+                if (it->second.score >= beta) return it->second.score;
+                else if (it->second.score > alpha) alpha = it->second.score;
+            } else {
+                if (it->second.score <= alpha) return it->second.score;
+                else if (it->second.score < beta) beta = it->second.score;
+            }
         }
     }
 
@@ -50,7 +64,14 @@ uint8_t minimax(GameState& game_state, uint8_t depth, uint8_t alpha, uint8_t bet
                 }
             }
         }
-        if (depth % 4 == 0 && original_alpha < max_eval && max_eval < original_beta) transposition_table[hash] = max_eval;
+        if (depth % 4 == 0) {
+            TTEntry entry;
+            entry.score = max_eval;
+            if (max_eval >= original_beta) entry.type = LOWER;
+            else if (max_eval > original_alpha) entry.type = EXACT;
+            else entry.type = UPPER;
+            transposition_table[hash] = entry;
+        }
         return max_eval;
     } else {
         uint8_t min_eval = 130;
@@ -69,7 +90,14 @@ uint8_t minimax(GameState& game_state, uint8_t depth, uint8_t alpha, uint8_t bet
                 }
             }
         }
-        if (depth % 4 == 0 && original_alpha < min_eval && min_eval < original_beta) transposition_table[hash] = min_eval;
+        if (depth % 4 == 0) {
+            TTEntry entry;
+            entry.score = min_eval;
+            if (min_eval >= original_beta) entry.type = LOWER;
+            else if (min_eval > original_alpha) entry.type = EXACT;
+            else entry.type = UPPER;
+            transposition_table[hash] = entry;
+        }
         return min_eval;
     }
 }

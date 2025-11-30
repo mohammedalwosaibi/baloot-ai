@@ -23,7 +23,7 @@ int main() {
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> duration = end - start;
     std::cout << "Time taken: " << duration.count() << " seconds" << std::endl;
-    std::cout << +score << "\n";
+    std::cout << "Score: " << +score << "\n";
     int total_nodes = 0;
     for (int i = 0; i < 8; i++) {
         total_nodes += nodes_visited[i];
