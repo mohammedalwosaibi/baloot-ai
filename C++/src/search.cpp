@@ -15,23 +15,18 @@ struct TTEntry {
 
 std::unordered_map<uint64_t, TTEntry> transposition_table;
 
-extern std::array<int, 8> nodes_visited;
-
-int8_t current_move = -1;
+extern int nodes_visited;
 
 uint8_t minimax(GameState& game_state, uint8_t depth, uint8_t alpha, uint8_t beta, bool maximizing) {
-    uint8_t original_alpha = alpha;
-    uint8_t original_beta = beta;
-    uint64_t hash = game_state.hash();
+    nodes_visited++;
+
     if (depth == 0) {
         return game_state.score();
     }
 
-    if (depth == 31) {
-        current_move++;
-    } else {
-        nodes_visited[current_move] += 1;
-    }
+    uint8_t original_alpha = alpha;
+    uint8_t original_beta = beta;
+    uint64_t hash = game_state.hash();
 
     
     if (depth % 4 == 0) {
@@ -109,12 +104,12 @@ uint8_t minimax(GameState& game_state, uint8_t depth, uint8_t alpha, uint8_t bet
     }
 }
 
-std::array<uint8_t, 32> extract_pv(const GameState& root) {
+std::array<uint8_t, 32> extract_pv(const GameState& root, uint8_t depth) {
     GameState state = root;
 
     std::array<uint8_t, 32> pv = {};
 
-    for (int i = 0; i < 32; i++) {
+    for (int i = 0; i < depth; i++) {
         uint64_t hash = state.hash();
         std::unordered_map<uint64_t, TTEntry>::iterator it = transposition_table.find(hash);
         uint8_t best_move = it->second.best_move;

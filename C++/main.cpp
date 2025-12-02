@@ -8,7 +8,7 @@
 #include <chrono>
 #include <random>
 
-std::array<int, 8> nodes_visited;
+int nodes_visited;
 
 int main() {
     const std::array<std::array<uint8_t, 8>, 4> player_cards = {{
@@ -27,23 +27,19 @@ int main() {
         std::cout << "\n";
     }
 
+    int depth = 16;
+
     GameState game_state(player_cards);
     auto start = std::chrono::high_resolution_clock::now();
-    uint8_t score = minimax(game_state, 32, 0, 130, true);
+    uint8_t score = minimax(game_state, depth, 0, 130, true);
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> duration = end - start;
     std::cout << "Time taken: " << duration.count() << " seconds" << std::endl;
     std::cout << "Score: " << +score << "\n";
-    int total_nodes = 0;
-    for (int i = 0; i < 8; i++) {
-        total_nodes += nodes_visited[i];
-        std::cout << nodes_visited[i] << (i == 7 ? "\n" : " ");
-    }
-    std::cout << "Total Nodes: " << total_nodes << "\n";
-    std::array<uint8_t, 32> pv = extract_pv(game_state);
-    // for (int i = 0; i < 32; i++) std::cout << +pv[i] << (i == 31 ? "\n" : " ");
+    std::cout << "Total Nodes: " << nodes_visited << "\n";
+    std::array<uint8_t, 32> pv = extract_pv(game_state, depth);
 
-    for (int i = 0; i < 32; i++) {
+    for (int i = 0; i < depth; i++) {
         if (i % 4 == 0) std::cout << "\nHand #" << (i / 4) + 1 << ":\n";
         uint8_t card = pv[i];
         std::cout << RANK_NAMES[get_rank(card)] << " of " << SUIT_NAMES[get_suit(card)] << "\n";

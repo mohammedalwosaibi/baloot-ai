@@ -78,11 +78,6 @@ void GameState::undo_move() {
     hash_ ^= PLAYER_KEY[current_player_];
     current_player_ = last_player;
     hash_ ^= PLAYER_KEY[current_player_];
-
-
-    card_indices_[num_of_played_cards_] = 0;
-    player_indices_[num_of_played_cards_] = 0;
-    played_cards_[num_of_played_cards_] = 0;
 }
 
 uint8_t GameState::get_legal_moves(std::array<uint8_t, 8>& moves) {
