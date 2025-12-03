@@ -11,6 +11,7 @@ struct TTEntry {
     uint8_t score;
     TTType type;
     uint8_t best_move;
+    uint8_t depth;
 };
 
 std::unordered_map<uint64_t, TTEntry> transposition_table;
@@ -28,10 +29,13 @@ uint8_t minimax(GameState& game_state, uint8_t depth, uint8_t alpha, uint8_t bet
     uint8_t original_beta = beta;
     uint64_t hash = game_state.hash();
 
-    
-    if (depth % 4 == 0) {
-        std::unordered_map<uint64_t, TTEntry>::iterator it = transposition_table.find(hash);
-        if (it != transposition_table.end()) {
+    std::array<uint8_t, 8> legal_moves;
+    uint8_t num_moves = game_state.get_legal_moves(legal_moves);
+    uint8_t best_move = legal_moves[0];
+
+    std::unordered_map<uint64_t, TTEntry>::iterator it = transposition_table.find(hash);
+    if (it != transposition_table.end()) {
+        if (depth % 4 == 0 && it->second.depth >= depth) {
             if (it->second.type == TTType::EXACT) return it->second.score;
             else if (it->second.type == TTType::LOWER) {
                 if (it->second.score >= beta) return it->second.score;
@@ -41,13 +45,19 @@ uint8_t minimax(GameState& game_state, uint8_t depth, uint8_t alpha, uint8_t bet
                 else if (it->second.score < beta) beta = it->second.score;
             }
         }
+
+        best_move = it->second.best_move;
+
+        for (uint8_t i = 1; i < num_moves; i++) {
+            if (legal_moves[i] == best_move) {
+                std::swap(legal_moves[0], legal_moves[i]);
+                break;
+            }
+        }
     }
 
     if (maximizing) {
         uint8_t max_eval = 0;
-        std::array<uint8_t, 8> legal_moves;
-        uint8_t num_moves = game_state.get_legal_moves(legal_moves);
-        uint8_t best_move = legal_moves[0];
         for (int i = 0; i < num_moves; i++) {
             uint8_t move = legal_moves[i];
             game_state.make_move(move);
@@ -66,6 +76,7 @@ uint8_t minimax(GameState& game_state, uint8_t depth, uint8_t alpha, uint8_t bet
         }
         TTEntry entry;
         entry.score = max_eval;
+        entry.depth = depth;
         entry.best_move = best_move;
         if (max_eval >= original_beta) entry.type = LOWER;
         else if (max_eval > original_alpha) entry.type = EXACT;
@@ -74,9 +85,6 @@ uint8_t minimax(GameState& game_state, uint8_t depth, uint8_t alpha, uint8_t bet
         return max_eval;
     } else {
         uint8_t min_eval = 130;
-        std::array<uint8_t, 8> legal_moves;
-        uint8_t num_moves = game_state.get_legal_moves(legal_moves);
-        uint8_t best_move = legal_moves[0];
         for (int i = 0; i < num_moves; i++) {
             uint8_t move = legal_moves[i];
             game_state.make_move(move);
@@ -96,6 +104,7 @@ uint8_t minimax(GameState& game_state, uint8_t depth, uint8_t alpha, uint8_t bet
         TTEntry entry;
         entry.score = min_eval;
         entry.best_move = best_move;
+        entry.depth = depth;
         if (min_eval >= original_beta) entry.type = LOWER;
         else if (min_eval > original_alpha) entry.type = EXACT;
         else entry.type = UPPER;
