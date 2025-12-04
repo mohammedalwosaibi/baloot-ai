@@ -44,12 +44,13 @@ void GameState::make_move(uint8_t card) {
                 auto [trick_winner, trick_score] = get_trick_stats(&played_cards_[num_of_played_cards_ - 4]);
                 current_player_ = (current_player_ + 1 + trick_winner) % 4;
                 hash_ ^= SCORE_KEY[score_];
+                uint8_t trick_idx = (num_of_played_cards_ / 4) - 1;
                 if (current_player_ == 0 || current_player_ == 2) {
                     if (num_of_played_cards_ == 32) trick_score += 10;
                     score_ += trick_score;
-                    trick_scores_[(num_of_played_cards_ / 4) - 1] = trick_score;
+                    trick_scores_[trick_idx] = trick_score;
                 } else {
-                    trick_scores_[(num_of_played_cards_ / 4) - 1] = 0;
+                    trick_scores_[trick_idx] = 0;
                 }
                 hash_ ^= SCORE_KEY[score_];
             } else {
