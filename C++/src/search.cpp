@@ -5,15 +5,6 @@
 #include <unordered_map>
 #include <iostream>
 
-enum TTType {UPPER, LOWER, EXACT};
-
-struct TTEntry {
-    uint8_t score;
-    TTType type;
-    uint8_t best_move;
-    uint8_t depth;
-};
-
 std::unordered_map<uint64_t, TTEntry> transposition_table;
 
 extern int nodes_visited;
