@@ -40,7 +40,7 @@ int main() {
     std::cout << "Time taken: " << duration.count() << " seconds" << std::endl;
     std::cout << "Score: " << +score << "\n";
     std::cout << "Total Nodes: " << nodes_visited << "\n";
-    std::array<uint8_t, 32> pv = extract_pv(game_state, depth);
+    std::vector<uint8_t> pv = extract_pv(game_state, depth);
 
     for (int i = 0; i < depth; i++) {
         if (i % 4 == 0) std::cout << "\nHand #" << (i / 4) + 1 << ":\n";

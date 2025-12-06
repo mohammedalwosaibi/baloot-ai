@@ -104,16 +104,17 @@ uint8_t minimax(GameState& game_state, uint8_t depth, uint8_t alpha, uint8_t bet
     }
 }
 
-std::array<uint8_t, 32> extract_pv(const GameState& root, uint8_t depth) {
+std::vector<uint8_t> extract_pv(const GameState& root, uint8_t depth) {
     GameState state = root;
 
-    std::array<uint8_t, 32> pv = {};
+    std::vector<uint8_t> pv;
+    pv.reserve(depth);
 
     for (int i = 0; i < depth; i++) {
         uint64_t hash = state.hash();
         std::unordered_map<uint64_t, TTEntry>::iterator it = transposition_table.find(hash);
         uint8_t best_move = it->second.best_move;
-        pv[i] = best_move;
+        pv.push_back(best_move);
         state.make_move(best_move);
     }
 
