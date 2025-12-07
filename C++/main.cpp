@@ -35,6 +35,7 @@ int main() {
     for (int i = 4; i <= depth; i += 4) {
         score = minimax(game_state, i, 0, 130, true);
     }
+    
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> duration = end - start;
     std::cout << "Time taken: " << duration.count() << " seconds" << std::endl;
