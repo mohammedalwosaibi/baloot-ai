@@ -2,14 +2,6 @@
 #include "constants.h"
 #include <random>
 
-uint8_t get_suit(const uint8_t card) {
-    return (card - 1) / 13; // integer division
-}
-
-uint8_t get_rank(const uint8_t card) {
-    return ((card - 1) % 13) + 1;
-}
-
 bool has_suit(const std::array<uint8_t, 8>& cards, uint8_t suit) {
     for (uint8_t card : cards) {
         if (card != 0 && get_suit(card) == suit) {
