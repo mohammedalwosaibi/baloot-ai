@@ -7,7 +7,7 @@
 inline constexpr std::array<uint8_t, 14> RANK_VALUES = {0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 10, 2, 3, 4};
 inline constexpr std::array<uint8_t, 14> RANK_ORDER = {0, 7, 0, 0, 0, 0, 0, 0, 1, 2, 6, 3, 4, 5};
 inline constexpr std::array<std::string_view, 14> RANK_NAMES = {"", "A", "", "", "", "", "", "7", "8", "9", "10", "J", "Q", "K"};
-inline constexpr std::array<std::string_view, 4> SUIT_NAMES = {"Hearts", "Spades", "Diamonds", "Clubs"};
+inline constexpr std::array<std::string_view, 4> SUIT_SYMBOLS = {"♥", "♠", "♦", "♣"};
 
 inline constexpr uint8_t NUM_CARDS = 52;
 inline constexpr uint8_t NUM_PLAYERS = 4;

@@ -22,7 +22,7 @@ int main() {
         std::cout << "Player #" << i + 1 << "'s Cards:" << "\n";
         for (int j = 0; j < 8; j++) {
             uint8_t card = player_cards[i][j];
-            std::cout << RANK_NAMES[get_rank(card)] << " of " << SUIT_NAMES[get_suit(card)] << "\n";
+            std::cout << RANK_NAMES[get_rank(card)] << SUIT_SYMBOLS[get_suit(card)] << (j == 7 ? "\n" : " ");
         }
         std::cout << "\n";
     }
@@ -38,16 +38,18 @@ int main() {
     
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> duration = end - start;
-    std::cout << "Time taken: " << duration.count() << " seconds" << std::endl;
-    std::cout << "Score: " << +score << "\n";
-    std::cout << "Total Nodes: " << nodes_visited << "\n";
+
     std::vector<uint8_t> pv = extract_pv(game_state, depth);
 
     for (int i = 0; i < depth; i++) {
-        if (i % 4 == 0) std::cout << "\nHand #" << (i / 4) + 1 << ":\n";
+        if (i % 4 == 0) std::cout << "Hand #" << (i / 4) + 1 << ":\n";
         uint8_t card = pv[i];
-        std::cout << RANK_NAMES[get_rank(card)] << " of " << SUIT_NAMES[get_suit(card)] << "\n";
+        std::cout << RANK_NAMES[get_rank(card)] << SUIT_SYMBOLS[get_suit(card)] << (i % 4 == 3 ? "\n\n" : " ");
     }
+
+    std::cout << "Time taken: " << duration.count() << " seconds" << std::endl;
+    std::cout << "Score: " << +score << "\n";
+    std::cout << "Total Nodes: " << nodes_visited << "\n";
 
     return 0;
 }
