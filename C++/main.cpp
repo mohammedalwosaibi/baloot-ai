@@ -7,6 +7,7 @@
 #include <array>
 #include <chrono>
 #include <random>
+#include <cmath>
 
 int nodes_visited = 0;
 
@@ -27,21 +28,22 @@ int main() {
         std::cout << "\n";
     }
 
-    int depth = 32;
+    int depth = 8;
 
     GameState game_state(player_cards);
+
     auto start = std::chrono::high_resolution_clock::now();
     uint8_t score;
-    for (int i = 4; i <= depth; i += 4) {
+    for (int i = 1; i <= depth; i++) {
         score = minimax(game_state, i, 0, 130, true);
     }
     
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> duration = end - start;
 
-    std::vector<uint8_t> pv = extract_pv(game_state, depth);
+    std::vector<uint8_t> pv = extract_pv(game_state, 32);
 
-    for (int i = 0; i < depth; i++) {
+    for (int i = 0; i < 32; i++) {
         if (i % 4 == 0) std::cout << "Hand #" << (i / 4) + 1 << ":\n";
         uint8_t card = pv[i];
         std::cout << RANK_NAMES[get_rank(card)] << SUIT_SYMBOLS[get_suit(card)] << (i % 4 == 3 ? "\n\n" : " ");
