@@ -21,11 +21,15 @@ hash_(0)
 
 void GameState::view_player_cards() {
     for (int i = 0; i < 4; i++) {
+        std::cout << "Player #" << i + 1 << "'s Cards: ";
         for (int j = 0; j < 8; j++) {
-            std::cout << +player_cards_[i][j] << " ";
+            uint8_t card = player_cards_[i][j];
+            uint8_t rank = get_rank(card);
+            std::cout << (rank == 10 ? "" : " ") << RANK_NAMES[rank] << SUIT_SYMBOLS[get_suit(card)] << (j == 7 ? "\n" : " ");
         }
-        std::cout << "\n";
     }
+    
+    std::cout << "\n";
 }
 
 void GameState::make_move(uint8_t card) {

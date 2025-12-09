@@ -108,9 +108,7 @@ uint8_t minimax(GameState& game_state, uint8_t trick_depth, uint8_t alpha, uint8
     }
 }
 
-std::vector<uint8_t> extract_pv(const GameState& root, uint8_t depth) {
-    GameState state = root;
-
+std::vector<uint8_t> extract_pv(GameState state, uint8_t depth) {
     std::vector<uint8_t> pv;
 
     for (int i = 0; i < depth; i++) {
