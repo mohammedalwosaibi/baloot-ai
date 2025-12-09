@@ -1,11 +1,13 @@
 #include "search.h"
 #include "utils.h"
+#include "constants.h"
 #include <array>
 #include <cstdint>
-#include <unordered_map>
 #include <iostream>
 
-std::unordered_map<uint64_t, TTEntry> transposition_table;
+static constexpr uint32_t TABLE_SIZE = 1 << 19;
+
+std::array<TTEntry, TABLE_SIZE> transposition_table;
 
 extern int nodes_visited;
 
@@ -22,22 +24,22 @@ uint8_t minimax(GameState& game_state, uint8_t trick_depth, uint8_t alpha, uint8
 
     std::array<uint8_t, 8> legal_moves;
     uint8_t num_moves = game_state.get_legal_moves(legal_moves);
-    uint8_t best_move;
+    uint8_t best_move = legal_moves[0];
 
-    std::unordered_map<uint64_t, TTEntry>::iterator it = transposition_table.find(hash);
-    if (it != transposition_table.end()) {
-        if (game_state.num_of_played_cards() % 4 == 0 && it->second.trick_depth >= trick_depth) {
-            if (it->second.type == TTType::EXACT) return it->second.score;
-            else if (it->second.type == TTType::LOWER) {
-                if (it->second.score >= beta) return it->second.score;
-                else if (it->second.score > alpha) alpha = it->second.score;
+    TTEntry& entry = transposition_table[hash & (TABLE_SIZE - 1)];
+    if (entry.hash == hash) {
+        if (game_state.num_of_played_cards() % 4 == 0 && entry.trick_depth >= trick_depth) {
+            if (entry.type == TTType::EXACT) return entry.score;
+            else if (entry.type == TTType::LOWER) {
+                if (entry.score >= beta) return entry.score;
+                else if (entry.score > alpha) alpha = entry.score;
             } else {
-                if (it->second.score <= alpha) return it->second.score;
-                else if (it->second.score < beta) beta = it->second.score;
+                if (entry.score <= alpha) return entry.score;
+                else if (entry.score < beta) beta = entry.score;
             }
         }
 
-        best_move = it->second.best_move;
+        best_move = entry.best_move;
 
         for (uint8_t i = 1; i < num_moves; i++) {
             if (legal_moves[i] == best_move) {
@@ -66,15 +68,15 @@ uint8_t minimax(GameState& game_state, uint8_t trick_depth, uint8_t alpha, uint8
                 }
             }
         }
-
-        TTEntry entry;
-        entry.score = max_eval;
-        entry.trick_depth = trick_depth;
-        entry.best_move = best_move;
-        if (max_eval >= original_beta) entry.type = LOWER;
-        else if (max_eval > original_alpha) entry.type = EXACT;
-        else entry.type = UPPER;
-        transposition_table[hash] = entry;
+        if (trick_depth >= entry.trick_depth) {
+            entry.score = max_eval;
+            entry.trick_depth = trick_depth;
+            entry.best_move = best_move;
+            entry.hash = hash;
+            if (max_eval >= original_beta) entry.type = LOWER;
+            else if (max_eval > original_alpha) entry.type = EXACT;
+            else entry.type = UPPER;
+        }
         return max_eval;
     } else {
         uint8_t min_eval = 130;
@@ -95,15 +97,15 @@ uint8_t minimax(GameState& game_state, uint8_t trick_depth, uint8_t alpha, uint8
                 }
             }
         }
-
-        TTEntry entry;
-        entry.score = min_eval;
-        entry.best_move = best_move;
-        entry.trick_depth = trick_depth;
-        if (min_eval >= original_beta) entry.type = LOWER;
-        else if (min_eval > original_alpha) entry.type = EXACT;
-        else entry.type = UPPER;
-        transposition_table[hash] = entry;
+        if (trick_depth >= entry.trick_depth) {
+            entry.score = min_eval;
+            entry.best_move = best_move;
+            entry.trick_depth = trick_depth;
+            entry.hash = hash;
+            if (min_eval >= original_beta) entry.type = LOWER;
+            else if (min_eval > original_alpha) entry.type = EXACT;
+            else entry.type = UPPER;
+        }
         return min_eval;
     }
 }
@@ -113,8 +115,9 @@ std::vector<uint8_t> extract_pv(GameState state, uint8_t depth) {
 
     for (int i = 0; i < depth; i++) {
         uint64_t hash = state.hash();
-        std::unordered_map<uint64_t, TTEntry>::iterator it = transposition_table.find(hash);
-        uint8_t best_move = it->second.best_move;
+        TTEntry& entry = transposition_table[hash & (TABLE_SIZE - 1)];
+        if (entry.hash != hash) break;
+        uint8_t best_move = entry.best_move;
         pv.push_back(best_move);
         state.make_move(best_move);
     }

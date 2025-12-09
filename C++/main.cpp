@@ -34,13 +34,13 @@ int main() {
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> duration = end - start;
 
-    std::vector<uint8_t> pv = extract_pv(game_state, 32);
+    // std::vector<uint8_t> pv = extract_pv(game_state, 32);
 
-    for (int i = 0; i < 32 - game_state.num_of_played_cards(); i++) {
-        if (i % 4 == 0) std::cout << "Hand #" << (i / 4) + 1 << ":\n";
-        uint8_t card = pv[i];
-        std::cout << RANK_NAMES[get_rank(card)] << SUIT_SYMBOLS[get_suit(card)] << (i % 4 == 3 ? "\n\n" : " ");
-    }
+    // for (int i = 0; i < 32; i++) {
+    //     if (i % 4 == 0) std::cout << "Hand #" << (i / 4) + 1 << ":\n";
+    //     uint8_t card = pv[i];
+    //     std::cout << RANK_NAMES[get_rank(card)] << SUIT_SYMBOLS[get_suit(card)] << (i % 4 == 3 ? "\n\n" : " ");
+    // }
 
     std::cout << "Time taken: " << duration.count() << " seconds" << std::endl;
     std::cout << "Score: " << +score << "\n";
