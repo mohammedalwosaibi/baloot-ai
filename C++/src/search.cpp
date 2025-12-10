@@ -131,18 +131,3 @@ uint8_t minimax(GameState& game_state, uint8_t trick_depth, uint8_t alpha, uint8
         return min_eval;
     }
 }
-
-std::vector<uint8_t> extract_pv(GameState state, uint8_t depth) {
-    std::vector<uint8_t> pv;
-
-    for (int i = 0; i < depth; i++) {
-        uint64_t hash = state.hash();
-        TTEntry& entry = transposition_table[hash & (TABLE_SIZE - 1)];
-        if (entry.hash != hash) break;
-        uint8_t best_move = entry.best_move;
-        pv.push_back(best_move);
-        state.make_move(best_move);
-    }
-
-    return pv;
-}
