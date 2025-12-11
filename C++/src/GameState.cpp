@@ -111,7 +111,9 @@ uint8_t GameState::get_legal_moves(std::array<uint8_t, 8>& moves) {
     return num_moves;
 }
 
-uint8_t GameState::score() const { return score_; }
+uint8_t GameState::evaluate() const {
+    return score_;
+}
 
 uint64_t GameState::hash() const { return hash_; }
 

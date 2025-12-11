@@ -19,7 +19,7 @@ uint8_t minimax(GameState& game_state, uint8_t trick_depth, uint8_t alpha, uint8
 
     if (trick_depth == 0) {
         pv_length[ply] = 0;
-        return game_state.score();
+        return game_state.evaluate();
     }
 
     uint8_t original_alpha = alpha;
