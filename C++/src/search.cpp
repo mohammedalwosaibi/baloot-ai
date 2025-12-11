@@ -14,6 +14,29 @@ std::array<uint8_t, 33> pv_length;
 
 extern int nodes_visited;
 
+static void store_tt_entry(uint8_t trick_depth, TTEntry& entry, uint8_t eval, uint8_t best_move, uint64_t hash, uint8_t original_alpha, uint8_t original_beta) {
+    if (trick_depth >= entry.trick_depth) {
+        entry.score = eval;
+        entry.trick_depth = trick_depth;
+        entry.best_move = best_move;
+        entry.hash = hash;
+        if (eval >= original_beta) entry.type = LOWER;
+        else if (eval > original_alpha) {
+            entry.type = EXACT;
+            // record samples if beginning of trick
+        } else entry.type = UPPER;
+    }
+}
+
+static void update_pv(uint8_t ply, uint8_t best_move) {
+    pv_table[ply][0] = best_move;
+    uint8_t child_len = pv_length[ply + 1];
+    if (child_len > 0) {
+        std::memcpy(&pv_table[ply][1], &pv_table[ply + 1][0], child_len * sizeof(uint8_t));
+    }
+    pv_length[ply] = child_len + 1;
+}
+
 uint8_t minimax(GameState& game_state, uint8_t trick_depth, uint8_t alpha, uint8_t beta, bool maximizing, uint8_t ply) {
     nodes_visited++;
 
@@ -35,7 +58,6 @@ uint8_t minimax(GameState& game_state, uint8_t trick_depth, uint8_t alpha, uint8
     TTEntry& entry = transposition_table[hash & (TABLE_SIZE - 1)];
     if (entry.hash == hash) {
         if (game_state.num_of_played_cards() % 4 == 0 && entry.trick_depth >= trick_depth) {
-            // if (entry.type == TTType::EXACT) return entry.score; // continue searching on exact hits for pv extraction
             if (entry.type == TTType::LOWER) {
                 if (entry.score >= beta) return entry.score;
                 if (entry.score > alpha) alpha = entry.score;
@@ -68,29 +90,14 @@ uint8_t minimax(GameState& game_state, uint8_t trick_depth, uint8_t alpha, uint8
             if (eval > max_eval) {
                 max_eval = eval;
                 best_move = move;
-
-                pv_table[ply][0] = best_move;
-                uint8_t child_len = pv_length[ply + 1];
-                if (child_len > 0) {
-                    std::memcpy(&pv_table[ply][1], &pv_table[ply + 1][0], child_len * sizeof(uint8_t));
-                }
-                pv_length[ply] = child_len + 1;
-
+                update_pv(ply, best_move);
                 if (max_eval > alpha) {
                     alpha = max_eval;
                     if (beta <= max_eval) break;
                 }
             }
         }
-        if (trick_depth >= entry.trick_depth) {
-            entry.score = max_eval;
-            entry.trick_depth = trick_depth;
-            entry.best_move = best_move;
-            entry.hash = hash;
-            if (max_eval >= original_beta) entry.type = LOWER;
-            else if (max_eval > original_alpha) entry.type = EXACT;
-            else entry.type = UPPER;
-        }
+        store_tt_entry(trick_depth, entry, max_eval, best_move, hash, original_alpha, original_beta);
         return max_eval;
     } else {
         int min_eval = 131;
@@ -105,29 +112,14 @@ uint8_t minimax(GameState& game_state, uint8_t trick_depth, uint8_t alpha, uint8
             if (eval < min_eval) {
                 min_eval = eval;
                 best_move = move;
-
-                pv_table[ply][0] = best_move;
-                uint8_t child_len = pv_length[ply + 1];
-                if (child_len > 0) {
-                    std::memcpy(&pv_table[ply][1], &pv_table[ply + 1][0], child_len * sizeof(uint8_t));
-                }
-                pv_length[ply] = child_len + 1;
-
+                update_pv(ply, best_move);
                 if (min_eval < beta) {
                     beta = min_eval;
                     if (min_eval <= alpha) break;
                 }
             }
         }
-        if (trick_depth >= entry.trick_depth) {
-            entry.score = min_eval;
-            entry.best_move = best_move;
-            entry.trick_depth = trick_depth;
-            entry.hash = hash;
-            if (min_eval >= original_beta) entry.type = LOWER;
-            else if (min_eval > original_alpha) entry.type = EXACT;
-            else entry.type = UPPER;
-        }
+        store_tt_entry(trick_depth, entry, min_eval, best_move, hash, original_alpha, original_beta);
         return min_eval;
     }
 }

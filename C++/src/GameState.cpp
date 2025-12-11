@@ -11,7 +11,8 @@ card_indices_{},
 trick_scores_{},
 current_player_(0),
 num_of_played_cards_(0),
-score_(0),
+home_score_(0),
+away_score_(0),
 hash_(0)
 {
     init_hashes();
@@ -47,16 +48,16 @@ void GameState::make_move(uint8_t card) {
             if (num_of_played_cards_ % 4 == 0) {
                 auto [trick_winner, trick_score] = get_trick_stats(&played_cards_[num_of_played_cards_ - 4]);
                 current_player_ = (current_player_ + 1 + trick_winner) % 4;
-                hash_ ^= SCORE_KEY[score_];
+                hash_ ^= SCORE_KEY[home_score_];
                 uint8_t trick_idx = (num_of_played_cards_ / 4) - 1;
                 if (current_player_ == 0 || current_player_ == 2) {
                     if (num_of_played_cards_ == 32) trick_score += 10;
-                    score_ += trick_score;
+                    home_score_ += trick_score;
                     trick_scores_[trick_idx] = trick_score;
                 } else {
                     trick_scores_[trick_idx] = 0;
                 }
-                hash_ ^= SCORE_KEY[score_];
+                hash_ ^= SCORE_KEY[home_score_];
             } else {
                 current_player_ = (current_player_ + 1) % 4;
             }
@@ -68,9 +69,9 @@ void GameState::make_move(uint8_t card) {
 
 void GameState::undo_move() {
     if (num_of_played_cards_ % 4 == 0) {
-        hash_ ^= SCORE_KEY[score_];
-        score_ -= trick_scores_[(num_of_played_cards_ / 4) - 1];
-        hash_ ^= SCORE_KEY[score_];
+        hash_ ^= SCORE_KEY[home_score_];
+        home_score_ -= trick_scores_[(num_of_played_cards_ / 4) - 1];
+        hash_ ^= SCORE_KEY[home_score_];
     }
 
     num_of_played_cards_--;
@@ -112,7 +113,7 @@ uint8_t GameState::get_legal_moves(std::array<uint8_t, 8>& moves) {
 }
 
 uint8_t GameState::evaluate() const {
-    return score_;
+    return home_score_;
 }
 
 uint64_t GameState::hash() const { return hash_; }

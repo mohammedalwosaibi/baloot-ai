@@ -22,8 +22,10 @@ private:
     std::array<uint8_t, 32> player_indices_;
     std::array<uint8_t, 32> card_indices_;
     std::array<uint8_t, 8> trick_scores_;
+    
     uint8_t current_player_;
     uint8_t num_of_played_cards_;
-    uint8_t score_;
+    uint8_t home_score_;
+    uint8_t away_score_;
     uint64_t hash_;
 };
