@@ -5,6 +5,7 @@
 #include <cstdint>
 #include <iostream>
 #include <climits>
+#include <fstream>
 
 static constexpr uint64_t TABLE_SIZE = 1 << 20;
 
@@ -14,7 +15,23 @@ std::array<uint8_t, 33> pv_length;
 
 extern int nodes_visited;
 
-static void store_tt_entry(uint8_t trick_depth, TTEntry& entry, uint8_t eval, uint8_t best_move, uint64_t hash, uint8_t original_alpha, uint8_t original_beta) {
+int num_samples = 0;
+std::array<uint8_t, 7> cur_samples;
+
+static constexpr std::array<int, 8> RANK_INDICES = {
+    1,
+    10,
+    13,
+    12,
+    11,
+    9,
+    8,
+    7
+};
+
+static constexpr std::array<uint8_t, 7> SAMPLES_PER_DEPTH = {2, 2, 4, 6, 8, 12, 16};
+
+static void store_tt_entry(GameState& game_state, uint8_t trick_depth, TTEntry& entry, uint8_t eval, uint8_t best_move, uint64_t hash, uint8_t original_alpha, uint8_t original_beta, std::ofstream& file) {
     if (trick_depth >= entry.trick_depth) {
         entry.score = eval;
         entry.trick_depth = trick_depth;
@@ -23,7 +40,18 @@ static void store_tt_entry(uint8_t trick_depth, TTEntry& entry, uint8_t eval, ui
         if (eval >= original_beta) entry.type = LOWER;
         else if (eval > original_alpha) {
             entry.type = EXACT;
-            // record samples if beginning of trick
+            if (trick_depth != 8 && cur_samples[trick_depth - 1] < SAMPLES_PER_DEPTH[trick_depth - 1] && num_samples < 50 && game_state.num_of_played_cards() % 4 == 0) {
+                file << +game_state.score_difference() << ","
+                    << +trick_depth << ","
+                    << ((game_state.current_player() == 0 || game_state.current_player() == 2) ? 1 : 0) << ",";
+
+                for (int idx : RANK_INDICES) file << +game_state.home_ranks()[idx] << ",";
+                for (int idx : RANK_INDICES) file << +game_state.away_ranks()[idx] << ",";
+
+                file << +eval << "\n";
+                num_samples++;
+                cur_samples[trick_depth - 1]++;
+            }
         } else entry.type = UPPER;
     }
 }
@@ -37,7 +65,11 @@ static void update_pv(uint8_t ply, uint8_t best_move) {
     pv_length[ply] = child_len + 1;
 }
 
-uint8_t minimax(GameState& game_state, uint8_t trick_depth, uint8_t alpha, uint8_t beta, bool maximizing, uint8_t ply) {
+uint8_t minimax(GameState& game_state, uint8_t trick_depth, uint8_t alpha, uint8_t beta, bool maximizing, uint8_t ply, std::ofstream& file) {
+    if (num_samples >= 50) {
+        return 0;
+    }
+
     nodes_visited++;
 
     if (trick_depth == 0) {
@@ -67,7 +99,7 @@ uint8_t minimax(GameState& game_state, uint8_t trick_depth, uint8_t alpha, uint8
             }
         }
 
-        best_move = entry.best_move;
+        // best_move = entry.best_move;
 
         for (uint8_t i = 1; i < num_moves; i++) {
             if (legal_moves[i] == best_move) {
@@ -85,7 +117,7 @@ uint8_t minimax(GameState& game_state, uint8_t trick_depth, uint8_t alpha, uint8
             uint8_t next_player = game_state.current_player();
             bool maximizing_player = next_player == 0 || next_player == 2;
             uint8_t next_trick_depth = trick_depth - (game_state.num_of_played_cards() % 4 == 0 ? 1 : 0);
-            uint8_t eval = minimax(game_state, next_trick_depth, alpha, beta, maximizing_player, ply + 1);
+            uint8_t eval = minimax(game_state, next_trick_depth, alpha, beta, maximizing_player, ply + 1, file);
             game_state.undo_move();
             if (eval > max_eval) {
                 max_eval = eval;
@@ -97,7 +129,7 @@ uint8_t minimax(GameState& game_state, uint8_t trick_depth, uint8_t alpha, uint8
                 }
             }
         }
-        store_tt_entry(trick_depth, entry, max_eval, best_move, hash, original_alpha, original_beta);
+        store_tt_entry(game_state, trick_depth, entry, max_eval, best_move, hash, original_alpha, original_beta, file);
         return max_eval;
     } else {
         int min_eval = 131;
@@ -107,7 +139,7 @@ uint8_t minimax(GameState& game_state, uint8_t trick_depth, uint8_t alpha, uint8
             uint8_t next_player = game_state.current_player();
             bool maximizing_player = next_player == 0 || next_player == 2;
             uint8_t next_trick_depth = trick_depth - (game_state.num_of_played_cards() % 4 == 0 ? 1 : 0);
-            uint8_t eval = minimax(game_state, next_trick_depth, alpha, beta, maximizing_player, ply + 1);
+            uint8_t eval = minimax(game_state, next_trick_depth, alpha, beta, maximizing_player, ply + 1, file);
             game_state.undo_move();
             if (eval < min_eval) {
                 min_eval = eval;
@@ -119,7 +151,7 @@ uint8_t minimax(GameState& game_state, uint8_t trick_depth, uint8_t alpha, uint8
                 }
             }
         }
-        store_tt_entry(trick_depth, entry, min_eval, best_move, hash, original_alpha, original_beta);
+        store_tt_entry(game_state, trick_depth, entry, min_eval, best_move, hash, original_alpha, original_beta, file);
         return min_eval;
     }
 }

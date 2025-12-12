@@ -14,5 +14,4 @@ struct TTEntry {
     uint64_t hash;
 };
 
-uint8_t minimax(GameState& game_state, uint8_t trick_depth, uint8_t alpha, uint8_t beta, bool maximizing, uint8_t ply);
-std::vector<uint8_t> extract_pv(GameState state, uint8_t depth);
+uint8_t minimax(GameState& game_state, uint8_t trick_depth, uint8_t alpha, uint8_t beta, bool maximizing, uint8_t ply, std::ofstream& file);

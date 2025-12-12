@@ -9,6 +9,8 @@ played_cards_{},
 player_indices_{},
 card_indices_{},
 trick_scores_{},
+home_ranks_{},
+away_ranks_{},
 current_player_(0),
 num_of_played_cards_(0),
 home_score_(0),
@@ -18,6 +20,13 @@ hash_(0)
     init_hashes();
     hash_ ^= PLAYER_KEY[current_player_];
     hash_ ^= SCORE_KEY[current_player_];
+
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 8; j++) {
+            if (i == 0 || i == 2) home_ranks_[get_rank(player_cards_[i][j])]++;
+            else if (i == 1 || i == 3) away_ranks_[get_rank(player_cards_[i][j])]++;
+        }
+    }
 }
 
 void GameState::view_player_cards() {
@@ -39,6 +48,9 @@ void GameState::make_move(uint8_t card) {
     for (int i = 0; i < 8; i++) {
         uint8_t curr = current_player_cards[i];
         if (curr == card) {
+            if (current_player_ == 0 || current_player_ == 2) home_ranks_[get_rank(card)]--;
+            else if (current_player_ == 1 || current_player_ == 3) away_ranks_[get_rank(card)]--;
+
             current_player_cards[i] = 0;
             player_indices_[num_of_played_cards_] = current_player_;
             card_indices_[num_of_played_cards_] = i;
@@ -50,13 +62,13 @@ void GameState::make_move(uint8_t card) {
                 current_player_ = (current_player_ + 1 + trick_winner) % 4;
                 hash_ ^= SCORE_KEY[home_score_];
                 uint8_t trick_idx = (num_of_played_cards_ / 4) - 1;
+                if (num_of_played_cards_ == 32) trick_score += 10;
                 if (current_player_ == 0 || current_player_ == 2) {
-                    if (num_of_played_cards_ == 32) trick_score += 10;
                     home_score_ += trick_score;
-                    trick_scores_[trick_idx] = trick_score;
                 } else {
-                    trick_scores_[trick_idx] = 0;
+                    away_score_ += trick_score;
                 }
+                trick_scores_[trick_idx] = trick_score;
                 hash_ ^= SCORE_KEY[home_score_];
             } else {
                 current_player_ = (current_player_ + 1) % 4;
@@ -70,7 +82,8 @@ void GameState::make_move(uint8_t card) {
 void GameState::undo_move() {
     if (num_of_played_cards_ % 4 == 0) {
         hash_ ^= SCORE_KEY[home_score_];
-        home_score_ -= trick_scores_[(num_of_played_cards_ / 4) - 1];
+        if (current_player_ == 0 || current_player_ == 2) home_score_ -= trick_scores_[(num_of_played_cards_ / 4) - 1];
+        else away_score_ -= trick_scores_[(num_of_played_cards_ / 4) - 1];
         hash_ ^= SCORE_KEY[home_score_];
     }
 
@@ -84,6 +97,9 @@ void GameState::undo_move() {
     hash_ ^= PLAYER_KEY[current_player_];
     current_player_ = last_player;
     hash_ ^= PLAYER_KEY[current_player_];
+
+    if (current_player_ == 0 || current_player_ == 2) home_ranks_[get_rank(played_cards_[num_of_played_cards_])]++;
+    else if (current_player_ == 1 || current_player_ == 3) away_ranks_[get_rank(played_cards_[num_of_played_cards_])]++;
 }
 
 uint8_t GameState::get_legal_moves(std::array<uint8_t, 8>& moves) {
@@ -121,4 +137,10 @@ uint64_t GameState::hash() const { return hash_; }
 uint8_t GameState::current_player() const { return current_player_; }
 
 uint8_t GameState::num_of_played_cards() const { return num_of_played_cards_; };
+
+int GameState::score_difference() const { return home_score_ - away_score_; };
+
+std::array<uint8_t, 14> GameState::home_ranks() const { return home_ranks_; };
+
+std::array<uint8_t, 14> GameState::away_ranks() const { return away_ranks_; };
 
