@@ -1,2 +1,3 @@
 .vscode
-C++/samples.csv
+C++/evaluation/*.csv
+C++/evaluation/.venv

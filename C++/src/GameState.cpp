@@ -128,8 +128,57 @@ uint8_t GameState::get_legal_moves(std::array<uint8_t, 8>& moves) {
     return num_moves;
 }
 
-uint8_t GameState::evaluate() const {
+/*
+away_num_A      -9.880322
+home_num_J      -3.707041
+home_num_7      -3.356345
+home_num_9      -2.371558
+away_num_10     -2.357482
+home_num_Q      -2.352208
+home_num_8      -1.871341
+home_num_K      -0.727490
+tricks_left      0.377068
+score_diff       0.500055
+away_num_7       1.180671
+away_num_K       1.498702
+away_num_J       2.060756
+away_num_9       2.469041
+away_num_8       2.723933
+home_num_10      2.866840
+away_num_Q       3.058839
+is_home_turn     9.433691
+home_num_A      12.273280
+*/
+
+int GameState::evaluate() const {
     return home_score_;
+    // if (num_of_played_cards_ == 32) return home_score_;
+
+    // double eval = (
+    //     -9.880322 * away_ranks_[1] + 
+    //     -3.707041 * home_ranks_[11] +
+    //     -3.356345 * home_ranks_[7] +
+    //     -2.371558 * home_ranks_[9] +
+    //     -2.357482 * away_ranks_[10] +
+    //     -2.352208 * home_ranks_[12] +
+    //     -1.871341 * home_ranks_[8] +
+    //     -0.727490 * home_ranks_[13] +
+    //     0.377068 * (32 - num_of_played_cards_) / 4 +
+    //     0.500055 * score_difference() +
+    //     1.180671 * away_ranks_[7] +
+    //     1.498702 * away_ranks_[13] +
+    //     2.060756 * away_ranks_[11] +
+    //     2.469041 * away_ranks_[9] +
+    //     2.723933 * away_ranks_[8] +
+    //     2.866840 * home_ranks_[10] +
+    //     3.058839 * away_ranks_[12] +
+    //     9.433691 * ((current_player_ == 0 || current_player_ == 2) ? 1 : 0) +
+    //     12.273280 * home_ranks_[1]
+    // );
+
+    // eval = std::clamp(eval, 0.0, 130.0);
+
+    // return static_cast<int>(std::round(eval));
 }
 
 uint64_t GameState::hash() const { return hash_; }

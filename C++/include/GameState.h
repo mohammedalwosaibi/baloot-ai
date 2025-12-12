@@ -11,7 +11,7 @@ public:
     void make_move(uint8_t card);
     void undo_move();
     uint8_t get_legal_moves(std::array<uint8_t, 8>& moves);
-    uint8_t evaluate() const;
+    int evaluate() const;
     uint64_t hash() const;
     uint8_t current_player() const;
     uint8_t num_of_played_cards() const;
