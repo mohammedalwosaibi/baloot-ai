@@ -13,25 +13,9 @@ std::array<TTEntry, TABLE_SIZE> transposition_table;
 std::array<std::array<uint8_t, 32>, 33> pv_table;
 std::array<uint8_t, 33> pv_length;
 
-extern int nodes_visited;
+int nodes_visited = 0;
 
-int num_samples = 0;
-std::array<uint8_t, 7> cur_samples;
-
-static constexpr std::array<int, 8> RANK_INDICES = {
-    1,
-    10,
-    13,
-    12,
-    11,
-    9,
-    8,
-    7
-};
-
-static constexpr std::array<uint8_t, 7> SAMPLES_PER_DEPTH = {2, 2, 4, 6, 8, 12, 16};
-
-static void store_tt_entry(GameState& game_state, uint8_t trick_depth, TTEntry& entry, uint8_t eval, uint8_t best_move, uint64_t hash, uint8_t original_alpha, uint8_t original_beta) {
+static void store_tt_entry(uint8_t trick_depth, TTEntry& entry, uint8_t eval, uint8_t best_move, uint64_t hash, uint8_t original_alpha, uint8_t original_beta) {
     if (trick_depth >= entry.trick_depth) {
         entry.score = eval;
         entry.trick_depth = trick_depth;
@@ -40,18 +24,6 @@ static void store_tt_entry(GameState& game_state, uint8_t trick_depth, TTEntry& 
         if (eval >= original_beta) entry.type = LOWER;
         else if (eval > original_alpha) {
             entry.type = EXACT;
-            // if (trick_depth != 8 && cur_samples[trick_depth - 1] < SAMPLES_PER_DEPTH[trick_depth - 1] && num_samples < 50 && game_state.num_of_played_cards() % 4 == 0) {
-            //     file << +game_state.score_difference() << ","
-            //         << +trick_depth << ","
-            //         << ((game_state.current_player() == 0 || game_state.current_player() == 2) ? 1 : 0) << ",";
-
-            //     for (int idx : RANK_INDICES) file << +game_state.home_ranks()[idx] << ",";
-            //     for (int idx : RANK_INDICES) file << +game_state.away_ranks()[idx] << ",";
-
-            //     file << +eval << "\n";
-            //     num_samples++;
-            //     cur_samples[trick_depth - 1]++;
-            // }
         } else entry.type = UPPER;
     }
 }
@@ -69,8 +41,19 @@ uint8_t minimax(GameState& game_state, uint8_t trick_depth, uint8_t alpha, uint8
     nodes_visited++;
 
     if (trick_depth == 0) {
-        pv_length[ply] = 0;
-        return game_state.evaluate();
+
+        uint8_t eval = game_state.evaluate();
+
+        if (game_state.num_of_played_cards() == 28) {
+            pv_length[ply] = 4;
+            
+            std::array<uint8_t, 4> last_trick = game_state.last_trick();
+            std::memcpy(pv_table[ply].data(), last_trick.data(), 4);
+        } else {
+            pv_length[ply] = 0;
+        }
+
+        return eval;
     }
 
     uint8_t original_alpha = alpha;
@@ -125,7 +108,7 @@ uint8_t minimax(GameState& game_state, uint8_t trick_depth, uint8_t alpha, uint8
                 }
             }
         }
-        store_tt_entry(game_state, trick_depth, entry, max_eval, best_move, hash, original_alpha, original_beta);
+        store_tt_entry(trick_depth, entry, max_eval, best_move, hash, original_alpha, original_beta);
         return max_eval;
     } else {
         int min_eval = 131;
@@ -147,7 +130,7 @@ uint8_t minimax(GameState& game_state, uint8_t trick_depth, uint8_t alpha, uint8
                 }
             }
         }
-        store_tt_entry(game_state, trick_depth, entry, min_eval, best_move, hash, original_alpha, original_beta);
+        store_tt_entry(trick_depth, entry, min_eval, best_move, hash, original_alpha, original_beta);
         return min_eval;
     }
 }
