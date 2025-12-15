@@ -22,12 +22,12 @@ hash_(0)
     hash_ ^= PLAYER_KEY[current_player_];
     hash_ ^= SCORE_KEY[home_score_];
 
-    // for (int i = 0; i < 4; i++) {
-    //     for (int j = 0; j < 8; j++) {
-    //         if (i == 0 || i == 2) home_ranks_[get_rank(player_cards_[i][j])]++;
-    //         else if (i == 1 || i == 3) away_ranks_[get_rank(player_cards_[i][j])]++;
-    //     }
-    // }
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 8; j++) {
+            if (i == 0 || i == 2) home_ranks_[get_rank(player_cards_[i][j])]++;
+            else if (i == 1 || i == 3) away_ranks_[get_rank(player_cards_[i][j])]++;
+        }
+    }
 }
 
 void GameState::view_player_cards() {
@@ -49,8 +49,8 @@ void GameState::make_move(uint8_t card) {
     for (int i = 0; i < 8; i++) {
         uint8_t curr = current_player_cards[i];
         if (curr == card) {
-            // if (current_player_ == 0 || current_player_ == 2) home_ranks_[get_rank(card)]--;
-            // else if (current_player_ == 1 || current_player_ == 3) away_ranks_[get_rank(card)]--;
+            if (current_player_ == 0 || current_player_ == 2) home_ranks_[get_rank(card)]--;
+            else if (current_player_ == 1 || current_player_ == 3) away_ranks_[get_rank(card)]--;
 
             current_player_cards[i] = 0;
             player_indices_[num_of_played_cards_] = current_player_;
@@ -99,8 +99,8 @@ void GameState::undo_move() {
     current_player_ = last_player;
     hash_ ^= PLAYER_KEY[current_player_];
 
-    // if (current_player_ == 0 || current_player_ == 2) home_ranks_[get_rank(played_cards_[num_of_played_cards_])]++;
-    // else if (current_player_ == 1 || current_player_ == 3) away_ranks_[get_rank(played_cards_[num_of_played_cards_])]++;
+    if (current_player_ == 0 || current_player_ == 2) home_ranks_[get_rank(played_cards_[num_of_played_cards_])]++;
+    else if (current_player_ == 1 || current_player_ == 3) away_ranks_[get_rank(played_cards_[num_of_played_cards_])]++;
 }
 
 uint8_t GameState::get_legal_moves(std::array<uint8_t, 8>& moves) {
@@ -129,7 +129,7 @@ uint8_t GameState::get_legal_moves(std::array<uint8_t, 8>& moves) {
     return num_moves;
 }
 
-uint8_t GameState::evaluate() {
+int GameState::evaluate() {
     if (num_of_played_cards_ == 28) {
         std::array<uint8_t, 4> remaining;
         for (int i = 0; i < 4; i++) {
@@ -156,8 +156,24 @@ uint8_t GameState::evaluate() {
         if (leader % 2 == 0) return home_score_ + trick_score;
         else return home_score_;
     }
-    
-    return home_score_;
+    // return home_score_;
+
+    double eval = (
+        11 * home_ranks_[1] +
+        10 * home_ranks_[10] + 
+        4 * home_ranks_[13] +
+        3 * home_ranks_[12] +
+        2 * home_ranks_[11] +
+        -11 * away_ranks_[1] +
+        -10 * away_ranks_[10] +
+        -4 * away_ranks_[13] +
+        -3 * away_ranks_[12] +
+        -2 * away_ranks_[11] +
+        5 * ((current_player_ == 0 || current_player_ == 2) ? 1 : -1) +
+        home_score_
+    );
+
+    return static_cast<int>(std::round(eval));
 }
 
 uint64_t GameState::hash() const { return hash_; }
