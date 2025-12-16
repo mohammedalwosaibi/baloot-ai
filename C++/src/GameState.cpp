@@ -156,7 +156,6 @@ int GameState::evaluate() {
         if (leader % 2 == 0) return home_score_ + trick_score;
         else return home_score_;
     }
-    // return home_score_;
 
     double eval = (
         11 * home_ranks_[1] +
@@ -164,12 +163,12 @@ int GameState::evaluate() {
         4 * home_ranks_[13] +
         3 * home_ranks_[12] +
         2 * home_ranks_[11] +
-        -11 * away_ranks_[1] +
-        -10 * away_ranks_[10] +
-        -4 * away_ranks_[13] +
-        -3 * away_ranks_[12] +
-        -2 * away_ranks_[11] +
-        5 * ((current_player_ == 0 || current_player_ == 2) ? 1 : -1) +
+        // -11 * away_ranks_[1] +
+        // -10 * away_ranks_[10] +
+        // -4 * away_ranks_[13] +
+        // -3 * away_ranks_[12] +
+        // -2 * away_ranks_[11] +
+        // 5 * ((current_player_ == 0 || current_player_ == 2) ? 1 : -1) +
         home_score_
     );
 
