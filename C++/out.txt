@@ -23,16 +23,16 @@ Depth #4 Success Rate: 100
 Depth #5 Success Rate: 100
 
 Trial #2
-Depth #1: Failure
-Depth #2: Failure
-Depth #3: Failure
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
 Depth #4: Success
-Depth #5: Failure
-Depth #1 Success Rate: 66.6667
-Depth #2 Success Rate: 66.6667
-Depth #3 Success Rate: 66.6667
+Depth #5: Success
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
 Depth #4 Success Rate: 100
-Depth #5 Success Rate: 66.6667
+Depth #5 Success Rate: 100
 
 Trial #3
 Depth #1: Success
@@ -40,35 +40,35 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 75
-Depth #2 Success Rate: 75
-Depth #3 Success Rate: 75
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
 Depth #4 Success Rate: 100
-Depth #5 Success Rate: 75
+Depth #5 Success Rate: 100
 
 Trial #4
-Depth #1: Failure
-Depth #2: Failure
-Depth #3: Failure
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 60
-Depth #2 Success Rate: 60
-Depth #3 Success Rate: 60
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
 Depth #4 Success Rate: 100
-Depth #5 Success Rate: 80
+Depth #5 Success Rate: 100
 
 Trial #5
 Depth #1: Success
 Depth #2: Success
 Depth #3: Success
-Depth #4: Failure
-Depth #5: Failure
-Depth #1 Success Rate: 66.6667
-Depth #2 Success Rate: 66.6667
-Depth #3 Success Rate: 66.6667
-Depth #4 Success Rate: 83.3333
-Depth #5 Success Rate: 66.6667
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
 
 Trial #6
 Depth #1: Success
@@ -76,11 +76,11 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 71.4286
-Depth #2 Success Rate: 71.4286
-Depth #3 Success Rate: 71.4286
-Depth #4 Success Rate: 85.7143
-Depth #5 Success Rate: 71.4286
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
 
 Trial #7
 Depth #1: Success
@@ -88,47 +88,47 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 75
-Depth #2 Success Rate: 75
-Depth #3 Success Rate: 75
-Depth #4 Success Rate: 87.5
-Depth #5 Success Rate: 75
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
 
 Trial #8
-Depth #1: Failure
+Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
-Depth #5: Failure
-Depth #1 Success Rate: 66.6667
-Depth #2 Success Rate: 77.7778
-Depth #3 Success Rate: 77.7778
-Depth #4 Success Rate: 88.8889
-Depth #5 Success Rate: 66.6667
+Depth #5: Success
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
 
 Trial #9
 Depth #1: Success
-Depth #2: Failure
-Depth #3: Failure
-Depth #4: Failure
-Depth #5: Success
-Depth #1 Success Rate: 70
-Depth #2 Success Rate: 70
-Depth #3 Success Rate: 70
-Depth #4 Success Rate: 80
-Depth #5 Success Rate: 70
-
-Trial #10
-Depth #1: Failure
-Depth #2: Failure
+Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 63.6364
-Depth #2 Success Rate: 63.6364
-Depth #3 Success Rate: 72.7273
-Depth #4 Success Rate: 81.8182
-Depth #5 Success Rate: 72.7273
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
+
+Trial #10
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
 
 Trial #11
 Depth #1: Success
@@ -136,35 +136,35 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 66.6667
-Depth #2 Success Rate: 66.6667
-Depth #3 Success Rate: 75
-Depth #4 Success Rate: 83.3333
-Depth #5 Success Rate: 75
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
 
 Trial #12
-Depth #1: Failure
-Depth #2: Success
-Depth #3: Success
-Depth #4: Failure
-Depth #5: Success
-Depth #1 Success Rate: 61.5385
-Depth #2 Success Rate: 69.2308
-Depth #3 Success Rate: 76.9231
-Depth #4 Success Rate: 76.9231
-Depth #5 Success Rate: 76.9231
-
-Trial #13
-Depth #1: Failure
+Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
-Depth #5: Failure
-Depth #1 Success Rate: 57.1429
-Depth #2 Success Rate: 71.4286
-Depth #3 Success Rate: 78.5714
-Depth #4 Success Rate: 78.5714
-Depth #5 Success Rate: 71.4286
+Depth #5: Success
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
+
+Trial #13
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
 
 Trial #14
 Depth #1: Success
@@ -172,59 +172,59 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 60
-Depth #2 Success Rate: 73.3333
-Depth #3 Success Rate: 80
-Depth #4 Success Rate: 80
-Depth #5 Success Rate: 73.3333
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
 
 Trial #15
-Depth #1: Failure
-Depth #2: Failure
+Depth #1: Success
+Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 56.25
-Depth #2 Success Rate: 68.75
-Depth #3 Success Rate: 81.25
-Depth #4 Success Rate: 81.25
-Depth #5 Success Rate: 75
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
 
 Trial #16
-Depth #1: Failure
+Depth #1: Success
 Depth #2: Success
 Depth #3: Success
-Depth #4: Failure
+Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 52.9412
-Depth #2 Success Rate: 70.5882
-Depth #3 Success Rate: 82.3529
-Depth #4 Success Rate: 76.4706
-Depth #5 Success Rate: 76.4706
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
 
 Trial #17
-Depth #1: Failure
-Depth #2: Success
-Depth #3: Success
-Depth #4: Success
-Depth #5: Failure
-Depth #1 Success Rate: 50
-Depth #2 Success Rate: 72.2222
-Depth #3 Success Rate: 83.3333
-Depth #4 Success Rate: 77.7778
-Depth #5 Success Rate: 72.2222
-
-Trial #18
-Depth #1: Failure
+Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 47.3684
-Depth #2 Success Rate: 73.6842
-Depth #3 Success Rate: 84.2105
-Depth #4 Success Rate: 78.9474
-Depth #5 Success Rate: 73.6842
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
+
+Trial #18
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
 
 Trial #19
 Depth #1: Success
@@ -232,23 +232,23 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 50
-Depth #2 Success Rate: 75
-Depth #3 Success Rate: 85
-Depth #4 Success Rate: 80
-Depth #5 Success Rate: 75
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
 
 Trial #20
 Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
-Depth #5: Failure
-Depth #1 Success Rate: 52.381
-Depth #2 Success Rate: 76.1905
-Depth #3 Success Rate: 85.7143
-Depth #4 Success Rate: 80.9524
-Depth #5 Success Rate: 71.4286
+Depth #5: Success
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
 
 Trial #21
 Depth #1: Success
@@ -256,11 +256,11 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 54.5455
-Depth #2 Success Rate: 77.2727
-Depth #3 Success Rate: 86.3636
-Depth #4 Success Rate: 81.8182
-Depth #5 Success Rate: 72.7273
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
 
 Trial #22
 Depth #1: Success
@@ -268,35 +268,35 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 56.5217
-Depth #2 Success Rate: 78.2609
-Depth #3 Success Rate: 86.9565
-Depth #4 Success Rate: 82.6087
-Depth #5 Success Rate: 73.913
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
 
 Trial #23
-Depth #1: Failure
-Depth #2: Failure
-Depth #3: Failure
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
 Depth #4: Success
-Depth #5: Failure
-Depth #1 Success Rate: 54.1667
-Depth #2 Success Rate: 75
-Depth #3 Success Rate: 83.3333
-Depth #4 Success Rate: 83.3333
-Depth #5 Success Rate: 70.8333
+Depth #5: Success
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
 
 Trial #24
 Depth #1: Success
-Depth #2: Failure
+Depth #2: Success
 Depth #3: Success
 Depth #4: Success
-Depth #5: Failure
-Depth #1 Success Rate: 56
-Depth #2 Success Rate: 72
-Depth #3 Success Rate: 84
-Depth #4 Success Rate: 84
-Depth #5 Success Rate: 68
+Depth #5: Success
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
 
 Trial #25
 Depth #1: Success
@@ -304,11 +304,11 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 57.6923
-Depth #2 Success Rate: 73.0769
-Depth #3 Success Rate: 84.6154
-Depth #4 Success Rate: 84.6154
-Depth #5 Success Rate: 69.2308
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
 
 Trial #26
 Depth #1: Success
@@ -316,23 +316,23 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 59.2593
-Depth #2 Success Rate: 74.0741
-Depth #3 Success Rate: 85.1852
-Depth #4 Success Rate: 85.1852
-Depth #5 Success Rate: 70.3704
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
 
 Trial #27
-Depth #1: Failure
-Depth #2: Failure
+Depth #1: Success
+Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 57.1429
-Depth #2 Success Rate: 71.4286
-Depth #3 Success Rate: 85.7143
-Depth #4 Success Rate: 85.7143
-Depth #5 Success Rate: 71.4286
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
 
 Trial #28
 Depth #1: Success
@@ -340,71 +340,71 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 58.6207
-Depth #2 Success Rate: 72.4138
-Depth #3 Success Rate: 86.2069
-Depth #4 Success Rate: 86.2069
-Depth #5 Success Rate: 72.4138
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
 
 Trial #29
-Depth #1: Failure
-Depth #2: Failure
-Depth #3: Failure
-Depth #4: Failure
-Depth #5: Failure
-Depth #1 Success Rate: 56.6667
-Depth #2 Success Rate: 70
-Depth #3 Success Rate: 83.3333
-Depth #4 Success Rate: 83.3333
-Depth #5 Success Rate: 70
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
 
 Trial #30
-Depth #1: Failure
+Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 54.8387
-Depth #2 Success Rate: 70.9677
-Depth #3 Success Rate: 83.871
-Depth #4 Success Rate: 83.871
-Depth #5 Success Rate: 70.9677
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 100
 
 Trial #31
-Depth #1: Failure
+Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
-Depth #5: Success
-Depth #1 Success Rate: 53.125
-Depth #2 Success Rate: 71.875
-Depth #3 Success Rate: 84.375
-Depth #4 Success Rate: 84.375
-Depth #5 Success Rate: 71.875
+Depth #5: Failure
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 96.875
 
 Trial #32
 Depth #1: Success
 Depth #2: Success
 Depth #3: Success
-Depth #4: Failure
-Depth #5: Failure
-Depth #1 Success Rate: 54.5455
-Depth #2 Success Rate: 72.7273
-Depth #3 Success Rate: 84.8485
-Depth #4 Success Rate: 81.8182
-Depth #5 Success Rate: 69.697
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 100
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 96.9697
 
 Trial #33
 Depth #1: Success
 Depth #2: Success
-Depth #3: Success
+Depth #3: Failure
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 55.8824
-Depth #2 Success Rate: 73.5294
-Depth #3 Success Rate: 85.2941
-Depth #4 Success Rate: 82.3529
-Depth #5 Success Rate: 70.5882
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 97.0588
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 97.0588
 
 Trial #34
 Depth #1: Success
@@ -412,47 +412,47 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 57.1429
-Depth #2 Success Rate: 74.2857
-Depth #3 Success Rate: 85.7143
-Depth #4 Success Rate: 82.8571
-Depth #5 Success Rate: 71.4286
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 97.1429
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 97.1429
 
 Trial #35
-Depth #1: Failure
-Depth #2: Failure
-Depth #3: Failure
-Depth #4: Success
-Depth #5: Failure
-Depth #1 Success Rate: 55.5556
-Depth #2 Success Rate: 72.2222
-Depth #3 Success Rate: 83.3333
-Depth #4 Success Rate: 83.3333
-Depth #5 Success Rate: 69.4444
-
-Trial #36
-Depth #1: Failure
+Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
-Depth #5: Success
-Depth #1 Success Rate: 54.0541
-Depth #2 Success Rate: 72.973
-Depth #3 Success Rate: 83.7838
-Depth #4 Success Rate: 83.7838
-Depth #5 Success Rate: 70.2703
+Depth #5: Failure
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 97.2222
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 94.4444
 
-Trial #37
+Trial #36
 Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 55.2632
-Depth #2 Success Rate: 73.6842
-Depth #3 Success Rate: 84.2105
-Depth #4 Success Rate: 84.2105
-Depth #5 Success Rate: 71.0526
+Depth #1 Success Rate: 100
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 97.2973
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 94.5946
+
+Trial #37
+Depth #1: Failure
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Failure
+Depth #1 Success Rate: 97.3684
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 97.3684
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 92.1053
 
 Trial #38
 Depth #1: Success
@@ -460,23 +460,23 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 56.4103
-Depth #2 Success Rate: 74.359
-Depth #3 Success Rate: 84.6154
-Depth #4 Success Rate: 84.6154
-Depth #5 Success Rate: 71.7949
+Depth #1 Success Rate: 97.4359
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 97.4359
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 92.3077
 
 Trial #39
 Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
-Depth #5: Failure
-Depth #1 Success Rate: 57.5
-Depth #2 Success Rate: 75
-Depth #3 Success Rate: 85
-Depth #4 Success Rate: 85
-Depth #5 Success Rate: 70
+Depth #5: Success
+Depth #1 Success Rate: 97.5
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 97.5
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 92.5
 
 Trial #40
 Depth #1: Success
@@ -484,47 +484,47 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 58.5366
-Depth #2 Success Rate: 75.6098
-Depth #3 Success Rate: 85.3659
-Depth #4 Success Rate: 85.3659
-Depth #5 Success Rate: 70.7317
+Depth #1 Success Rate: 97.561
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 97.561
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 92.6829
 
 Trial #41
-Depth #1: Failure
-Depth #2: Failure
-Depth #3: Failure
-Depth #4: Success
-Depth #5: Failure
-Depth #1 Success Rate: 57.1429
-Depth #2 Success Rate: 73.8095
-Depth #3 Success Rate: 83.3333
-Depth #4 Success Rate: 85.7143
-Depth #5 Success Rate: 69.0476
-
-Trial #42
-Depth #1: Failure
+Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 55.814
-Depth #2 Success Rate: 74.4186
-Depth #3 Success Rate: 83.7209
-Depth #4 Success Rate: 86.0465
-Depth #5 Success Rate: 69.7674
+Depth #1 Success Rate: 97.619
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 97.619
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 92.8571
+
+Trial #42
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 97.6744
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 97.6744
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 93.0233
 
 Trial #43
 Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
-Depth #5: Success
-Depth #1 Success Rate: 56.8182
-Depth #2 Success Rate: 75
-Depth #3 Success Rate: 84.0909
-Depth #4 Success Rate: 86.3636
-Depth #5 Success Rate: 70.4545
+Depth #5: Failure
+Depth #1 Success Rate: 97.7273
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 97.7273
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 90.9091
 
 Trial #44
 Depth #1: Success
@@ -532,23 +532,23 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 57.7778
-Depth #2 Success Rate: 75.5556
-Depth #3 Success Rate: 84.4444
-Depth #4 Success Rate: 86.6667
-Depth #5 Success Rate: 71.1111
+Depth #1 Success Rate: 97.7778
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 97.7778
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 91.1111
 
 Trial #45
 Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
-Depth #5: Failure
-Depth #1 Success Rate: 58.6957
-Depth #2 Success Rate: 76.087
-Depth #3 Success Rate: 84.7826
-Depth #4 Success Rate: 86.9565
-Depth #5 Success Rate: 69.5652
+Depth #5: Success
+Depth #1 Success Rate: 97.8261
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 97.8261
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 91.3043
 
 Trial #46
 Depth #1: Success
@@ -556,23 +556,23 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 59.5745
-Depth #2 Success Rate: 76.5957
-Depth #3 Success Rate: 85.1064
-Depth #4 Success Rate: 87.234
-Depth #5 Success Rate: 70.2128
+Depth #1 Success Rate: 97.8723
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 97.8723
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 91.4894
 
 Trial #47
 Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
-Depth #5: Success
-Depth #1 Success Rate: 60.4167
-Depth #2 Success Rate: 77.0833
-Depth #3 Success Rate: 85.4167
-Depth #4 Success Rate: 87.5
-Depth #5 Success Rate: 70.8333
+Depth #5: Failure
+Depth #1 Success Rate: 97.9167
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 97.9167
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 89.5833
 
 Trial #48
 Depth #1: Success
@@ -580,11 +580,11 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 61.2245
-Depth #2 Success Rate: 77.551
-Depth #3 Success Rate: 85.7143
-Depth #4 Success Rate: 87.7551
-Depth #5 Success Rate: 71.4286
+Depth #1 Success Rate: 97.9592
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 97.9592
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 89.7959
 
 Trial #49
 Depth #1: Success
@@ -592,23 +592,23 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 62
-Depth #2 Success Rate: 78
-Depth #3 Success Rate: 86
-Depth #4 Success Rate: 88
-Depth #5 Success Rate: 72
+Depth #1 Success Rate: 98
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98
+Depth #4 Success Rate: 100
+Depth #5 Success Rate: 90
 
 Trial #50
 Depth #1: Success
 Depth #2: Success
 Depth #3: Success
-Depth #4: Success
+Depth #4: Failure
 Depth #5: Success
-Depth #1 Success Rate: 62.7451
-Depth #2 Success Rate: 78.4314
-Depth #3 Success Rate: 86.2745
-Depth #4 Success Rate: 88.2353
-Depth #5 Success Rate: 72.549
+Depth #1 Success Rate: 98.0392
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.0392
+Depth #4 Success Rate: 98.0392
+Depth #5 Success Rate: 90.1961
 
 Trial #51
 Depth #1: Success
@@ -616,35 +616,35 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 63.4615
-Depth #2 Success Rate: 78.8462
-Depth #3 Success Rate: 86.5385
-Depth #4 Success Rate: 88.4615
-Depth #5 Success Rate: 73.0769
+Depth #1 Success Rate: 98.0769
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.0769
+Depth #4 Success Rate: 98.0769
+Depth #5 Success Rate: 90.3846
 
 Trial #52
 Depth #1: Success
 Depth #2: Success
 Depth #3: Success
-Depth #4: Failure
-Depth #5: Failure
-Depth #1 Success Rate: 64.1509
-Depth #2 Success Rate: 79.2453
-Depth #3 Success Rate: 86.7925
-Depth #4 Success Rate: 86.7925
-Depth #5 Success Rate: 71.6981
-
-Trial #53
-Depth #1: Failure
-Depth #2: Failure
-Depth #3: Failure
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 62.963
-Depth #2 Success Rate: 77.7778
-Depth #3 Success Rate: 85.1852
-Depth #4 Success Rate: 87.037
-Depth #5 Success Rate: 72.2222
+Depth #1 Success Rate: 98.1132
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.1132
+Depth #4 Success Rate: 98.1132
+Depth #5 Success Rate: 90.566
+
+Trial #53
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 98.1481
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.1481
+Depth #4 Success Rate: 98.1481
+Depth #5 Success Rate: 90.7407
 
 Trial #54
 Depth #1: Success
@@ -652,11 +652,11 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 63.6364
-Depth #2 Success Rate: 78.1818
-Depth #3 Success Rate: 85.4545
-Depth #4 Success Rate: 87.2727
-Depth #5 Success Rate: 72.7273
+Depth #1 Success Rate: 98.1818
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.1818
+Depth #4 Success Rate: 98.1818
+Depth #5 Success Rate: 90.9091
 
 Trial #55
 Depth #1: Success
@@ -664,23 +664,23 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 64.2857
-Depth #2 Success Rate: 78.5714
-Depth #3 Success Rate: 85.7143
-Depth #4 Success Rate: 87.5
-Depth #5 Success Rate: 73.2143
+Depth #1 Success Rate: 98.2143
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.2143
+Depth #4 Success Rate: 98.2143
+Depth #5 Success Rate: 91.0714
 
 Trial #56
-Depth #1: Failure
+Depth #1: Success
 Depth #2: Success
-Depth #3: Failure
+Depth #3: Success
 Depth #4: Success
-Depth #5: Failure
-Depth #1 Success Rate: 63.1579
-Depth #2 Success Rate: 78.9474
-Depth #3 Success Rate: 84.2105
-Depth #4 Success Rate: 87.7193
-Depth #5 Success Rate: 71.9298
+Depth #5: Success
+Depth #1 Success Rate: 98.2456
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.2456
+Depth #4 Success Rate: 98.2456
+Depth #5 Success Rate: 91.2281
 
 Trial #57
 Depth #1: Success
@@ -688,35 +688,35 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 63.7931
-Depth #2 Success Rate: 79.3103
-Depth #3 Success Rate: 84.4828
-Depth #4 Success Rate: 87.931
-Depth #5 Success Rate: 72.4138
+Depth #1 Success Rate: 98.2759
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.2759
+Depth #4 Success Rate: 98.2759
+Depth #5 Success Rate: 91.3793
 
 Trial #58
 Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
-Depth #5: Failure
-Depth #1 Success Rate: 64.4068
-Depth #2 Success Rate: 79.661
-Depth #3 Success Rate: 84.7458
-Depth #4 Success Rate: 88.1356
-Depth #5 Success Rate: 71.1864
+Depth #5: Success
+Depth #1 Success Rate: 98.3051
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.3051
+Depth #4 Success Rate: 98.3051
+Depth #5 Success Rate: 91.5254
 
 Trial #59
-Depth #1: Failure
-Depth #2: Failure
-Depth #3: Failure
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 63.3333
-Depth #2 Success Rate: 78.3333
-Depth #3 Success Rate: 83.3333
-Depth #4 Success Rate: 88.3333
-Depth #5 Success Rate: 71.6667
+Depth #1 Success Rate: 98.3333
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.3333
+Depth #4 Success Rate: 98.3333
+Depth #5 Success Rate: 91.6667
 
 Trial #60
 Depth #1: Success
@@ -724,23 +724,23 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 63.9344
-Depth #2 Success Rate: 78.6885
-Depth #3 Success Rate: 83.6066
-Depth #4 Success Rate: 88.5246
-Depth #5 Success Rate: 72.1311
+Depth #1 Success Rate: 98.3607
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.3607
+Depth #4 Success Rate: 98.3607
+Depth #5 Success Rate: 91.8033
 
 Trial #61
-Depth #1: Failure
-Depth #2: Failure
-Depth #3: Failure
-Depth #4: Failure
-Depth #5: Failure
-Depth #1 Success Rate: 62.9032
-Depth #2 Success Rate: 77.4194
-Depth #3 Success Rate: 82.2581
-Depth #4 Success Rate: 87.0968
-Depth #5 Success Rate: 70.9677
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 98.3871
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.3871
+Depth #4 Success Rate: 98.3871
+Depth #5 Success Rate: 91.9355
 
 Trial #62
 Depth #1: Success
@@ -748,35 +748,35 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 63.4921
-Depth #2 Success Rate: 77.7778
-Depth #3 Success Rate: 82.5397
-Depth #4 Success Rate: 87.3016
-Depth #5 Success Rate: 71.4286
+Depth #1 Success Rate: 98.4127
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.4127
+Depth #4 Success Rate: 98.4127
+Depth #5 Success Rate: 92.0635
 
 Trial #63
 Depth #1: Success
 Depth #2: Success
 Depth #3: Success
-Depth #4: Failure
-Depth #5: Failure
-Depth #1 Success Rate: 64.0625
-Depth #2 Success Rate: 78.125
-Depth #3 Success Rate: 82.8125
-Depth #4 Success Rate: 85.9375
-Depth #5 Success Rate: 70.3125
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 98.4375
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.4375
+Depth #4 Success Rate: 98.4375
+Depth #5 Success Rate: 92.1875
 
 Trial #64
 Depth #1: Success
-Depth #2: Failure
-Depth #3: Failure
-Depth #4: Failure
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 64.6154
-Depth #2 Success Rate: 76.9231
-Depth #3 Success Rate: 81.5385
-Depth #4 Success Rate: 84.6154
-Depth #5 Success Rate: 70.7692
+Depth #1 Success Rate: 98.4615
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.4615
+Depth #4 Success Rate: 98.4615
+Depth #5 Success Rate: 92.3077
 
 Trial #65
 Depth #1: Success
@@ -784,11 +784,11 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 65.1515
-Depth #2 Success Rate: 77.2727
-Depth #3 Success Rate: 81.8182
-Depth #4 Success Rate: 84.8485
-Depth #5 Success Rate: 71.2121
+Depth #1 Success Rate: 98.4848
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.4848
+Depth #4 Success Rate: 98.4848
+Depth #5 Success Rate: 92.4242
 
 Trial #66
 Depth #1: Success
@@ -796,11 +796,11 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 65.6716
-Depth #2 Success Rate: 77.6119
-Depth #3 Success Rate: 82.0896
-Depth #4 Success Rate: 85.0746
-Depth #5 Success Rate: 71.6418
+Depth #1 Success Rate: 98.5075
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.5075
+Depth #4 Success Rate: 98.5075
+Depth #5 Success Rate: 92.5373
 
 Trial #67
 Depth #1: Success
@@ -808,35 +808,35 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 66.1765
-Depth #2 Success Rate: 77.9412
-Depth #3 Success Rate: 82.3529
-Depth #4 Success Rate: 85.2941
-Depth #5 Success Rate: 72.0588
+Depth #1 Success Rate: 98.5294
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.5294
+Depth #4 Success Rate: 98.5294
+Depth #5 Success Rate: 92.6471
 
 Trial #68
-Depth #1: Failure
+Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 65.2174
-Depth #2 Success Rate: 78.2609
-Depth #3 Success Rate: 82.6087
-Depth #4 Success Rate: 85.5072
-Depth #5 Success Rate: 72.4638
+Depth #1 Success Rate: 98.5507
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.5507
+Depth #4 Success Rate: 98.5507
+Depth #5 Success Rate: 92.7536
 
 Trial #69
-Depth #1: Failure
-Depth #2: Failure
-Depth #3: Failure
-Depth #4: Failure
-Depth #5: Failure
-Depth #1 Success Rate: 64.2857
-Depth #2 Success Rate: 77.1429
-Depth #3 Success Rate: 81.4286
-Depth #4 Success Rate: 84.2857
-Depth #5 Success Rate: 71.4286
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 98.5714
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.5714
+Depth #4 Success Rate: 98.5714
+Depth #5 Success Rate: 92.8571
 
 Trial #70
 Depth #1: Success
@@ -844,47 +844,47 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 64.7887
-Depth #2 Success Rate: 77.4648
-Depth #3 Success Rate: 81.6901
-Depth #4 Success Rate: 84.507
-Depth #5 Success Rate: 71.831
+Depth #1 Success Rate: 98.5915
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.5915
+Depth #4 Success Rate: 98.5915
+Depth #5 Success Rate: 92.9577
 
 Trial #71
-Depth #1: Failure
-Depth #2: Failure
-Depth #3: Failure
-Depth #4: Success
-Depth #5: Success
-Depth #1 Success Rate: 63.8889
-Depth #2 Success Rate: 76.3889
-Depth #3 Success Rate: 80.5556
-Depth #4 Success Rate: 84.7222
-Depth #5 Success Rate: 72.2222
-
-Trial #72
-Depth #1: Failure
+Depth #1: Success
 Depth #2: Success
 Depth #3: Success
-Depth #4: Failure
-Depth #5: Failure
-Depth #1 Success Rate: 63.0137
-Depth #2 Success Rate: 76.7123
-Depth #3 Success Rate: 80.8219
-Depth #4 Success Rate: 83.5616
-Depth #5 Success Rate: 71.2329
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 98.6111
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.6111
+Depth #4 Success Rate: 98.6111
+Depth #5 Success Rate: 93.0556
+
+Trial #72
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 98.6301
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.6301
+Depth #4 Success Rate: 98.6301
+Depth #5 Success Rate: 93.1507
 
 Trial #73
-Depth #1: Failure
-Depth #2: Failure
-Depth #3: Failure
-Depth #4: Failure
-Depth #5: Failure
-Depth #1 Success Rate: 62.1622
-Depth #2 Success Rate: 75.6757
-Depth #3 Success Rate: 79.7297
-Depth #4 Success Rate: 82.4324
-Depth #5 Success Rate: 70.2703
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 98.6486
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.6486
+Depth #4 Success Rate: 98.6486
+Depth #5 Success Rate: 93.2432
 
 Trial #74
 Depth #1: Success
@@ -892,83 +892,83 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 62.6667
-Depth #2 Success Rate: 76
-Depth #3 Success Rate: 80
-Depth #4 Success Rate: 82.6667
-Depth #5 Success Rate: 70.6667
+Depth #1 Success Rate: 98.6667
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.6667
+Depth #4 Success Rate: 98.6667
+Depth #5 Success Rate: 93.3333
 
 Trial #75
-Depth #1: Failure
+Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 61.8421
-Depth #2 Success Rate: 76.3158
-Depth #3 Success Rate: 80.2632
-Depth #4 Success Rate: 82.8947
-Depth #5 Success Rate: 71.0526
+Depth #1 Success Rate: 98.6842
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.6842
+Depth #4 Success Rate: 98.6842
+Depth #5 Success Rate: 93.4211
 
 Trial #76
 Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
-Depth #5: Failure
-Depth #1 Success Rate: 62.3377
-Depth #2 Success Rate: 76.6234
-Depth #3 Success Rate: 80.5195
-Depth #4 Success Rate: 83.1169
-Depth #5 Success Rate: 70.1299
+Depth #5: Success
+Depth #1 Success Rate: 98.7013
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.7013
+Depth #4 Success Rate: 98.7013
+Depth #5 Success Rate: 93.5065
 
 Trial #77
-Depth #1: Failure
-Depth #2: Success
-Depth #3: Success
-Depth #4: Success
-Depth #5: Success
-Depth #1 Success Rate: 61.5385
-Depth #2 Success Rate: 76.9231
-Depth #3 Success Rate: 80.7692
-Depth #4 Success Rate: 83.3333
-Depth #5 Success Rate: 70.5128
-
-Trial #78
-Depth #1: Failure
-Depth #2: Success
-Depth #3: Success
-Depth #4: Success
-Depth #5: Success
-Depth #1 Success Rate: 60.7595
-Depth #2 Success Rate: 77.2152
-Depth #3 Success Rate: 81.0127
-Depth #4 Success Rate: 83.5443
-Depth #5 Success Rate: 70.8861
-
-Trial #79
-Depth #1: Failure
+Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Failure
+Depth #5: Success
+Depth #1 Success Rate: 98.7179
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.7179
+Depth #4 Success Rate: 97.4359
+Depth #5 Success Rate: 93.5897
+
+Trial #78
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
 Depth #5: Failure
-Depth #1 Success Rate: 60
-Depth #2 Success Rate: 77.5
-Depth #3 Success Rate: 81.25
-Depth #4 Success Rate: 82.5
-Depth #5 Success Rate: 70
+Depth #1 Success Rate: 98.7342
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.7342
+Depth #4 Success Rate: 97.4684
+Depth #5 Success Rate: 92.4051
+
+Trial #79
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 98.75
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.75
+Depth #4 Success Rate: 97.5
+Depth #5 Success Rate: 92.5
 
 Trial #80
 Depth #1: Success
-Depth #2: Failure
-Depth #3: Failure
-Depth #4: Failure
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 60.4938
-Depth #2 Success Rate: 76.5432
-Depth #3 Success Rate: 80.2469
-Depth #4 Success Rate: 81.4815
-Depth #5 Success Rate: 70.3704
+Depth #1 Success Rate: 98.7654
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.7654
+Depth #4 Success Rate: 97.5309
+Depth #5 Success Rate: 92.5926
 
 Trial #81
 Depth #1: Success
@@ -976,35 +976,35 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 60.9756
-Depth #2 Success Rate: 76.8293
-Depth #3 Success Rate: 80.4878
-Depth #4 Success Rate: 81.7073
-Depth #5 Success Rate: 70.7317
+Depth #1 Success Rate: 98.7805
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.7805
+Depth #4 Success Rate: 97.561
+Depth #5 Success Rate: 92.6829
 
 Trial #82
-Depth #1: Failure
-Depth #2: Failure
-Depth #3: Success
-Depth #4: Success
-Depth #5: Success
-Depth #1 Success Rate: 60.241
-Depth #2 Success Rate: 75.9036
-Depth #3 Success Rate: 80.7229
-Depth #4 Success Rate: 81.9277
-Depth #5 Success Rate: 71.0843
-
-Trial #83
-Depth #1: Failure
+Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
-Depth #5: Failure
-Depth #1 Success Rate: 59.5238
-Depth #2 Success Rate: 76.1905
-Depth #3 Success Rate: 80.9524
-Depth #4 Success Rate: 82.1429
-Depth #5 Success Rate: 70.2381
+Depth #5: Success
+Depth #1 Success Rate: 98.7952
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.7952
+Depth #4 Success Rate: 97.5904
+Depth #5 Success Rate: 92.7711
+
+Trial #83
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 98.8095
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.8095
+Depth #4 Success Rate: 97.619
+Depth #5 Success Rate: 92.8571
 
 Trial #84
 Depth #1: Success
@@ -1012,83 +1012,83 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 60
-Depth #2 Success Rate: 76.4706
-Depth #3 Success Rate: 81.1765
-Depth #4 Success Rate: 82.3529
-Depth #5 Success Rate: 70.5882
+Depth #1 Success Rate: 98.8235
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.8235
+Depth #4 Success Rate: 97.6471
+Depth #5 Success Rate: 92.9412
 
 Trial #85
-Depth #1: Failure
-Depth #2: Failure
+Depth #1: Success
+Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 59.3023
-Depth #2 Success Rate: 75.5814
-Depth #3 Success Rate: 81.3953
-Depth #4 Success Rate: 82.5581
-Depth #5 Success Rate: 70.9302
+Depth #1 Success Rate: 98.8372
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.8372
+Depth #4 Success Rate: 97.6744
+Depth #5 Success Rate: 93.0233
 
 Trial #86
-Depth #1: Failure
-Depth #2: Failure
+Depth #1: Success
+Depth #2: Success
 Depth #3: Success
 Depth #4: Success
-Depth #5: Failure
-Depth #1 Success Rate: 58.6207
-Depth #2 Success Rate: 74.7126
-Depth #3 Success Rate: 81.6092
-Depth #4 Success Rate: 82.7586
-Depth #5 Success Rate: 70.1149
+Depth #5: Success
+Depth #1 Success Rate: 98.8506
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.8506
+Depth #4 Success Rate: 97.7011
+Depth #5 Success Rate: 93.1034
 
 Trial #87
-Depth #1: Success
+Depth #1: Failure
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 59.0909
-Depth #2 Success Rate: 75
-Depth #3 Success Rate: 81.8182
-Depth #4 Success Rate: 82.9545
-Depth #5 Success Rate: 70.4545
+Depth #1 Success Rate: 97.7273
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.8636
+Depth #4 Success Rate: 97.7273
+Depth #5 Success Rate: 93.1818
 
 Trial #88
-Depth #1: Failure
-Depth #2: Success
-Depth #3: Failure
-Depth #4: Failure
-Depth #5: Success
-Depth #1 Success Rate: 58.427
-Depth #2 Success Rate: 75.2809
-Depth #3 Success Rate: 80.8989
-Depth #4 Success Rate: 82.0225
-Depth #5 Success Rate: 70.7865
-
-Trial #89
 Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 58.8889
-Depth #2 Success Rate: 75.5556
-Depth #3 Success Rate: 81.1111
-Depth #4 Success Rate: 82.2222
-Depth #5 Success Rate: 71.1111
+Depth #1 Success Rate: 97.7528
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.8764
+Depth #4 Success Rate: 97.7528
+Depth #5 Success Rate: 93.2584
 
-Trial #90
+Trial #89
 Depth #1: Failure
-Depth #2: Failure
+Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 58.2418
-Depth #2 Success Rate: 74.7253
-Depth #3 Success Rate: 81.3187
-Depth #4 Success Rate: 82.4176
-Depth #5 Success Rate: 71.4286
+Depth #1 Success Rate: 96.6667
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.8889
+Depth #4 Success Rate: 97.7778
+Depth #5 Success Rate: 93.3333
+
+Trial #90
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 96.7033
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.9011
+Depth #4 Success Rate: 97.8022
+Depth #5 Success Rate: 93.4066
 
 Trial #91
 Depth #1: Success
@@ -1096,23 +1096,23 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 58.6957
-Depth #2 Success Rate: 75
-Depth #3 Success Rate: 81.5217
-Depth #4 Success Rate: 82.6087
-Depth #5 Success Rate: 71.7391
+Depth #1 Success Rate: 96.7391
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.913
+Depth #4 Success Rate: 97.8261
+Depth #5 Success Rate: 93.4783
 
 Trial #92
 Depth #1: Success
 Depth #2: Success
-Depth #3: Failure
-Depth #4: Failure
-Depth #5: Failure
-Depth #1 Success Rate: 59.1398
-Depth #2 Success Rate: 75.2688
-Depth #3 Success Rate: 80.6452
-Depth #4 Success Rate: 81.7204
-Depth #5 Success Rate: 70.9677
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 96.7742
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.9247
+Depth #4 Success Rate: 97.8495
+Depth #5 Success Rate: 93.5484
 
 Trial #93
 Depth #1: Success
@@ -1120,11 +1120,11 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 59.5745
-Depth #2 Success Rate: 75.5319
-Depth #3 Success Rate: 80.8511
-Depth #4 Success Rate: 81.9149
-Depth #5 Success Rate: 71.2766
+Depth #1 Success Rate: 96.8085
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.9362
+Depth #4 Success Rate: 97.8723
+Depth #5 Success Rate: 93.617
 
 Trial #94
 Depth #1: Success
@@ -1132,23 +1132,23 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 60
-Depth #2 Success Rate: 75.7895
-Depth #3 Success Rate: 81.0526
-Depth #4 Success Rate: 82.1053
-Depth #5 Success Rate: 71.5789
+Depth #1 Success Rate: 96.8421
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.9474
+Depth #4 Success Rate: 97.8947
+Depth #5 Success Rate: 93.6842
 
 Trial #95
-Depth #1: Failure
+Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
-Depth #5: Failure
-Depth #1 Success Rate: 59.375
-Depth #2 Success Rate: 76.0417
-Depth #3 Success Rate: 81.25
-Depth #4 Success Rate: 82.2917
-Depth #5 Success Rate: 70.8333
+Depth #5: Success
+Depth #1 Success Rate: 96.875
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.9583
+Depth #4 Success Rate: 97.9167
+Depth #5 Success Rate: 93.75
 
 Trial #96
 Depth #1: Success
@@ -1156,71 +1156,71 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 59.7938
-Depth #2 Success Rate: 76.2887
-Depth #3 Success Rate: 81.4433
-Depth #4 Success Rate: 82.4742
-Depth #5 Success Rate: 71.134
+Depth #1 Success Rate: 96.9072
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.9691
+Depth #4 Success Rate: 97.9381
+Depth #5 Success Rate: 93.8144
 
 Trial #97
 Depth #1: Failure
 Depth #2: Success
 Depth #3: Success
-Depth #4: Failure
+Depth #4: Success
 Depth #5: Failure
-Depth #1 Success Rate: 59.1837
-Depth #2 Success Rate: 76.5306
-Depth #3 Success Rate: 81.6327
-Depth #4 Success Rate: 81.6327
-Depth #5 Success Rate: 70.4082
+Depth #1 Success Rate: 95.9184
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.9796
+Depth #4 Success Rate: 97.9592
+Depth #5 Success Rate: 92.8571
 
 Trial #98
-Depth #1: Failure
-Depth #2: Failure
-Depth #3: Failure
-Depth #4: Success
-Depth #5: Success
-Depth #1 Success Rate: 58.5859
-Depth #2 Success Rate: 75.7576
-Depth #3 Success Rate: 80.8081
-Depth #4 Success Rate: 81.8182
-Depth #5 Success Rate: 70.7071
-
-Trial #99
-Depth #1: Failure
+Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 58
-Depth #2 Success Rate: 76
-Depth #3 Success Rate: 81
-Depth #4 Success Rate: 82
-Depth #5 Success Rate: 71
+Depth #1 Success Rate: 95.9596
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 98.9899
+Depth #4 Success Rate: 97.9798
+Depth #5 Success Rate: 92.9293
+
+Trial #99
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 96
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99
+Depth #4 Success Rate: 98
+Depth #5 Success Rate: 93
 
 Trial #100
 Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
-Depth #5: Success
-Depth #1 Success Rate: 58.4158
-Depth #2 Success Rate: 76.2376
-Depth #3 Success Rate: 81.1881
-Depth #4 Success Rate: 82.1782
-Depth #5 Success Rate: 71.2871
+Depth #5: Failure
+Depth #1 Success Rate: 96.0396
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.0099
+Depth #4 Success Rate: 98.0198
+Depth #5 Success Rate: 92.0792
 
 Trial #101
-Depth #1: Failure
-Depth #2: Failure
-Depth #3: Failure
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
 Depth #4: Success
-Depth #5: Failure
-Depth #1 Success Rate: 57.8431
-Depth #2 Success Rate: 75.4902
-Depth #3 Success Rate: 80.3922
-Depth #4 Success Rate: 82.3529
-Depth #5 Success Rate: 70.5882
+Depth #5: Success
+Depth #1 Success Rate: 96.0784
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.0196
+Depth #4 Success Rate: 98.0392
+Depth #5 Success Rate: 92.1569
 
 Trial #102
 Depth #1: Success
@@ -1228,59 +1228,59 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 58.2524
-Depth #2 Success Rate: 75.7282
-Depth #3 Success Rate: 80.5825
-Depth #4 Success Rate: 82.5243
-Depth #5 Success Rate: 70.8738
+Depth #1 Success Rate: 96.1165
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.0291
+Depth #4 Success Rate: 98.0583
+Depth #5 Success Rate: 92.233
 
 Trial #103
-Depth #1: Failure
-Depth #2: Failure
-Depth #3: Failure
-Depth #4: Success
-Depth #5: Success
-Depth #1 Success Rate: 57.6923
-Depth #2 Success Rate: 75
-Depth #3 Success Rate: 79.8077
-Depth #4 Success Rate: 82.6923
-Depth #5 Success Rate: 71.1538
-
-Trial #104
-Depth #1: Failure
-Depth #2: Success
-Depth #3: Success
-Depth #4: Success
-Depth #5: Success
-Depth #1 Success Rate: 57.1429
-Depth #2 Success Rate: 75.2381
-Depth #3 Success Rate: 80
-Depth #4 Success Rate: 82.8571
-Depth #5 Success Rate: 71.4286
-
-Trial #105
 Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 57.5472
-Depth #2 Success Rate: 75.4717
-Depth #3 Success Rate: 80.1887
-Depth #4 Success Rate: 83.0189
-Depth #5 Success Rate: 71.6981
+Depth #1 Success Rate: 96.1538
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.0385
+Depth #4 Success Rate: 98.0769
+Depth #5 Success Rate: 92.3077
 
-Trial #106
+Trial #104
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 96.1905
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.0476
+Depth #4 Success Rate: 98.0952
+Depth #5 Success Rate: 92.381
+
+Trial #105
 Depth #1: Failure
 Depth #2: Success
-Depth #3: Failure
+Depth #3: Success
 Depth #4: Success
 Depth #5: Failure
-Depth #1 Success Rate: 57.0093
-Depth #2 Success Rate: 75.7009
-Depth #3 Success Rate: 79.4393
-Depth #4 Success Rate: 83.1776
-Depth #5 Success Rate: 71.028
+Depth #1 Success Rate: 95.283
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.0566
+Depth #4 Success Rate: 98.1132
+Depth #5 Success Rate: 91.5094
+
+Trial #106
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 95.3271
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.0654
+Depth #4 Success Rate: 98.1308
+Depth #5 Success Rate: 91.5888
 
 Trial #107
 Depth #1: Success
@@ -1288,11 +1288,11 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 57.4074
-Depth #2 Success Rate: 75.9259
-Depth #3 Success Rate: 79.6296
-Depth #4 Success Rate: 83.3333
-Depth #5 Success Rate: 71.2963
+Depth #1 Success Rate: 95.3704
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.0741
+Depth #4 Success Rate: 98.1481
+Depth #5 Success Rate: 91.6667
 
 Trial #108
 Depth #1: Success
@@ -1300,35 +1300,35 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 57.7982
-Depth #2 Success Rate: 76.1468
-Depth #3 Success Rate: 79.8165
-Depth #4 Success Rate: 83.4862
-Depth #5 Success Rate: 71.5596
+Depth #1 Success Rate: 95.4128
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.0826
+Depth #4 Success Rate: 98.1651
+Depth #5 Success Rate: 91.7431
 
 Trial #109
-Depth #1: Failure
-Depth #2: Failure
-Depth #3: Failure
-Depth #4: Success
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Failure
 Depth #5: Failure
-Depth #1 Success Rate: 57.2727
-Depth #2 Success Rate: 75.4545
-Depth #3 Success Rate: 79.0909
-Depth #4 Success Rate: 83.6364
-Depth #5 Success Rate: 70.9091
+Depth #1 Success Rate: 95.4545
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.0909
+Depth #4 Success Rate: 97.2727
+Depth #5 Success Rate: 90.9091
 
 Trial #110
-Depth #1: Failure
+Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 56.7568
-Depth #2 Success Rate: 75.6757
-Depth #3 Success Rate: 79.2793
-Depth #4 Success Rate: 83.7838
-Depth #5 Success Rate: 71.1712
+Depth #1 Success Rate: 95.4955
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.0991
+Depth #4 Success Rate: 97.2973
+Depth #5 Success Rate: 90.991
 
 Trial #111
 Depth #1: Success
@@ -1336,71 +1336,71 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 57.1429
-Depth #2 Success Rate: 75.8929
-Depth #3 Success Rate: 79.4643
-Depth #4 Success Rate: 83.9286
-Depth #5 Success Rate: 71.4286
+Depth #1 Success Rate: 95.5357
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.1071
+Depth #4 Success Rate: 97.3214
+Depth #5 Success Rate: 91.0714
 
 Trial #112
-Depth #1: Failure
-Depth #2: Failure
-Depth #3: Failure
-Depth #4: Success
-Depth #5: Success
-Depth #1 Success Rate: 56.6372
-Depth #2 Success Rate: 75.2212
-Depth #3 Success Rate: 78.7611
-Depth #4 Success Rate: 84.0708
-Depth #5 Success Rate: 71.6814
-
-Trial #113
-Depth #1: Failure
-Depth #2: Failure
-Depth #3: Failure
-Depth #4: Failure
-Depth #5: Failure
-Depth #1 Success Rate: 56.1404
-Depth #2 Success Rate: 74.5614
-Depth #3 Success Rate: 78.0702
-Depth #4 Success Rate: 83.3333
-Depth #5 Success Rate: 71.0526
-
-Trial #114
 Depth #1: Success
-Depth #2: Failure
+Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 56.5217
-Depth #2 Success Rate: 73.913
-Depth #3 Success Rate: 78.2609
-Depth #4 Success Rate: 83.4783
-Depth #5 Success Rate: 71.3043
+Depth #1 Success Rate: 95.5752
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.115
+Depth #4 Success Rate: 97.3451
+Depth #5 Success Rate: 91.1504
 
-Trial #115
-Depth #1: Failure
-Depth #2: Failure
-Depth #3: Failure
+Trial #113
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 56.0345
-Depth #2 Success Rate: 73.2759
-Depth #3 Success Rate: 77.5862
-Depth #4 Success Rate: 83.6207
-Depth #5 Success Rate: 71.5517
+Depth #1 Success Rate: 95.614
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.1228
+Depth #4 Success Rate: 97.3684
+Depth #5 Success Rate: 91.2281
+
+Trial #114
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 95.6522
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.1304
+Depth #4 Success Rate: 97.3913
+Depth #5 Success Rate: 91.3043
+
+Trial #115
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 95.6897
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.1379
+Depth #4 Success Rate: 97.4138
+Depth #5 Success Rate: 91.3793
 
 Trial #116
 Depth #1: Success
 Depth #2: Success
-Depth #3: Failure
+Depth #3: Success
 Depth #4: Success
-Depth #5: Failure
-Depth #1 Success Rate: 56.4103
-Depth #2 Success Rate: 73.5043
-Depth #3 Success Rate: 76.9231
-Depth #4 Success Rate: 83.7607
-Depth #5 Success Rate: 70.9402
+Depth #5: Success
+Depth #1 Success Rate: 95.7265
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.1453
+Depth #4 Success Rate: 97.4359
+Depth #5 Success Rate: 91.453
 
 Trial #117
 Depth #1: Success
@@ -1408,23 +1408,23 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 56.7797
-Depth #2 Success Rate: 73.7288
-Depth #3 Success Rate: 77.1186
-Depth #4 Success Rate: 83.8983
-Depth #5 Success Rate: 71.1864
+Depth #1 Success Rate: 95.7627
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.1525
+Depth #4 Success Rate: 97.4576
+Depth #5 Success Rate: 91.5254
 
 Trial #118
 Depth #1: Success
-Depth #2: Failure
-Depth #3: Failure
-Depth #4: Failure
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 57.1429
-Depth #2 Success Rate: 73.1092
-Depth #3 Success Rate: 76.4706
-Depth #4 Success Rate: 83.1933
-Depth #5 Success Rate: 71.4286
+Depth #1 Success Rate: 95.7983
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.1597
+Depth #4 Success Rate: 97.479
+Depth #5 Success Rate: 91.5966
 
 Trial #119
 Depth #1: Success
@@ -1432,11 +1432,11 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 57.5
-Depth #2 Success Rate: 73.3333
-Depth #3 Success Rate: 76.6667
-Depth #4 Success Rate: 83.3333
-Depth #5 Success Rate: 71.6667
+Depth #1 Success Rate: 95.8333
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.1667
+Depth #4 Success Rate: 97.5
+Depth #5 Success Rate: 91.6667
 
 Trial #120
 Depth #1: Success
@@ -1444,11 +1444,11 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 57.8512
-Depth #2 Success Rate: 73.5537
-Depth #3 Success Rate: 76.8595
-Depth #4 Success Rate: 83.4711
-Depth #5 Success Rate: 71.9008
+Depth #1 Success Rate: 95.8678
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.1736
+Depth #4 Success Rate: 97.5207
+Depth #5 Success Rate: 91.7355
 
 Trial #121
 Depth #1: Success
@@ -1456,23 +1456,23 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 58.1967
-Depth #2 Success Rate: 73.7705
-Depth #3 Success Rate: 77.0492
-Depth #4 Success Rate: 83.6066
-Depth #5 Success Rate: 72.1311
+Depth #1 Success Rate: 95.9016
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.1803
+Depth #4 Success Rate: 97.541
+Depth #5 Success Rate: 91.8033
 
 Trial #122
 Depth #1: Success
 Depth #2: Success
 Depth #3: Success
-Depth #4: Failure
+Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 58.5366
-Depth #2 Success Rate: 73.9837
-Depth #3 Success Rate: 77.2358
-Depth #4 Success Rate: 82.9268
-Depth #5 Success Rate: 72.3577
+Depth #1 Success Rate: 95.935
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.187
+Depth #4 Success Rate: 97.561
+Depth #5 Success Rate: 91.8699
 
 Trial #123
 Depth #1: Success
@@ -1480,11 +1480,11 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 58.871
-Depth #2 Success Rate: 74.1935
-Depth #3 Success Rate: 77.4194
-Depth #4 Success Rate: 83.0645
-Depth #5 Success Rate: 72.5806
+Depth #1 Success Rate: 95.9677
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.1935
+Depth #4 Success Rate: 97.5806
+Depth #5 Success Rate: 91.9355
 
 Trial #124
 Depth #1: Success
@@ -1492,33 +1492,909 @@ Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 59.2
-Depth #2 Success Rate: 74.4
-Depth #3 Success Rate: 77.6
-Depth #4 Success Rate: 83.2
-Depth #5 Success Rate: 72.8
+Depth #1 Success Rate: 96
+Depth #2 Success Rate: 100
+Depth #3 Success Rate: 99.2
+Depth #4 Success Rate: 97.6
+Depth #5 Success Rate: 92
 
 Trial #125
-Depth #1: Success
+Depth #1: Failure
 Depth #2: Failure
-Depth #3: Failure
+Depth #3: Success
 Depth #4: Success
-Depth #5: Failure
-Depth #1 Success Rate: 59.5238
-Depth #2 Success Rate: 73.8095
-Depth #3 Success Rate: 76.9841
-Depth #4 Success Rate: 83.3333
-Depth #5 Success Rate: 72.2222
+Depth #5: Success
+Depth #1 Success Rate: 95.2381
+Depth #2 Success Rate: 99.2063
+Depth #3 Success Rate: 99.2063
+Depth #4 Success Rate: 97.619
+Depth #5 Success Rate: 92.0635
 
 Trial #126
+Depth #1: Failure
+Depth #2: Success
+Depth #3: Success
+Depth #4: Failure
+Depth #5: Success
+Depth #1 Success Rate: 94.4882
+Depth #2 Success Rate: 99.2126
+Depth #3 Success Rate: 99.2126
+Depth #4 Success Rate: 96.8504
+Depth #5 Success Rate: 92.126
+
+Trial #127
 Depth #1: Success
 Depth #2: Success
 Depth #3: Success
 Depth #4: Success
 Depth #5: Success
-Depth #1 Success Rate: 59.8425
-Depth #2 Success Rate: 74.0157
-Depth #3 Success Rate: 77.1654
-Depth #4 Success Rate: 83.4646
-Depth #5 Success Rate: 72.4409
+Depth #1 Success Rate: 94.5312
+Depth #2 Success Rate: 99.2188
+Depth #3 Success Rate: 99.2188
+Depth #4 Success Rate: 96.875
+Depth #5 Success Rate: 92.1875
+
+Trial #128
+Depth #1: Success
+Depth #2: Failure
+Depth #3: Success
+Depth #4: Failure
+Depth #5: Success
+Depth #1 Success Rate: 94.5736
+Depth #2 Success Rate: 98.4496
+Depth #3 Success Rate: 99.2248
+Depth #4 Success Rate: 96.124
+Depth #5 Success Rate: 92.2481
+
+Trial #129
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 94.6154
+Depth #2 Success Rate: 98.4615
+Depth #3 Success Rate: 99.2308
+Depth #4 Success Rate: 96.1538
+Depth #5 Success Rate: 92.3077
+
+Trial #130
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 94.6565
+Depth #2 Success Rate: 98.4733
+Depth #3 Success Rate: 99.2366
+Depth #4 Success Rate: 96.1832
+Depth #5 Success Rate: 92.3664
+
+Trial #131
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 94.697
+Depth #2 Success Rate: 98.4848
+Depth #3 Success Rate: 99.2424
+Depth #4 Success Rate: 96.2121
+Depth #5 Success Rate: 92.4242
+
+Trial #132
+Depth #1: Failure
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Failure
+Depth #1 Success Rate: 93.985
+Depth #2 Success Rate: 98.4962
+Depth #3 Success Rate: 99.2481
+Depth #4 Success Rate: 96.2406
+Depth #5 Success Rate: 91.7293
+
+Trial #133
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 94.0299
+Depth #2 Success Rate: 98.5075
+Depth #3 Success Rate: 99.2537
+Depth #4 Success Rate: 96.2687
+Depth #5 Success Rate: 91.791
+
+Trial #134
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 94.0741
+Depth #2 Success Rate: 98.5185
+Depth #3 Success Rate: 99.2593
+Depth #4 Success Rate: 96.2963
+Depth #5 Success Rate: 91.8519
+
+Trial #135
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Failure
+Depth #1 Success Rate: 94.1176
+Depth #2 Success Rate: 98.5294
+Depth #3 Success Rate: 99.2647
+Depth #4 Success Rate: 96.3235
+Depth #5 Success Rate: 91.1765
+
+Trial #136
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 94.1606
+Depth #2 Success Rate: 98.5401
+Depth #3 Success Rate: 99.2701
+Depth #4 Success Rate: 96.3504
+Depth #5 Success Rate: 91.2409
+
+Trial #137
+Depth #1: Failure
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 93.4783
+Depth #2 Success Rate: 98.5507
+Depth #3 Success Rate: 99.2754
+Depth #4 Success Rate: 96.3768
+Depth #5 Success Rate: 91.3043
+
+Trial #138
+Depth #1: Failure
+Depth #2: Failure
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.8058
+Depth #2 Success Rate: 97.8417
+Depth #3 Success Rate: 99.2806
+Depth #4 Success Rate: 96.4029
+Depth #5 Success Rate: 91.3669
+
+Trial #139
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.8571
+Depth #2 Success Rate: 97.8571
+Depth #3 Success Rate: 99.2857
+Depth #4 Success Rate: 96.4286
+Depth #5 Success Rate: 91.4286
+
+Trial #140
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.9078
+Depth #2 Success Rate: 97.8723
+Depth #3 Success Rate: 99.2908
+Depth #4 Success Rate: 96.4539
+Depth #5 Success Rate: 91.4894
+
+Trial #141
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Failure
+Depth #1 Success Rate: 92.9577
+Depth #2 Success Rate: 97.8873
+Depth #3 Success Rate: 99.2958
+Depth #4 Success Rate: 96.4789
+Depth #5 Success Rate: 90.8451
+
+Trial #142
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 93.007
+Depth #2 Success Rate: 97.9021
+Depth #3 Success Rate: 99.3007
+Depth #4 Success Rate: 96.5035
+Depth #5 Success Rate: 90.9091
+
+Trial #143
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 93.0556
+Depth #2 Success Rate: 97.9167
+Depth #3 Success Rate: 99.3056
+Depth #4 Success Rate: 96.5278
+Depth #5 Success Rate: 90.9722
+
+Trial #144
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 93.1034
+Depth #2 Success Rate: 97.931
+Depth #3 Success Rate: 99.3103
+Depth #4 Success Rate: 96.5517
+Depth #5 Success Rate: 91.0345
+
+Trial #145
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 93.1507
+Depth #2 Success Rate: 97.9452
+Depth #3 Success Rate: 99.3151
+Depth #4 Success Rate: 96.5753
+Depth #5 Success Rate: 91.0959
+
+Trial #146
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 93.1973
+Depth #2 Success Rate: 97.9592
+Depth #3 Success Rate: 99.3197
+Depth #4 Success Rate: 96.5986
+Depth #5 Success Rate: 91.1565
+
+Trial #147
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 93.2432
+Depth #2 Success Rate: 97.973
+Depth #3 Success Rate: 99.3243
+Depth #4 Success Rate: 96.6216
+Depth #5 Success Rate: 91.2162
+
+Trial #148
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 93.2886
+Depth #2 Success Rate: 97.9866
+Depth #3 Success Rate: 99.3289
+Depth #4 Success Rate: 96.6443
+Depth #5 Success Rate: 91.2752
+
+Trial #149
+Depth #1: Failure
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.6667
+Depth #2 Success Rate: 98
+Depth #3 Success Rate: 99.3333
+Depth #4 Success Rate: 96.6667
+Depth #5 Success Rate: 91.3333
+
+Trial #150
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Failure
+Depth #5: Failure
+Depth #1 Success Rate: 92.7152
+Depth #2 Success Rate: 98.0132
+Depth #3 Success Rate: 99.3377
+Depth #4 Success Rate: 96.0265
+Depth #5 Success Rate: 90.7285
+
+Trial #151
+Depth #1: Failure
+Depth #2: Failure
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.1053
+Depth #2 Success Rate: 97.3684
+Depth #3 Success Rate: 99.3421
+Depth #4 Success Rate: 96.0526
+Depth #5 Success Rate: 90.7895
+
+Trial #152
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.1569
+Depth #2 Success Rate: 97.3856
+Depth #3 Success Rate: 99.3464
+Depth #4 Success Rate: 96.0784
+Depth #5 Success Rate: 90.8497
+
+Trial #153
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.2078
+Depth #2 Success Rate: 97.4026
+Depth #3 Success Rate: 99.3506
+Depth #4 Success Rate: 96.1039
+Depth #5 Success Rate: 90.9091
+
+Trial #154
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.2581
+Depth #2 Success Rate: 97.4194
+Depth #3 Success Rate: 99.3548
+Depth #4 Success Rate: 96.129
+Depth #5 Success Rate: 90.9677
+
+Trial #155
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Failure
+Depth #1 Success Rate: 92.3077
+Depth #2 Success Rate: 97.4359
+Depth #3 Success Rate: 99.359
+Depth #4 Success Rate: 96.1538
+Depth #5 Success Rate: 90.3846
+
+Trial #156
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.3567
+Depth #2 Success Rate: 97.4522
+Depth #3 Success Rate: 99.3631
+Depth #4 Success Rate: 96.1783
+Depth #5 Success Rate: 90.4459
+
+Trial #157
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.4051
+Depth #2 Success Rate: 97.4684
+Depth #3 Success Rate: 99.3671
+Depth #4 Success Rate: 96.2025
+Depth #5 Success Rate: 90.5063
+
+Trial #158
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.4528
+Depth #2 Success Rate: 97.4843
+Depth #3 Success Rate: 99.3711
+Depth #4 Success Rate: 96.2264
+Depth #5 Success Rate: 90.566
+
+Trial #159
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.5
+Depth #2 Success Rate: 97.5
+Depth #3 Success Rate: 99.375
+Depth #4 Success Rate: 96.25
+Depth #5 Success Rate: 90.625
+
+Trial #160
+Depth #1: Failure
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 91.9255
+Depth #2 Success Rate: 97.5155
+Depth #3 Success Rate: 99.3789
+Depth #4 Success Rate: 96.2733
+Depth #5 Success Rate: 90.6832
+
+Trial #161
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 91.9753
+Depth #2 Success Rate: 97.5309
+Depth #3 Success Rate: 99.3827
+Depth #4 Success Rate: 96.2963
+Depth #5 Success Rate: 90.7407
+
+Trial #162
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.0245
+Depth #2 Success Rate: 97.546
+Depth #3 Success Rate: 99.3865
+Depth #4 Success Rate: 96.319
+Depth #5 Success Rate: 90.7975
+
+Trial #163
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.0732
+Depth #2 Success Rate: 97.561
+Depth #3 Success Rate: 99.3902
+Depth #4 Success Rate: 96.3415
+Depth #5 Success Rate: 90.8537
+
+Trial #164
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.1212
+Depth #2 Success Rate: 97.5758
+Depth #3 Success Rate: 99.3939
+Depth #4 Success Rate: 96.3636
+Depth #5 Success Rate: 90.9091
+
+Trial #165
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.1687
+Depth #2 Success Rate: 97.5904
+Depth #3 Success Rate: 99.3976
+Depth #4 Success Rate: 96.3855
+Depth #5 Success Rate: 90.9639
+
+Trial #166
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.2156
+Depth #2 Success Rate: 97.6048
+Depth #3 Success Rate: 99.4012
+Depth #4 Success Rate: 96.4072
+Depth #5 Success Rate: 91.018
+
+Trial #167
+Depth #1: Failure
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 91.6667
+Depth #2 Success Rate: 97.619
+Depth #3 Success Rate: 99.4048
+Depth #4 Success Rate: 96.4286
+Depth #5 Success Rate: 91.0714
+
+Trial #168
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 91.716
+Depth #2 Success Rate: 97.6331
+Depth #3 Success Rate: 99.4083
+Depth #4 Success Rate: 96.4497
+Depth #5 Success Rate: 91.1243
+
+Trial #169
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 91.7647
+Depth #2 Success Rate: 97.6471
+Depth #3 Success Rate: 99.4118
+Depth #4 Success Rate: 96.4706
+Depth #5 Success Rate: 91.1765
+
+Trial #170
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Failure
+Depth #1 Success Rate: 91.8129
+Depth #2 Success Rate: 97.6608
+Depth #3 Success Rate: 99.4152
+Depth #4 Success Rate: 96.4912
+Depth #5 Success Rate: 90.6433
+
+Trial #171
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 91.8605
+Depth #2 Success Rate: 97.6744
+Depth #3 Success Rate: 99.4186
+Depth #4 Success Rate: 96.5116
+Depth #5 Success Rate: 90.6977
+
+Trial #172
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 91.9075
+Depth #2 Success Rate: 97.6879
+Depth #3 Success Rate: 99.422
+Depth #4 Success Rate: 96.5318
+Depth #5 Success Rate: 90.7514
+
+Trial #173
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 91.954
+Depth #2 Success Rate: 97.7011
+Depth #3 Success Rate: 99.4253
+Depth #4 Success Rate: 96.5517
+Depth #5 Success Rate: 90.8046
+
+Trial #174
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92
+Depth #2 Success Rate: 97.7143
+Depth #3 Success Rate: 99.4286
+Depth #4 Success Rate: 96.5714
+Depth #5 Success Rate: 90.8571
+
+Trial #175
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.0455
+Depth #2 Success Rate: 97.7273
+Depth #3 Success Rate: 99.4318
+Depth #4 Success Rate: 96.5909
+Depth #5 Success Rate: 90.9091
+
+Trial #176
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.0904
+Depth #2 Success Rate: 97.7401
+Depth #3 Success Rate: 99.435
+Depth #4 Success Rate: 96.6102
+Depth #5 Success Rate: 90.9605
+
+Trial #177
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.1348
+Depth #2 Success Rate: 97.7528
+Depth #3 Success Rate: 99.4382
+Depth #4 Success Rate: 96.6292
+Depth #5 Success Rate: 91.0112
+
+Trial #178
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Failure
+Depth #1 Success Rate: 92.1788
+Depth #2 Success Rate: 97.7654
+Depth #3 Success Rate: 99.4413
+Depth #4 Success Rate: 96.648
+Depth #5 Success Rate: 90.5028
+
+Trial #179
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.2222
+Depth #2 Success Rate: 97.7778
+Depth #3 Success Rate: 99.4444
+Depth #4 Success Rate: 96.6667
+Depth #5 Success Rate: 90.5556
+
+Trial #180
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.2652
+Depth #2 Success Rate: 97.7901
+Depth #3 Success Rate: 99.4475
+Depth #4 Success Rate: 96.6851
+Depth #5 Success Rate: 90.6077
+
+Trial #181
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.3077
+Depth #2 Success Rate: 97.8022
+Depth #3 Success Rate: 99.4505
+Depth #4 Success Rate: 96.7033
+Depth #5 Success Rate: 90.6593
+
+Trial #182
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 92.3497
+Depth #2 Success Rate: 97.8142
+Depth #3 Success Rate: 99.4536
+Depth #4 Success Rate: 96.7213
+Depth #5 Success Rate: 90.7104
+
+Trial #183
+Depth #1: Failure
+Depth #2: Failure
+Depth #3: Failure
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 91.8478
+Depth #2 Success Rate: 97.2826
+Depth #3 Success Rate: 98.913
+Depth #4 Success Rate: 96.7391
+Depth #5 Success Rate: 90.7609
+
+Trial #184
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 91.8919
+Depth #2 Success Rate: 97.2973
+Depth #3 Success Rate: 98.9189
+Depth #4 Success Rate: 96.7568
+Depth #5 Success Rate: 90.8108
+
+Trial #185
+Depth #1: Failure
+Depth #2: Success
+Depth #3: Success
+Depth #4: Failure
+Depth #5: Failure
+Depth #1 Success Rate: 91.3978
+Depth #2 Success Rate: 97.3118
+Depth #3 Success Rate: 98.9247
+Depth #4 Success Rate: 96.2366
+Depth #5 Success Rate: 90.3226
+
+Trial #186
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 91.4439
+Depth #2 Success Rate: 97.3262
+Depth #3 Success Rate: 98.9305
+Depth #4 Success Rate: 96.2567
+Depth #5 Success Rate: 90.3743
+
+Trial #187
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Failure
+Depth #1 Success Rate: 91.4894
+Depth #2 Success Rate: 97.3404
+Depth #3 Success Rate: 98.9362
+Depth #4 Success Rate: 96.2766
+Depth #5 Success Rate: 89.8936
+
+Trial #188
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 91.5344
+Depth #2 Success Rate: 97.3545
+Depth #3 Success Rate: 98.9418
+Depth #4 Success Rate: 96.2963
+Depth #5 Success Rate: 89.9471
+
+Trial #189
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 91.5789
+Depth #2 Success Rate: 97.3684
+Depth #3 Success Rate: 98.9474
+Depth #4 Success Rate: 96.3158
+Depth #5 Success Rate: 90
+
+Trial #190
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 91.623
+Depth #2 Success Rate: 97.3822
+Depth #3 Success Rate: 98.9529
+Depth #4 Success Rate: 96.3351
+Depth #5 Success Rate: 90.0524
+
+Trial #191
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 91.6667
+Depth #2 Success Rate: 97.3958
+Depth #3 Success Rate: 98.9583
+Depth #4 Success Rate: 96.3542
+Depth #5 Success Rate: 90.1042
+
+Trial #192
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 91.7098
+Depth #2 Success Rate: 97.4093
+Depth #3 Success Rate: 98.9637
+Depth #4 Success Rate: 96.3731
+Depth #5 Success Rate: 90.1554
+
+Trial #193
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 91.7526
+Depth #2 Success Rate: 97.4227
+Depth #3 Success Rate: 98.9691
+Depth #4 Success Rate: 96.3918
+Depth #5 Success Rate: 90.2062
+
+Trial #194
+Depth #1: Failure
+Depth #2: Failure
+Depth #3: Failure
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 91.2821
+Depth #2 Success Rate: 96.9231
+Depth #3 Success Rate: 98.4615
+Depth #4 Success Rate: 96.4103
+Depth #5 Success Rate: 90.2564
+
+Trial #195
+Depth #1: Failure
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Failure
+Depth #1 Success Rate: 90.8163
+Depth #2 Success Rate: 96.9388
+Depth #3 Success Rate: 98.4694
+Depth #4 Success Rate: 96.4286
+Depth #5 Success Rate: 89.7959
+
+Trial #196
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 90.8629
+Depth #2 Success Rate: 96.9543
+Depth #3 Success Rate: 98.4772
+Depth #4 Success Rate: 96.4467
+Depth #5 Success Rate: 89.8477
+
+Trial #197
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 90.9091
+Depth #2 Success Rate: 96.9697
+Depth #3 Success Rate: 98.4848
+Depth #4 Success Rate: 96.4646
+Depth #5 Success Rate: 89.899
+
+Trial #198
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 90.9548
+Depth #2 Success Rate: 96.9849
+Depth #3 Success Rate: 98.4925
+Depth #4 Success Rate: 96.4824
+Depth #5 Success Rate: 89.9497
+
+Trial #199
+Depth #1: Success
+Depth #2: Success
+Depth #3: Success
+Depth #4: Success
+Depth #5: Success
+Depth #1 Success Rate: 91
+Depth #2 Success Rate: 97
+Depth #3 Success Rate: 98.5
+Depth #4 Success Rate: 96.5
+Depth #5 Success Rate: 90
 

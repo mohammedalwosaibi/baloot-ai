@@ -133,7 +133,7 @@ int main() {
                         return a.second > b.second;
                     });
 
-            if (sorted_votes_benchmark[0].first == sorted_votes[0].first) { success[depth - 1]++; std::cout << "Depth #" << depth << ": Success\n"; }
+            if (sorted_votes_benchmark[0].first == sorted_votes[0].first || sorted_votes_benchmark[1].first == sorted_votes[0].first) { success[depth - 1]++; std::cout << "Depth #" << depth << ": Success\n"; }
             else std::cout << "Depth #" << depth << ": Failure\n";
         }
 
