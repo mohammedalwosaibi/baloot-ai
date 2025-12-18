@@ -23,7 +23,10 @@ static constexpr int TRIALS = 100;
 int main() {
     SampleGenerator sample_generator({35, 37, 26, 34, 1, 39, 51, 7}, 2);
     std::array<std::array<uint8_t, 8>, 4> sample;
-    sample_generator.generate_sample(sample);
+    auto start = std::chrono::high_resolution_clock::now();
+    for (int i = 0; i < 10000; i++) sample_generator.generate_sample(sample);
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> duration = end - start;
 
     for (int p = 0; p < 4; p++) {
         std::cout << "Player #" << p << ": ";
@@ -32,6 +35,7 @@ int main() {
         }
         std::cout << "\n";
     }
+    std::cout << "Time Taken: " << duration.count() << " seconds\n";
 
     // std::random_device rd;
     // std::mt19937 gen(rd());

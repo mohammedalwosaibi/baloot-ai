@@ -9,7 +9,8 @@ player_id_(player_id),
 remaining_cards_{},
 allowed_players_{},
 played_cards_{},
-num_of_played_cards_(0)
+num_of_played_cards_(0),
+rng_(std::random_device{}())
 {
     for (int i = 1; i < 53; i++) allowed_players_[i] = 0b1111 & ~(1 << player_id_); // bit mask of 1111 for card i means it is allowed to be in any player's hand
     for (uint8_t card : current_player_cards_) if (card != 0) allowed_players_[card] = 1 << player_id_;
@@ -35,24 +36,48 @@ bool SampleGenerator::generate_sample(std::array<std::array<uint8_t, 8>, 4>& sam
     for (uint8_t card : current_player_cards_) if (card != 0) sample[player_id_][has[player_id_]++] = card;
     need[player_id_] = 0;
 
+    std::shuffle(remaining_cards_.begin(), remaining_cards_.end(), rng_);
+
+    auto feasible_count = [&](uint8_t card) {
+        int count = 0;
+        for (int p = 0; p < 4; p++)
+            if (need[p] > 0 && (allowed_players_[card] & (1u << p))) count++;
+        return count;
+    };
+
     std::function<bool(int)> assign = [&](int idx) -> bool {
         if (idx == remaining_cards_.size()) return true;
 
+        int best_j = -1;
+        int best_count = 99;
+
+        for (int j = idx; j < remaining_cards_.size(); j++) {
+            int count = feasible_count(remaining_cards_[j]);
+            if (count == 0) return false;
+            if (count < best_count) {
+                best_count = count;
+                best_j = j;
+                if (best_count == 1) break;
+            }
+        }
+
+        std::swap(remaining_cards_[idx], remaining_cards_[best_j]);
+
         uint8_t card = remaining_cards_[idx];
-        uint8_t mask = allowed_players_[card] & 0b1111;
 
         for (int p = 0; p < 4; ++p) {
             if (need[p] == 0) continue;
-            if (!(mask & (1u << p))) continue;
+            if (!(allowed_players_[card] & (1u << p))) continue;
 
             sample[p][has[p]++] = card;
-            --need[p];
+            need[p]--;
 
             if (assign(idx + 1)) return true;
 
-            ++need[p];
-            --has[p];
+            need[p]++;
+            has[p]--;
         }
+
         return false;
     };
 

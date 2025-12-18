@@ -4,6 +4,7 @@
 #include <array>
 #include <vector>
 #include <cstdint>
+#include <random>
 
 class SampleGenerator {
 public:
@@ -18,4 +19,5 @@ private:
     std::array<std::array<bool, 4>, 4> player_has_suit_;
     uint8_t player_id_;
     uint8_t num_of_played_cards_;
+    std::mt19937 rng_;
 };
