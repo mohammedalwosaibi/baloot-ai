@@ -2,6 +2,7 @@
 #include "utils.h"
 #include <functional>
 #include <cmath>
+#include <algorithm>
 
 SampleGenerator::SampleGenerator(const std::array<uint8_t, 8>& current_player_cards, int player_id) :
 current_player_cards_(current_player_cards),
@@ -10,6 +11,7 @@ remaining_cards_{},
 allowed_players_{},
 played_cards_{},
 num_of_played_cards_(0),
+trick_suit_(-1),
 rng_(std::random_device{}())
 {
     for (int i = 1; i < 53; i++) allowed_players_[i] = 0b1111 & ~(1 << player_id_); // bit mask of 1111 for card i means it is allowed to be in any player's hand
@@ -21,6 +23,7 @@ rng_(std::random_device{}())
 }
 
 bool SampleGenerator::generate_sample(std::array<std::array<uint8_t, 8>, 4>& sample) {
+    for (auto& row : sample) row.fill(0);
     uint8_t tricks_completed = num_of_played_cards_ / 4;
     uint8_t cards_in_current_trick = num_of_played_cards_ % 4;
 
@@ -82,4 +85,28 @@ bool SampleGenerator::generate_sample(std::array<std::array<uint8_t, 8>, 4>& sam
     };
 
     return assign(0);
+}
+
+void SampleGenerator::play_card(uint8_t card, uint8_t player_id) {
+    played_cards_[num_of_played_cards_] = card;
+    
+    if (player_id_ != player_id) {
+        std::erase(remaining_cards_, card);
+     } else {
+        for (uint8_t& current_player_card : current_player_cards_) if (current_player_card == card) current_player_card = 0;
+    }
+    
+    if (num_of_played_cards_ % 4 != 0) {
+        if (get_suit(card) != trick_suit_) {
+            for (uint8_t c : remaining_cards_) {
+                if (get_suit(c) == trick_suit_) {
+                    allowed_players_[c] &= ~(1u << player_id);
+                }
+            }
+        }
+    } else {
+        trick_suit_ = get_suit(card);
+    }
+
+    num_of_played_cards_++;
 }

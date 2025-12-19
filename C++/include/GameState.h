@@ -17,8 +17,8 @@ public:
     uint8_t num_of_played_cards() const;
     int score_difference() const;
     std::array<uint8_t, 14> home_ranks() const;
-    std::array<uint8_t, 14> away_ranks() const;
     std::array<uint8_t, 4> last_trick() const;
+    void set_player_cards(std::array<std::array<uint8_t, 8>, 4>& sample);
 
 private:
     std::array<std::array<uint8_t, 8>, 4> player_cards_;
@@ -27,7 +27,6 @@ private:
     std::array<uint8_t, 32> card_indices_;
     std::array<uint8_t, 8> trick_scores_;
     std::array<uint8_t, 14> home_ranks_;
-    std::array<uint8_t, 14> away_ranks_;
     std::array<uint8_t, 4> last_trick_;
     
     uint8_t current_player_;

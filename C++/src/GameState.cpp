@@ -10,7 +10,6 @@ player_indices_{},
 card_indices_{},
 trick_scores_{},
 home_ranks_{},
-away_ranks_{},
 last_trick_{},
 current_player_(0),
 num_of_played_cards_(0),
@@ -25,7 +24,6 @@ hash_(0)
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 8; j++) {
             if (i == 0 || i == 2) home_ranks_[get_rank(player_cards_[i][j])]++;
-            else if (i == 1 || i == 3) away_ranks_[get_rank(player_cards_[i][j])]++;
         }
     }
 }
@@ -50,7 +48,6 @@ void GameState::make_move(uint8_t card) {
         uint8_t curr = current_player_cards[i];
         if (curr == card) {
             if (current_player_ == 0 || current_player_ == 2) home_ranks_[get_rank(card)]--;
-            else if (current_player_ == 1 || current_player_ == 3) away_ranks_[get_rank(card)]--;
 
             current_player_cards[i] = 0;
             player_indices_[num_of_played_cards_] = current_player_;
@@ -100,7 +97,6 @@ void GameState::undo_move() {
     hash_ ^= PLAYER_KEY[current_player_];
 
     if (current_player_ == 0 || current_player_ == 2) home_ranks_[get_rank(played_cards_[num_of_played_cards_])]++;
-    else if (current_player_ == 1 || current_player_ == 3) away_ranks_[get_rank(played_cards_[num_of_played_cards_])]++;
 }
 
 uint8_t GameState::get_legal_moves(std::array<uint8_t, 8>& moves) {
@@ -155,6 +151,8 @@ int GameState::evaluate() {
         leader = (leader + trick_winner) % 4;
         if (leader % 2 == 0) return home_score_ + trick_score;
         else return home_score_;
+    } else if (num_of_played_cards_ == 32) {
+        return home_score_;
     }
 
     double eval = (
@@ -169,6 +167,19 @@ int GameState::evaluate() {
     return static_cast<int>(std::round(eval));
 }
 
+void GameState::set_player_cards(std::array<std::array<uint8_t, 8>, 4>& sample) {
+    home_ranks_.fill(0);
+    for (int p = 0; p < 4; p++) {
+        int counter = 0;
+        for (int c = 0; c < 8; c++) {
+            if (player_cards_[p][c] != 0) { player_cards_[p][c] = sample[p][counter]; counter++; }
+            else continue;
+            if (p % 2 == 0) home_ranks_[get_rank(player_cards_[p][c])]++;
+        }
+    }
+}
+
+
 uint64_t GameState::hash() const { return hash_; }
 
 uint8_t GameState::current_player() const { return current_player_; }
@@ -178,8 +189,6 @@ uint8_t GameState::num_of_played_cards() const { return num_of_played_cards_; };
 int GameState::score_difference() const { return home_score_ - away_score_; };
 
 std::array<uint8_t, 14> GameState::home_ranks() const { return home_ranks_; };
-
-std::array<uint8_t, 14> GameState::away_ranks() const { return away_ranks_; };
 
 std::array<uint8_t, 4> GameState::last_trick() const { return last_trick_; };
 

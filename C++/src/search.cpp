@@ -40,7 +40,7 @@ static void update_pv(uint8_t ply, uint8_t best_move) {
 int minimax(GameState& game_state, uint8_t trick_depth, int alpha, int beta, bool maximizing, uint8_t ply) {
     nodes_visited++;
 
-    if (trick_depth == 0) {
+    if (trick_depth == 0 || game_state.num_of_played_cards() == 28 || game_state.num_of_played_cards() == 32) {
 
         int eval = game_state.evaluate();
 
