@@ -49,7 +49,7 @@ void GameState::make_move(uint8_t card) {
         if (curr == card) {
             if (current_player_ == 0 || current_player_ == 2) home_ranks_[get_rank(card)]--;
 
-            current_player_cards[i] = 0;
+            current_player_cards[i] = NO_CARD;
             player_indices_[num_of_played_cards_] = current_player_;
             card_indices_[num_of_played_cards_] = i;
             played_cards_[num_of_played_cards_++] = card;
@@ -105,7 +105,7 @@ uint8_t GameState::get_legal_moves(std::array<uint8_t, 8>& moves) {
 
     if (num_of_played_cards_ % 4 == 0) {
         for (int i = 0; i < current_player_cards.size(); i++) {
-            if (current_player_cards[i] != 0) moves[num_moves++] = current_player_cards[i];
+            if (current_player_cards[i] != NO_CARD) moves[num_moves++] = current_player_cards[i];
         }
     } else {
         uint8_t trick_leader_idx = num_of_played_cards_ - (num_of_played_cards_ % 4);
@@ -113,7 +113,7 @@ uint8_t GameState::get_legal_moves(std::array<uint8_t, 8>& moves) {
         bool player_has_suit = has_suit(current_player_cards, trick_suit);
         for (int i = 0; i < current_player_cards.size(); i++) {
             uint8_t card = current_player_cards[i];
-            if (card == 0) continue;
+            if (card == NO_CARD) continue;
             if (player_has_suit && get_suit(card) == trick_suit) {
                 moves[num_moves++] = card;
             } else if (!player_has_suit) {
@@ -131,7 +131,7 @@ int GameState::evaluate() {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 8; j++) {
                 uint8_t card = player_cards_[i][j];
-                if (card) {
+                if (card != NO_CARD) {
                     remaining[i] = card;
                     break;
                 }
@@ -156,11 +156,11 @@ int GameState::evaluate() {
     }
 
     double eval = (
-        11 * home_ranks_[1] +
-        10 * home_ranks_[10] + 
-        4 * home_ranks_[13] +
-        3 * home_ranks_[12] +
-        2 * home_ranks_[11] +
+        11 * home_ranks_[0] +
+        10 * home_ranks_[9] + 
+        4 * home_ranks_[12] +
+        3 * home_ranks_[11] +
+        2 * home_ranks_[10] +
         home_score_
     );
 
@@ -172,7 +172,7 @@ void GameState::set_player_cards(std::array<std::array<uint8_t, 8>, 4>& sample) 
     for (int p = 0; p < 4; p++) {
         int counter = 0;
         for (int c = 0; c < 8; c++) {
-            if (player_cards_[p][c] != 0) { player_cards_[p][c] = sample[p][counter]; counter++; }
+            if (player_cards_[p][c] != NO_CARD) { player_cards_[p][c] = sample[p][counter]; counter++; }
             else continue;
             if (p % 2 == 0) home_ranks_[get_rank(player_cards_[p][c])]++;
         }
@@ -188,7 +188,7 @@ uint8_t GameState::num_of_played_cards() const { return num_of_played_cards_; };
 
 int GameState::score_difference() const { return home_score_ - away_score_; };
 
-std::array<uint8_t, 14> GameState::home_ranks() const { return home_ranks_; };
+std::array<uint8_t, 13> GameState::home_ranks() const { return home_ranks_; };
 
 std::array<uint8_t, 4> GameState::last_trick() const { return last_trick_; };
 

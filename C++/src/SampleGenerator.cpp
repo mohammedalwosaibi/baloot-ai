@@ -1,8 +1,10 @@
 #include "SampleGenerator.h"
 #include "utils.h"
+#include "constants.h"
 #include <functional>
 #include <cmath>
 #include <algorithm>
+#include <iostream>
 
 SampleGenerator::SampleGenerator(const std::array<uint8_t, 8>& current_player_cards, int player_id) :
 current_player_cards_(current_player_cards),
@@ -14,16 +16,16 @@ num_of_played_cards_(0),
 trick_suit_(-1),
 rng_(std::random_device{}())
 {
-    for (int i = 1; i < 53; i++) allowed_players_[i] = 0b1111 & ~(1 << player_id_); // bit mask of 1111 for card i means it is allowed to be in any player's hand
-    for (uint8_t card : current_player_cards_) if (card != 0) allowed_players_[card] = 1 << player_id_;
-    for (int i = 1; i < 53; i++) {
+    for (int i = 0; i < 52; i++) allowed_players_[i] = 0b1111 & ~(1 << player_id_); // bit mask of 1111 for card i means it is allowed to be in any player's hand
+    for (uint8_t card : current_player_cards_) if (card != NO_CARD) allowed_players_[card] = 1 << player_id_;
+    for (int i = 0; i < 52; i++) {
         uint8_t rank = get_rank(i);
-        if ((rank > 6 || rank == 1) && std::find(current_player_cards_.begin(), current_player_cards_.end(), i) == current_player_cards_.end()) remaining_cards_.push_back(i);
+        if ((rank > 5 || rank == 0) && std::find(current_player_cards_.begin(), current_player_cards_.end(), i) == current_player_cards_.end()) remaining_cards_.push_back(i);
     }
 }
 
 bool SampleGenerator::generate_sample(std::array<std::array<uint8_t, 8>, 4>& sample) {
-    for (auto& row : sample) row.fill(0);
+    for (auto& row : sample) row.fill(NO_CARD);
     uint8_t tricks_completed = num_of_played_cards_ / 4;
     uint8_t cards_in_current_trick = num_of_played_cards_ % 4;
 
@@ -36,7 +38,7 @@ bool SampleGenerator::generate_sample(std::array<std::array<uint8_t, 8>, 4>& sam
         need[player]--;
     }
 
-    for (uint8_t card : current_player_cards_) if (card != 0) sample[player_id_][has[player_id_]++] = card;
+    for (uint8_t card : current_player_cards_) if (card != NO_CARD) sample[player_id_][has[player_id_]++] = card;
     need[player_id_] = 0;
 
     std::shuffle(remaining_cards_.begin(), remaining_cards_.end(), rng_);
@@ -68,7 +70,10 @@ bool SampleGenerator::generate_sample(std::array<std::array<uint8_t, 8>, 4>& sam
 
         uint8_t card = remaining_cards_[idx];
 
-        for (int p = 0; p < 4; ++p) {
+        std::array<uint8_t,4> players = {0,1,2,3};
+        std::shuffle(players.begin(), players.end(), rng_);
+
+        for (uint8_t p : players) {
             if (need[p] == 0) continue;
             if (!(allowed_players_[card] & (1u << p))) continue;
 
@@ -93,7 +98,7 @@ void SampleGenerator::play_card(uint8_t card, uint8_t player_id) {
     if (player_id_ != player_id) {
         std::erase(remaining_cards_, card);
      } else {
-        for (uint8_t& current_player_card : current_player_cards_) if (current_player_card == card) current_player_card = 0;
+        for (uint8_t& current_player_card : current_player_cards_) if (current_player_card == card) current_player_card = NO_CARD;
     }
     
     if (num_of_played_cards_ % 4 != 0) {

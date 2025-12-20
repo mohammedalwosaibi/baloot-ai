@@ -13,7 +13,7 @@ public:
     void play_card(uint8_t card, uint8_t player_id);
 
 private:
-    std::array<uint8_t, 53> allowed_players_;
+    std::array<uint8_t, 52> allowed_players_;
     std::array<uint8_t, 32> played_cards_;
     std::vector<uint8_t> remaining_cards_;
     std::array<uint8_t, 8> current_player_cards_;
