@@ -19,8 +19,6 @@ extern std::array<TTEntry, 1 << 20> transposition_table;
 
 extern int nodes_visited;
 
-static constexpr int TRIALS = 100;
-
 int main() {
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -42,8 +40,8 @@ int main() {
 
         std::array<std::array<uint8_t, 8>, 4> player_cards{};
 
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 8; j++) {
+        for (size_t i = 0; i < 4; i++) {
+            for (size_t j = 0; j < 8; j++) {
                 player_cards[i][j] = deck[i * 8 + j];
             }
         }
@@ -65,7 +63,7 @@ int main() {
         while (game_state.num_of_played_cards() != 32) {
             if (game_state.current_player() == 0) {
                 std::cout << "Player Cards: ";
-                for (int i = 0; i < 8; i++) if (player_cards[0][i] != 0) std::cout << RANK_NAMES[get_rank(player_cards[0][i])] << SUIT_SYMBOLS[get_suit(player_cards[0][i])] << " (" << +player_cards[0][i] << ") ";
+                for (size_t i = 0; i < 8; i++) if (player_cards[0][i] != 0) std::cout << RANK_NAMES[get_rank(player_cards[0][i])] << SUIT_SYMBOLS[get_suit(player_cards[0][i])] << " (" << +player_cards[0][i] << ") ";
                 std::cout << "\n";
                 std::cout << "Player 0: ";
                 int card_in;
@@ -78,11 +76,10 @@ int main() {
 
                 for (uint8_t& c : player_cards[0]) if (c == card) c = 0;
                 game_state.make_move(card);
-                for (int i = 0; i < 4; i++) sg_arr[i].play_card(card, 0);
+                for (size_t i = 0; i < 4; i++) sg_arr[i].play_card(card, 0);
             } else {
                 // generate best move from other players
                 auto start = std::chrono::high_resolution_clock::now();
-                auto mid = std::chrono::high_resolution_clock::now();
                 auto end = std::chrono::high_resolution_clock::now();
                 std::chrono::duration<double> duration = end - start;
 
@@ -97,7 +94,7 @@ int main() {
                     std::array<uint8_t, 8> moves;
                     uint8_t num_moves = game_state.get_legal_moves(moves);
 
-                    for (int i = 0; i < num_moves; i++) {
+                    for (size_t i = 0; i < num_moves; i++) {
                         uint8_t card = moves[i];
                         game_state.make_move(card);
                         votes[card] += minimax(game_state, 4, 0, 130, game_state.current_player() == 0 || game_state.current_player() == 2, 0);
@@ -124,7 +121,7 @@ int main() {
                             return a.second < b.second;
                         });
 
-                for (int i = 0; i < 4; i++) sg_arr[i].play_card(sorted_votes[0].first, game_state.current_player());
+                for (size_t i = 0; i < 4; i++) sg_arr[i].play_card(sorted_votes[0].first, game_state.current_player());
                 std::cout << "Player " << +game_state.current_player() << ": " << RANK_NAMES[get_rank(sorted_votes[0].first)] << SUIT_SYMBOLS[get_suit(sorted_votes[0].first)] << std::endl;
                 game_state.make_move(sorted_votes[0].first);
             }

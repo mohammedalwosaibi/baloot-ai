@@ -90,7 +90,7 @@ int minimax(GameState& game_state, uint8_t trick_depth, int alpha, int beta, boo
 
     if (maximizing) {
         int max_eval = -1;
-        for (int i = 0; i < num_moves; i++) {
+        for (size_t i = 0; i < num_moves; i++) {
             uint8_t move = legal_moves[i];
             game_state.make_move(move);
             uint8_t next_player = game_state.current_player();
@@ -112,7 +112,7 @@ int minimax(GameState& game_state, uint8_t trick_depth, int alpha, int beta, boo
         return max_eval;
     } else {
         int min_eval = 131;
-        for (int i = 0; i < num_moves; i++) {
+        for (size_t i = 0; i < num_moves; i++) {
             uint8_t move = legal_moves[i];
             game_state.make_move(move);
             uint8_t next_player = game_state.current_player();

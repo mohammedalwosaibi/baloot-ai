@@ -28,7 +28,7 @@ constexpr std::pair<uint8_t, uint8_t> get_trick_stats(const uint8_t* trick) {
     uint8_t winner = 0;
     uint8_t score = RANK_VALUES[max_rank];
 
-    for (int i = 1; i < 4; i++) {
+    for (uint8_t i = 1; i < 4; i++) {
         uint8_t cur_rank = get_rank(trick[i]);
         score += RANK_VALUES[cur_rank];
         if (get_suit(trick[i]) == trick_suit && RANK_ORDER[cur_rank] > RANK_ORDER[max_rank]) {

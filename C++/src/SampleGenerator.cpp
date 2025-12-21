@@ -6,19 +6,19 @@
 #include <algorithm>
 #include <iostream>
 
-SampleGenerator::SampleGenerator(const std::array<uint8_t, 8>& current_player_cards, int player_id) :
+SampleGenerator::SampleGenerator(const std::array<uint8_t, 8>& current_player_cards, uint8_t player_id) :
 current_player_cards_(current_player_cards),
-player_id_(player_id),
-remaining_cards_{},
 allowed_players_{},
 played_cards_{},
+remaining_cards_{},
+player_id_(player_id),
 num_of_played_cards_(0),
-trick_suit_(-1),
+trick_suit_(255),
 rng_(std::random_device{}())
 {
-    for (int i = 0; i < 52; i++) allowed_players_[i] = 0b1111 & ~(1 << player_id_); // bit mask of 1111 for card i means it is allowed to be in any player's hand
-    for (uint8_t card : current_player_cards_) if (card != NO_CARD) allowed_players_[card] = 1 << player_id_;
-    for (int i = 0; i < 52; i++) {
+    for (size_t i = 0; i < 52; i++) allowed_players_[i] = 0b1111 & ~(1 << player_id_); // bit mask of 1111 for card i means it is allowed to be in any player's hand
+    for (uint8_t card : current_player_cards_) if (card != NO_CARD) allowed_players_[card] = static_cast<uint8_t>(1u << player_id_);
+    for (uint8_t i = 0; i < 52; i++) {
         uint8_t rank = get_rank(i);
         if ((rank > 5 || rank == 0) && std::find(current_player_cards_.begin(), current_player_cards_.end(), i) == current_player_cards_.end()) remaining_cards_.push_back(i);
     }
@@ -33,7 +33,7 @@ bool SampleGenerator::generate_sample(std::array<std::array<uint8_t, 8>, 4>& sam
     uint8_t initial_need = static_cast<uint8_t>(8 - tricks_completed);
     std::array<uint8_t, 4> need = {initial_need, initial_need, initial_need, initial_need};
 
-    for (int i = 0; i < cards_in_current_trick; i++) {
+    for (size_t i = 0; i < cards_in_current_trick; i++) {
         uint8_t player = (player_id_ - i + 3) % 4;
         need[player]--;
     }
@@ -45,23 +45,23 @@ bool SampleGenerator::generate_sample(std::array<std::array<uint8_t, 8>, 4>& sam
 
     auto feasible_count = [&](uint8_t card) {
         int count = 0;
-        for (int p = 0; p < 4; p++)
+        for (uint8_t p = 0; p < 4; p++)
             if (need[p] > 0 && (allowed_players_[card] & (1u << p))) count++;
         return count;
     };
 
-    std::function<bool(int)> assign = [&](int idx) -> bool {
+    std::function<bool(size_t)> assign = [&](size_t idx) -> bool {
         if (idx == remaining_cards_.size()) return true;
 
-        int best_j = -1;
-        int best_count = 99;
+        uint8_t best_j = 255;
+        int best_count = -1;
 
-        for (int j = idx; j < remaining_cards_.size(); j++) {
+        for (size_t j = idx; j < remaining_cards_.size(); j++) {
             int count = feasible_count(remaining_cards_[j]);
             if (count == 0) return false;
             if (count < best_count) {
                 best_count = count;
-                best_j = j;
+                best_j = static_cast<uint8_t>(j);
                 if (best_count == 1) break;
             }
         }

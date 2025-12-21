@@ -21,17 +21,17 @@ hash_(0)
     hash_ ^= PLAYER_KEY[current_player_];
     hash_ ^= SCORE_KEY[home_score_];
 
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 8; j++) {
-            if (i == 0 || i == 2) home_ranks_[get_rank(player_cards_[i][j])]++;
+    for (size_t i = 0; i < 4; i++) {
+        for (size_t j = 0; j < 8; j++) {
+            if (i % 2 == 0) home_ranks_[get_rank(player_cards_[i][j])]++;
         }
     }
 }
 
 void GameState::view_player_cards() {
-    for (int i = 0; i < 4; i++) {
+    for (size_t i = 0; i < 4; i++) {
         std::cout << "Player #" << i + 1 << "'s Cards: ";
-        for (int j = 0; j < 8; j++) {
+        for (size_t j = 0; j < 8; j++) {
             uint8_t card = player_cards_[i][j];
             uint8_t rank = get_rank(card);
             std::cout << (rank == 10 ? "" : " ") << RANK_NAMES[rank] << SUIT_SYMBOLS[get_suit(card)] << (j == 7 ? "\n" : " ");
@@ -44,14 +44,14 @@ void GameState::view_player_cards() {
 void GameState::make_move(uint8_t card) {
     std::array<uint8_t, 8>& current_player_cards = player_cards_[current_player_];
 
-    for (int i = 0; i < 8; i++) {
+    for (size_t i = 0; i < 8; i++) {
         uint8_t curr = current_player_cards[i];
         if (curr == card) {
             if (current_player_ == 0 || current_player_ == 2) home_ranks_[get_rank(card)]--;
 
             current_player_cards[i] = NO_CARD;
             player_indices_[num_of_played_cards_] = current_player_;
-            card_indices_[num_of_played_cards_] = i;
+            card_indices_[num_of_played_cards_] = static_cast<uint8_t>(i);
             played_cards_[num_of_played_cards_++] = card;
             hash_ ^= CARD_KEY[card];
             hash_ ^= PLAYER_KEY[current_player_];
@@ -104,14 +104,14 @@ uint8_t GameState::get_legal_moves(std::array<uint8_t, 8>& moves) {
     uint8_t num_moves = 0;
 
     if (num_of_played_cards_ % 4 == 0) {
-        for (int i = 0; i < current_player_cards.size(); i++) {
+        for (size_t i = 0; i < current_player_cards.size(); i++) {
             if (current_player_cards[i] != NO_CARD) moves[num_moves++] = current_player_cards[i];
         }
     } else {
         uint8_t trick_leader_idx = num_of_played_cards_ - (num_of_played_cards_ % 4);
         uint8_t trick_suit = get_suit(played_cards_[trick_leader_idx]);
         bool player_has_suit = has_suit(current_player_cards, trick_suit);
-        for (int i = 0; i < current_player_cards.size(); i++) {
+        for (size_t i = 0; i < current_player_cards.size(); i++) {
             uint8_t card = current_player_cards[i];
             if (card == NO_CARD) continue;
             if (player_has_suit && get_suit(card) == trick_suit) {
@@ -128,8 +128,8 @@ uint8_t GameState::get_legal_moves(std::array<uint8_t, 8>& moves) {
 int GameState::evaluate() {
     if (num_of_played_cards_ == 28) {
         std::array<uint8_t, 4> remaining;
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 8; j++) {
+        for (size_t i = 0; i < 4; i++) {
+            for (size_t j = 0; j < 8; j++) {
                 uint8_t card = player_cards_[i][j];
                 if (card != NO_CARD) {
                     remaining[i] = card;
@@ -169,9 +169,9 @@ int GameState::evaluate() {
 
 void GameState::set_player_cards(std::array<std::array<uint8_t, 8>, 4>& sample) {
     home_ranks_.fill(0);
-    for (int p = 0; p < 4; p++) {
-        int counter = 0;
-        for (int c = 0; c < 8; c++) {
+    for (size_t p = 0; p < 4; p++) {
+        size_t counter = 0;
+        for (size_t c = 0; c < 8; c++) {
             if (player_cards_[p][c] != NO_CARD) { player_cards_[p][c] = sample[p][counter]; counter++; }
             else continue;
             if (p % 2 == 0) home_ranks_[get_rank(player_cards_[p][c])]++;
