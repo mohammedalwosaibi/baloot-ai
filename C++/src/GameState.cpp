@@ -179,6 +179,10 @@ void GameState::set_player_cards(std::array<std::array<uint8_t, 8>, 4>& sample) 
     }
 }
 
+void GameState::set_current_player(uint8_t player_id) {
+    current_player_ = player_id;
+}
+
 
 uint64_t GameState::hash() const { return hash_; }
 

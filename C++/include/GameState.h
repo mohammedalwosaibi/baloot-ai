@@ -19,6 +19,7 @@ public:
     std::array<uint8_t, 13> home_ranks() const;
     std::array<uint8_t, 4> last_trick() const;
     void set_player_cards(std::array<std::array<uint8_t, 8>, 4>& sample);
+    void set_current_player(uint8_t player_id);
 
 private:
     std::array<std::array<uint8_t, 8>, 4> player_cards_;

@@ -13,7 +13,6 @@ played_cards_{},
 remaining_cards_{},
 player_id_(player_id),
 num_of_played_cards_(0),
-trick_suit_(255),
 rng_(std::random_device{}())
 {
     for (size_t i = 0; i < 52; i++) allowed_players_[i] = 0b1111 & ~(1 << player_id_); // bit mask of 1111 for card i means it is allowed to be in any player's hand
@@ -53,15 +52,15 @@ bool SampleGenerator::generate_sample(std::array<std::array<uint8_t, 8>, 4>& sam
     std::function<bool(size_t)> assign = [&](size_t idx) -> bool {
         if (idx == remaining_cards_.size()) return true;
 
-        uint8_t best_j = 255;
-        int best_count = -1;
+        size_t best_j = idx;
+        int best_count = INT_MAX;
 
         for (size_t j = idx; j < remaining_cards_.size(); j++) {
             int count = feasible_count(remaining_cards_[j]);
             if (count == 0) return false;
             if (count < best_count) {
                 best_count = count;
-                best_j = static_cast<uint8_t>(j);
+                best_j = j;
                 if (best_count == 1) break;
             }
         }

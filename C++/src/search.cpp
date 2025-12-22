@@ -7,13 +7,9 @@
 #include <climits>
 #include <fstream>
 
-static constexpr uint64_t TABLE_SIZE = 1 << 20;
-
 std::array<TTEntry, TABLE_SIZE> transposition_table;
 std::array<std::array<uint8_t, 32>, 33> pv_table;
 std::array<uint8_t, 33> pv_length;
-
-int nodes_visited = 0;
 
 static void store_tt_entry(uint8_t trick_depth, TTEntry& entry, int eval, uint8_t best_move, uint64_t hash, int original_alpha, int original_beta) {
     if (trick_depth >= entry.trick_depth) {
@@ -38,8 +34,6 @@ static void update_pv(uint8_t ply, uint8_t best_move) {
 }
 
 int minimax(GameState& game_state, uint8_t trick_depth, int alpha, int beta, bool maximizing, uint8_t ply) {
-    nodes_visited++;
-
     if (trick_depth == 0 || game_state.num_of_played_cards() == 28 || game_state.num_of_played_cards() == 32) {
 
         int eval = game_state.evaluate();
