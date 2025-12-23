@@ -17,6 +17,8 @@ extern std::array<uint8_t, 33> pv_length;
 
 extern std::array<TTEntry, TABLE_SIZE>transposition_table;
 
+uint32_t sample_id;
+
 int main() {
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -34,6 +36,8 @@ int main() {
     uint8_t starting_player = 0;
     
     while (true) {
+        for (auto& e : transposition_table) e.hash = 0;
+        sample_id = 0;
 
         std::shuffle(deck.begin(), deck.end(), gen);
 
@@ -63,38 +67,22 @@ int main() {
         starting_player = (starting_player + 1) % 4;
 
         while (game_state.num_of_played_cards() != 32) {
-            // if (game_state.current_player() == 0) {
-            //     std::cout << "Player Cards: ";
-            //     for (size_t i = 0; i < 8; i++) if (player_cards[0][i] != NO_CARD) std::cout << RANK_NAMES[get_rank(player_cards[0][i])] << SUIT_SYMBOLS[get_suit(player_cards[0][i])] << " (" << +player_cards[0][i] << ") ";
-            //     std::cout << "\n";
-            //     std::cout << "Player 0: ";
-            //     int card_in;
-            //     std::cin >> card_in;
-            //     uint8_t card = static_cast<uint8_t>(card_in);
-
-            //     std::array<std::array<uint8_t, 8>, 4> sample;
-            //     sg_arr[0].generate_sample(sample);
-            //     game_state.set_player_cards(sample);
-
-            //     for (uint8_t& c : player_cards[0]) if (c == card) c = NO_CARD;
-            //     game_state.make_move(card);
-            //     for (size_t i = 0; i < 4; i++) sg_arr[i].play_card(card, 0);
-            // } else {
             auto start = std::chrono::high_resolution_clock::now();
             auto end = std::chrono::high_resolution_clock::now();
             std::chrono::duration<double> duration = end - start;
 
             std::unordered_map<uint8_t, double> votes;
-            while (duration.count() < 2) {
-                for (auto& e : transposition_table) e.hash = 0;
-                
-                std::array<std::array<uint8_t, 8>, 4> sample;
-                sg_arr[game_state.current_player()].generate_sample(sample);
-                game_state.set_player_cards(sample);
 
-                std::array<uint8_t, 8> moves;
-                uint8_t num_moves = game_state.get_legal_moves(moves);
+            std::array<std::array<uint8_t, 8>, 4> sample;
+            sg_arr[game_state.current_player()].generate_sample(sample);
+            game_state.set_player_cards(sample);
 
+            std::array<uint8_t, 8> moves;
+            uint8_t num_moves = game_state.get_legal_moves(moves);
+
+            uint32_t init_sample_id = sample_id;
+
+            while (duration.count() < 1) {
                 uint8_t depth_to_search = game_state.current_player() % 2 == 0 ? 4 : 2;
 
                 for (size_t i = 0; i < num_moves; i++) {
@@ -106,7 +94,13 @@ int main() {
 
                 end = std::chrono::high_resolution_clock::now();
                 duration = end - start;
+                sample_id++;
+
+                sg_arr[game_state.current_player()].generate_sample(sample);
+                game_state.set_player_cards(sample);
             }
+
+            std::cout << "Iterations: " << sample_id - init_sample_id << std::endl;
 
             std::vector<std::pair<uint8_t, double>> sorted_votes;
             sorted_votes.reserve(votes.size());
@@ -127,7 +121,6 @@ int main() {
             for (size_t i = 0; i < 4; i++) sg_arr[i].play_card(sorted_votes[0].first, game_state.current_player());
             std::cout << "Player " << +game_state.current_player() << ": " << RANK_NAMES[get_rank(sorted_votes[0].first)] << SUIT_SYMBOLS[get_suit(sorted_votes[0].first)] << std::endl;
             game_state.make_move(sorted_votes[0].first);
-            // }
             
             if (game_state.num_of_played_cards() % 4 == 0) std::cout << "\n";
         }

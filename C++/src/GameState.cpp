@@ -33,9 +33,11 @@ void GameState::view_player_cards() {
         std::cout << "Player #" << i + 1 << "'s Cards: ";
         for (size_t j = 0; j < 8; j++) {
             uint8_t card = player_cards_[i][j];
+            if (card == NO_CARD) continue;
             uint8_t rank = get_rank(card);
-            std::cout << (rank == 10 ? "" : " ") << RANK_NAMES[rank] << SUIT_SYMBOLS[get_suit(card)] << (j == 7 ? "\n" : " ");
+            std::cout << (rank == 9 ? "" : " ") << RANK_NAMES[rank] << SUIT_SYMBOLS[get_suit(card)] << " ";
         }
+        std::cout << "\n";
     }
     
     std::cout << "\n";

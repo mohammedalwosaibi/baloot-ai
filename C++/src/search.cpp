@@ -11,12 +11,15 @@ std::array<TTEntry, TABLE_SIZE> transposition_table;
 std::array<std::array<uint8_t, 32>, 33> pv_table;
 std::array<uint8_t, 33> pv_length;
 
+extern uint32_t sample_id;
+
 static void store_tt_entry(uint8_t trick_depth, TTEntry& entry, int eval, uint8_t best_move, uint64_t hash, int original_alpha, int original_beta) {
     if (trick_depth >= entry.trick_depth) {
         entry.score = eval;
         entry.trick_depth = trick_depth;
         entry.best_move = best_move;
         entry.hash = hash;
+        entry.sample_id = sample_id;
         if (eval >= original_beta) entry.type = LOWER;
         else if (eval > original_alpha) {
             entry.type = EXACT;
@@ -61,7 +64,7 @@ int minimax(GameState& game_state, uint8_t trick_depth, int alpha, int beta, boo
     pv_length[ply] = 0;
 
     TTEntry& entry = transposition_table[hash & (TABLE_SIZE - 1)];
-    if (entry.hash == hash) {
+    if (entry.hash == hash && entry.sample_id == sample_id) {
         if (game_state.num_of_played_cards() % 4 == 0 && entry.trick_depth >= trick_depth) {
             if (entry.type == TTType::LOWER) {
                 if (entry.score >= beta) return entry.score;
