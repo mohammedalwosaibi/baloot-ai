@@ -30,7 +30,7 @@ hash_(0)
 
 void GameState::view_player_cards() {
     for (size_t i = 0; i < 4; i++) {
-        std::cout << "Player #" << i + 1 << "'s Cards: ";
+        std::cout << "Player #" << i << "'s Cards: ";
         for (size_t j = 0; j < 8; j++) {
             uint8_t card = player_cards_[i][j];
             if (card == NO_CARD) continue;
@@ -174,6 +174,8 @@ void GameState::set_player_cards(std::array<std::array<uint8_t, 8>, 4>& sample) 
     for (size_t p = 0; p < 4; p++) {
         size_t counter = 0;
         for (size_t c = 0; c < 8; c++) {
+            while (counter < 8 && sample[p][counter] == NO_CARD) counter++;
+            if (counter == 8) break;
             if (player_cards_[p][c] != NO_CARD) { player_cards_[p][c] = sample[p][counter]; counter++; }
             else continue;
             if (p % 2 == 0) home_ranks_[get_rank(player_cards_[p][c])]++;

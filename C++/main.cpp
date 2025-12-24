@@ -41,7 +41,12 @@ int main() {
 
         std::shuffle(deck.begin(), deck.end(), gen);
 
-        std::array<std::array<uint8_t, 8>, 4> player_cards{};
+        std::array<std::array<uint8_t, 8>, 4> player_cards = {{
+            { 26, 12, 10,  8, 48, 51, 46, 20 },
+            { 37, 13, 50, 45, 33, 36, 23, 22 },
+            {  7, 11, 47, 34, 19, 32, 25, 21 },
+            {  0,  9, 39, 49,  6, 24, 38, 35 }
+        }};
 
         for (size_t i = 0; i < 4; i++) {
             for (size_t j = 0; j < 8; j++) {
@@ -67,61 +72,66 @@ int main() {
         starting_player = (starting_player + 1) % 4;
 
         while (game_state.num_of_played_cards() != 32) {
-            auto start = std::chrono::high_resolution_clock::now();
-            auto end = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<double> duration = end - start;
-
-            std::unordered_map<uint8_t, double> votes;
-
-            std::array<std::array<uint8_t, 8>, 4> sample;
-            sg_arr[game_state.current_player()].generate_sample(sample);
-            game_state.set_player_cards(sample);
-
-            std::array<uint8_t, 8> moves;
-            uint8_t num_moves = game_state.get_legal_moves(moves);
-
-            uint32_t init_sample_id = sample_id;
-
-            while (duration.count() < 1) {
-                uint8_t depth_to_search = game_state.current_player() % 2 == 0 ? 4 : 2;
-
-                for (size_t i = 0; i < num_moves; i++) {
-                    uint8_t card = moves[i];
-                    game_state.make_move(card);
-                    votes[card] += minimax(game_state, depth_to_search, 0, 130, game_state.current_player() % 2 == 0, game_state.num_of_played_cards());
-                    game_state.undo_move();
-                }
-
-                end = std::chrono::high_resolution_clock::now();
-                duration = end - start;
-                sample_id++;
-
+            if (game_state.current_player() % 2 == 0) {
+                // let home team use cheating game state to analyze gap
+                game_state.set_player_cards(player_cards);
+                minimax(game_state, 7, 0, 130, true, 0);
+                uint8_t move = pv_table[0][0];
+                for (size_t i = 0; i < 4; i++) sg_arr[i].play_card(move, game_state.current_player());
+                std::cout << "Player " << +game_state.current_player() << ": " << RANK_NAMES[get_rank(move)] << SUIT_SYMBOLS[get_suit(move)] << std::endl;
+                for (uint8_t& card : player_cards[game_state.current_player()]) if (card == move) card = NO_CARD;
+                game_state.make_move(move);
+            } else {
+                std::array<std::array<uint8_t, 8>, 4> sample;
                 sg_arr[game_state.current_player()].generate_sample(sample);
                 game_state.set_player_cards(sample);
+
+                std::array<uint8_t, 8> moves;
+                uint8_t num_moves = game_state.get_legal_moves(moves);
+
+                auto start = std::chrono::high_resolution_clock::now();
+                auto end = std::chrono::high_resolution_clock::now();
+                std::chrono::duration<double> duration = end - start;
+
+                std::unordered_map<uint8_t, double> votes;
+
+                while (duration.count() < 3) {
+                    for (size_t i = 0; i < num_moves; i++) {
+                        uint8_t card = moves[i];
+                        game_state.make_move(card);
+                        votes[card] += minimax(game_state, 2, 0, 130, game_state.current_player() % 2 == 0, game_state.num_of_played_cards());
+                        game_state.undo_move();
+                    }
+
+                    end = std::chrono::high_resolution_clock::now();
+                    duration = end - start;
+                    sample_id++;
+
+                    sg_arr[game_state.current_player()].generate_sample(sample);
+                    game_state.set_player_cards(sample);
+                }
+
+                std::vector<std::pair<uint8_t, double>> sorted_votes;
+                sorted_votes.reserve(votes.size());
+
+                for (auto& kv : votes) {
+                    sorted_votes.push_back(kv);
+                }
+
+                if (game_state.current_player() == 0 || game_state.current_player() == 2) std::sort(sorted_votes.begin(), sorted_votes.end(),
+                        [](const auto& a, const auto& b) {
+                            return a.second > b.second;
+                        });
+                else std::sort(sorted_votes.begin(), sorted_votes.end(),
+                        [](const auto& a, const auto& b) {
+                            return a.second < b.second;
+                        });
+
+                for (size_t i = 0; i < 4; i++) sg_arr[i].play_card(sorted_votes[0].first, game_state.current_player());
+                std::cout << "Player " << +game_state.current_player() << ": " << RANK_NAMES[get_rank(sorted_votes[0].first)] << SUIT_SYMBOLS[get_suit(sorted_votes[0].first)] << std::endl;
+                for (uint8_t& card : player_cards[game_state.current_player()]) if (card == sorted_votes[0].first) card = NO_CARD;
+                game_state.make_move(sorted_votes[0].first);
             }
-
-            std::cout << "Iterations: " << sample_id - init_sample_id << std::endl;
-
-            std::vector<std::pair<uint8_t, double>> sorted_votes;
-            sorted_votes.reserve(votes.size());
-
-            for (auto& kv : votes) {
-                sorted_votes.push_back(kv);
-            }
-
-            if (game_state.current_player() == 0 || game_state.current_player() == 2) std::sort(sorted_votes.begin(), sorted_votes.end(),
-                    [](const auto& a, const auto& b) {
-                        return a.second > b.second;
-                    });
-            else std::sort(sorted_votes.begin(), sorted_votes.end(),
-                    [](const auto& a, const auto& b) {
-                        return a.second < b.second;
-                    });
-
-            for (size_t i = 0; i < 4; i++) sg_arr[i].play_card(sorted_votes[0].first, game_state.current_player());
-            std::cout << "Player " << +game_state.current_player() << ": " << RANK_NAMES[get_rank(sorted_votes[0].first)] << SUIT_SYMBOLS[get_suit(sorted_votes[0].first)] << std::endl;
-            game_state.make_move(sorted_votes[0].first);
-            
             if (game_state.num_of_played_cards() % 4 == 0) std::cout << "\n";
         }
 
