@@ -45,10 +45,11 @@ void GameState::view_player_cards() {
 
 void GameState::make_move(uint8_t card) {
     std::array<uint8_t, 8>& current_player_cards = player_cards_[current_player_];
-
+    bool found = false;
     for (size_t i = 0; i < 8; i++) {
         uint8_t curr = current_player_cards[i];
         if (curr == card) {
+            found = true;
             if (current_player_ == 0 || current_player_ == 2) home_ranks_[get_rank(card)]--;
 
             current_player_cards[i] = NO_CARD;
@@ -77,6 +78,11 @@ void GameState::make_move(uint8_t card) {
             break;
         }
     }
+    if (!found) {
+    std::cerr << "ILLEGAL make_move: player " << +current_player_
+              << " tried card=" << +card << " but not in hand\n";
+    std::abort();
+}
 }
 
 void GameState::undo_move() {
