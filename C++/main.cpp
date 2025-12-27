@@ -79,10 +79,10 @@ int main() {
         std::shuffle(deck.begin(), deck.end(), gen);
 
         std::array<std::array<uint8_t, 8>, 4> player_cards = {{
-            { 26, 12, 10,  8, 48, 51, 46, 20 },
-            { 37, 13, 50, 45, 33, 36, 23, 22 },
-            {  7, 11, 47, 34, 19, 32, 25, 21 },
-            {  0,  9, 39, 49,  6, 24, 38, 35 }
+            {{0, 35, 45, 6, 21, 8, 24, 25}},    // Player 2
+            {{51, 23, 22, 32, 26, 13, 11, 19}},  // Player 3
+            {{34, 33, 39, 48, 50, 49, 47, 20}}, // Player 0
+            {{36, 38, 37, 12, 7, 46, 10, 9}}   // Player 1
         }};
 
         for (size_t i = 0; i < 4; i++) {
@@ -91,7 +91,7 @@ int main() {
             }
         }
 
-        std::sort(player_cards[0].begin(), player_cards[0].end(),
+        for (uint8_t i = 0; i < 4; i++) std::sort(player_cards[i].begin(), player_cards[i].end(),
                 [](const auto& a, const auto& b) {
                     return SUIT_SYMBOLS[get_suit(a)] != SUIT_SYMBOLS[get_suit(b)] ? SUIT_SYMBOLS[get_suit(a)] > SUIT_SYMBOLS[get_suit(b)] : RANK_ORDER[get_rank(a)] > RANK_ORDER[get_rank(b)];
                 });
@@ -121,7 +121,7 @@ int main() {
         while (game_state.num_of_played_cards() != 32) {
             if (game_state.current_player() % 2 == 0) {
                 game_state.set_player_cards(player_cards);
-                ismcts_arr[game_state.current_player()].run(3);
+                ismcts_arr[game_state.current_player()].run(1);
                 uint8_t move = ismcts_arr[game_state.current_player()].best_move();
                 for (size_t i = 0; i < 4; i++) {
                     sg_arr[i].play_card(move, game_state.current_player());
@@ -146,7 +146,7 @@ int main() {
 
                 std::unordered_map<uint8_t, double> votes;
 
-                while (duration.count() < 3) {
+                while (duration.count() < 1) {
                     for (size_t i = 0; i < num_moves; i++) {
                         uint8_t card = moves[i];
                         game_state.make_move(card);

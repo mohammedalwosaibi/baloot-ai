@@ -16,7 +16,7 @@ struct Node {
         if (visits == 0) return std::numeric_limits<float>::infinity();
 
         float exploitation = static_cast<float>(total_score) / static_cast<float>(visits);
-        float exploration = 1000 * std::sqrt(std::log(static_cast<float>(availability)) / static_cast<float>(visits));
+        float exploration = 184 * std::sqrt(std::log(static_cast<float>(availability)) / static_cast<float>(visits));
 
         return exploitation + exploration;
     }
@@ -33,10 +33,13 @@ public:
 private:
     std::array<uint8_t, 8> current_player_cards_;
     std::vector<Node> nodes_;
-    uint8_t player_id_;
+    // uint8_t player_id_;
     GameState game_state_;
     SampleGenerator sample_generator_;
     std::mt19937 rng_;
+    std::array<uint32_t, 52> mast_visits;
+    std::array<uint64_t, 52> mast_total_score;
 
     void randomize_cards();
+    uint8_t pick_rollout_move(const std::array<uint8_t,8>& moves, uint8_t num_moves);
 };
