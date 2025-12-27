@@ -37,9 +37,9 @@ private:
     GameState game_state_;
     SampleGenerator sample_generator_;
     std::mt19937 rng_;
-    std::array<uint32_t, 52> mast_visits;
-    std::array<uint64_t, 52> mast_total_score;
+    std::array<std::array<uint32_t, 52>, 4> mast_visits;
+    std::array<std::array<uint64_t, 52>, 4> mast_total_score;
 
     void randomize_cards();
-    uint8_t pick_rollout_move(const std::array<uint8_t,8>& moves, uint8_t num_moves);
+    uint8_t pick_rollout_move(uint8_t acting_player, const std::array<uint8_t,8>& moves, uint8_t num_moves);
 };

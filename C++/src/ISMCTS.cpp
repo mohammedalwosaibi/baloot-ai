@@ -4,6 +4,7 @@
 #include <random>
 #include <iostream>
 #include <limits>
+#include <cassert>
 
 static constexpr std::array<uint8_t, 52> INDEX_52_TO_32 = {
     0, 255, 255, 255, 255, 255, 1, 2, 3, 4, 5, 6, 7,
@@ -44,20 +45,20 @@ void ISMCTS::play_card(uint8_t card, uint8_t player_id) {
     sample_generator_.play_card(card, player_id);
 }
 
-uint8_t ISMCTS::pick_rollout_move(const std::array<uint8_t,8>& moves, uint8_t num_moves) {
+uint8_t ISMCTS::pick_rollout_move(uint8_t acting_player, const std::array<uint8_t,8>& moves, uint8_t num_moves) {
     std::uniform_real_distribution<float> uni01(0.0f, 1.0f);
     if (uni01(rng_) < EPS) {
         std::uniform_int_distribution<int> uni(0, num_moves - 1);
-        return moves[uni(rng_)];
+        return moves[static_cast<size_t>(uni(rng_))];
     }
 
     double best_score = -std::numeric_limits<double>::infinity();
     uint8_t best = moves[0];
 
-    for (int i = 0; i < num_moves; i++) {
+    for (size_t i = 0; i < num_moves; i++) {
         uint8_t move = moves[i];
-        uint32_t visits = mast_visits[move];
-        double score = (visits == 0) ? std::numeric_limits<double>::infinity() : ((double) mast_total_score[move] / visits);
+        uint32_t visits = mast_visits[acting_player][move];
+        double score = (visits == 0) ? 65.0 : ((double) mast_total_score[acting_player][move] / visits);
         if (score > best_score) {
             best_score = score;
             best = move;
@@ -69,6 +70,10 @@ uint8_t ISMCTS::pick_rollout_move(const std::array<uint8_t,8>& moves, uint8_t nu
 void ISMCTS::run(uint8_t max_duration) {
     nodes_.clear();
     nodes_.emplace_back();
+    for (size_t i = 0; i < 4; i++) {
+        mast_total_score[i].fill(0);
+        mast_visits[i].fill(0);
+    }
     auto start = std::chrono::high_resolution_clock::now();
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> duration = end - start;
@@ -77,10 +82,11 @@ void ISMCTS::run(uint8_t max_duration) {
         randomize_cards();
 
         std::vector<uint32_t> path = {0};
-        std::vector<uint8_t> players = {game_state_.current_player()};
         GameState state_copy = game_state_;
+        std::vector<uint8_t> path_players = {state_copy.current_player()};
         uint32_t current_idx = 0;
         std::vector<uint8_t> rollout_moves;
+        std::vector<uint8_t> rollout_players;
 
         while (state_copy.num_of_played_cards() != 32) {
             std::array<uint8_t, 8> moves;
@@ -94,6 +100,7 @@ void ISMCTS::run(uint8_t max_duration) {
             bool expanded = false;
 
             for (uint8_t i = 0; i < num_moves; i++) {
+                
                 uint8_t move_52 = moves[i];
                 uint8_t move_32 = INDEX_52_TO_32[move_52];
                 uint32_t idx = nodes_[current_idx].child_indices[move_32];
@@ -119,7 +126,7 @@ void ISMCTS::run(uint8_t max_duration) {
             }
 
             path.push_back(best_idx);
-            players.push_back(state_copy.current_player());
+            path_players.push_back(state_copy.current_player());
             state_copy.make_move(best_move);
             current_idx = best_idx;
 
@@ -127,9 +134,9 @@ void ISMCTS::run(uint8_t max_duration) {
                 while (state_copy.num_of_played_cards() != 32) {
                     num_moves = state_copy.get_legal_moves(moves);
 
-                    uint8_t chosen = pick_rollout_move(moves, num_moves);
+                    uint8_t chosen = pick_rollout_move(state_copy.current_player(), moves, num_moves);
                     rollout_moves.push_back(chosen);
-                    players.push_back(state_copy.current_player());
+                    rollout_players.push_back(state_copy.current_player());
                     state_copy.make_move(chosen);
                 }
                 break;
@@ -138,21 +145,21 @@ void ISMCTS::run(uint8_t max_duration) {
 
         int home_score = state_copy.evaluate();
         int away_score = 130 - home_score;
-        uint8_t path_size = path.size();
 
-        for (uint8_t i = 0; i < path_size; i++) {
+        for (uint8_t i = 0; i < path.size(); i++) {
             uint32_t idx = path[i];
-            int final_score = players[i] % 2 == 0 ? home_score : away_score;
+            int final_score = path_players[i] % 2 == 0 ? home_score : away_score;
             Node& node = nodes_[idx];
             node.visits++;
             node.total_score += static_cast<uint64_t>(final_score);
         }
 
         for (uint8_t i = 0; i < rollout_moves.size(); i++) {
-            uint8_t acting_player = players[i + path_size];
+            uint8_t acting_player = rollout_players[i];
             uint8_t move = rollout_moves[i];
-            mast_visits[move]++;
-            mast_total_score[move] += acting_player % 2 == 0 ? home_score : away_score;
+            mast_visits[acting_player][move]++;
+            int final_score = acting_player % 2 == 0 ? home_score : away_score;
+            mast_total_score[acting_player][move] += static_cast<uint64_t>(final_score);
         }
 
         end = std::chrono::high_resolution_clock::now();
@@ -176,7 +183,7 @@ uint8_t ISMCTS::best_move() {
         if (child_idx == 0) continue;
 
         uint32_t visits = nodes_[child_idx].visits;
-        std::cout << RANK_NAMES[get_rank(move_52)] << SUIT_SYMBOLS[get_suit(move_52)] << " " << visits << std::endl;
+        // std::cout << RANK_NAMES[get_rank(move_52)] << SUIT_SYMBOLS[get_suit(move_52)] << " " << visits << std::endl;
         if (visits > best_visits) {
             best_visits = visits;
             selected_move = move_52;
