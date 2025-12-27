@@ -134,7 +134,10 @@ void ISMCTS::run(uint8_t max_duration) {
                 while (state_copy.num_of_played_cards() != 32) {
                     num_moves = state_copy.get_legal_moves(moves);
 
-                    uint8_t chosen = pick_rollout_move(state_copy.current_player(), moves, num_moves);
+                    // uint8_t chosen = pick_rollout_move(state_copy.current_player(), moves, num_moves);
+
+                    std::shuffle(moves.begin(), moves.begin() + num_moves, rng_);
+                    uint8_t chosen = moves[0];
                     rollout_moves.push_back(chosen);
                     rollout_players.push_back(state_copy.current_player());
                     state_copy.make_move(chosen);
