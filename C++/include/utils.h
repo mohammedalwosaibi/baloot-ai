@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <array>
 #include <utility>
+#include <string>
 
 constexpr uint8_t get_suit(const uint8_t card) {
     return card / 13;
@@ -11,6 +12,13 @@ constexpr uint8_t get_suit(const uint8_t card) {
 
 constexpr uint8_t get_rank(const uint8_t card) {
     return card % 13;
+}
+
+constexpr std::string get_card(uint8_t card) {
+    std::string str;
+    str.append(RANK_NAMES[get_rank(card)]);
+    str.append(SUIT_SYMBOLS[get_suit(card)]);
+    return str;
 }
 
 constexpr bool has_suit(const std::array<uint8_t, 8>& cards, uint8_t suit) {

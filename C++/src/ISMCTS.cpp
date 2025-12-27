@@ -183,7 +183,7 @@ uint8_t ISMCTS::best_move() {
         if (child_idx == 0) continue;
 
         uint32_t visits = nodes_[child_idx].visits;
-        // std::cout << RANK_NAMES[get_rank(move_52)] << SUIT_SYMBOLS[get_suit(move_52)] << " " << visits << std::endl;
+        std::cout << RANK_NAMES[get_rank(move_52)] << SUIT_SYMBOLS[get_suit(move_52)] << " " << visits << std::endl;
         if (visits > best_visits) {
             best_visits = visits;
             selected_move = move_52;
