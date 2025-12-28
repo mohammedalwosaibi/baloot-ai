@@ -13,12 +13,11 @@ static constexpr std::array<uint8_t, 52> INDEX_52_TO_32 = {
     24, 255, 255, 255, 255, 255, 25, 26, 27, 28, 29, 30, 31
 };
 
-static constexpr float EPS = 0.2f;
+static constexpr double C_MAST = 184.0;
 
 ISMCTS::ISMCTS(const std::array<uint8_t, 8>& current_player_cards, uint8_t player_id) :
 current_player_cards_(current_player_cards),
 nodes_{},
-// player_id_(player_id),
 game_state_({}),
 sample_generator_(current_player_cards_, player_id),
 rng_(std::random_device{}()),
@@ -45,34 +44,54 @@ void ISMCTS::play_card(uint8_t card, uint8_t player_id) {
     sample_generator_.play_card(card, player_id);
 }
 
-uint8_t ISMCTS::pick_rollout_move(uint8_t acting_player, const std::array<uint8_t,8>& moves, uint8_t num_moves) {
-    std::uniform_real_distribution<float> uni01(0.0f, 1.0f);
-    if (uni01(rng_) < EPS) {
-        std::uniform_int_distribution<int> uni(0, num_moves - 1);
-        return moves[static_cast<size_t>(uni(rng_))];
-    }
+uint8_t ISMCTS::pick_rollout_move(uint8_t acting_player, uint8_t bucket, const std::array<uint8_t,8>& moves, uint8_t num_moves) {
+    uint32_t N = 0;
+    for (size_t c = 0; c < 52; c++) N += mast_visits[bucket][acting_player][c];
+    if (N == 0) N = 1;
 
-    double best_score = -std::numeric_limits<double>::infinity();
+    double best_ucb = -std::numeric_limits<double>::infinity();
     uint8_t best = moves[0];
 
-    for (size_t i = 0; i < num_moves; i++) {
-        uint8_t move = moves[i];
-        uint32_t visits = mast_visits[acting_player][move];
-        double score = (visits == 0) ? 65.0 : ((double) mast_total_score[acting_player][move] / visits);
-        if (score > best_score) {
-            best_score = score;
-            best = move;
-        } else if (score == best_score && uni01(rng_) < 0.5f) best = move;
+    std::uniform_real_distribution<float> uni01(0.0f, 1.0f);
+
+    for (uint8_t i = 0; i < num_moves; i++) {
+        uint8_t m = moves[i];
+        uint32_t n = mast_visits[bucket][acting_player][m];
+
+        double ucb;
+        if (n == 0) {
+            ucb = std::numeric_limits<double>::infinity();
+        } else {
+            double mean = (double) mast_total_score[bucket][acting_player][m] / (double) n;
+            double bonus = C_MAST * std::sqrt(std::log((double) N) / (double) n);
+            ucb = mean + bonus;
+        }
+
+        if (ucb > best_ucb) {
+            best_ucb = ucb;
+            best = m;
+        } else if (ucb == best_ucb && uni01(rng_) < 0.5f) {
+            best = m;
+        }
     }
+
     return best;
 }
 
-void ISMCTS::run(uint8_t max_duration) {
+static uint8_t epic_key(const GameState& s) {
+    uint8_t trick = s.num_of_played_cards() / 4;
+    uint8_t leader = (s.num_of_played_cards() % 4 == 0) ? 1 : 0;
+    return (trick << 1) | leader;
+}
+
+void ISMCTS::run(double max_duration) {
     nodes_.clear();
     nodes_.emplace_back();
-    for (size_t i = 0; i < 4; i++) {
-        mast_total_score[i].fill(0);
-        mast_visits[i].fill(0);
+    for (size_t b = 0; b < 16; b++) {
+        for (size_t i = 0; i < 4; i++) {
+            mast_total_score[b][i].fill(0);
+            mast_visits[b][i].fill(0);
+        }
     }
     auto start = std::chrono::high_resolution_clock::now();
     auto end = std::chrono::high_resolution_clock::now();
@@ -87,6 +106,7 @@ void ISMCTS::run(uint8_t max_duration) {
         uint32_t current_idx = 0;
         std::vector<uint8_t> rollout_moves;
         std::vector<uint8_t> rollout_players;
+        std::vector<uint8_t> rollout_buckets;
 
         while (state_copy.num_of_played_cards() != 32) {
             std::array<uint8_t, 8> moves;
@@ -116,6 +136,7 @@ void ISMCTS::run(uint8_t max_duration) {
                     expanded = true;
                 } else {
                     float child_ucb1 = nodes_[idx].ucb1();
+                    if (nodes_[idx].visits == 0) expanded = true;
                     if (child_ucb1 > best_ucb1) {
                         best_ucb1 = child_ucb1;
                         best_move = move_52;
@@ -127,6 +148,9 @@ void ISMCTS::run(uint8_t max_duration) {
 
             path.push_back(best_idx);
             path_players.push_back(state_copy.current_player());
+            rollout_moves.push_back(best_move);
+            rollout_buckets.push_back(epic_key(state_copy));
+            rollout_players.push_back(state_copy.current_player());
             state_copy.make_move(best_move);
             current_idx = best_idx;
 
@@ -134,11 +158,13 @@ void ISMCTS::run(uint8_t max_duration) {
                 while (state_copy.num_of_played_cards() != 32) {
                     num_moves = state_copy.get_legal_moves(moves);
 
-                    // uint8_t chosen = pick_rollout_move(state_copy.current_player(), moves, num_moves);
+                    uint8_t bucket = epic_key(state_copy);
 
-                    std::shuffle(moves.begin(), moves.begin() + num_moves, rng_);
-                    uint8_t chosen = moves[0];
+                    uint8_t chosen = pick_rollout_move(state_copy.current_player(), bucket, moves, num_moves);
+                    // std::shuffle(moves.begin(), moves.begin() + num_moves, rng_);
+                    // uint8_t chosen = moves[0];
                     rollout_moves.push_back(chosen);
+                    rollout_buckets.push_back(bucket);
                     rollout_players.push_back(state_copy.current_player());
                     state_copy.make_move(chosen);
                 }
@@ -159,10 +185,11 @@ void ISMCTS::run(uint8_t max_duration) {
 
         for (uint8_t i = 0; i < rollout_moves.size(); i++) {
             uint8_t acting_player = rollout_players[i];
+            uint8_t bucket = rollout_buckets[i];
             uint8_t move = rollout_moves[i];
-            mast_visits[acting_player][move]++;
+            mast_visits[bucket][acting_player][move]++;
             int final_score = acting_player % 2 == 0 ? home_score : away_score;
-            mast_total_score[acting_player][move] += static_cast<uint64_t>(final_score);
+            mast_total_score[bucket][acting_player][move] += static_cast<uint64_t>(final_score);
         }
 
         end = std::chrono::high_resolution_clock::now();
