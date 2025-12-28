@@ -12,7 +12,6 @@ struct TTEntry {
     uint8_t best_move;
     uint8_t trick_depth;
     uint64_t hash;
-    uint32_t sample_id;
 };
 
 int minimax(GameState& game_state, uint8_t trick_depth, int alpha, int beta, bool maximizing, uint8_t ply);

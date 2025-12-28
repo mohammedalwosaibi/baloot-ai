@@ -18,8 +18,6 @@ extern std::array<uint8_t, 33> pv_length;
 
 extern std::array<TTEntry, TABLE_SIZE>transposition_table;
 
-uint32_t sample_id;
-
 int main() {
     // std::random_device rd;
     // std::mt19937 gen(3);
@@ -73,8 +71,10 @@ int main() {
     uint8_t starting_player = 0;
     
     while (true) {
-        for (auto& e : transposition_table) e.hash = 0;
-        sample_id = 0;
+        for (auto& e : transposition_table) {
+            e.hash = 0;
+            e.trick_depth = 0;
+        }
 
         std::shuffle(deck.begin(), deck.end(), gen);
 
@@ -121,6 +121,7 @@ int main() {
         while (game_state.num_of_played_cards() != 32) {
             if (game_state.current_player() % 2 == 0) {
                 game_state.set_player_cards(player_cards);
+                ismcts_arr[game_state.current_player()].game_state_.set_player_cards(player_cards);
                 ismcts_arr[game_state.current_player()].run(0.1);
                 uint8_t move = ismcts_arr[game_state.current_player()].best_move();
                 for (size_t i = 0; i < 4; i++) {
@@ -133,59 +134,30 @@ int main() {
 
                 game_state.make_move(move);
             } else {
-                std::array<std::array<uint8_t, 8>, 4> sample;
-                sg_arr[game_state.current_player()].generate_sample(sample);
-                game_state.set_player_cards(sample);
+                game_state.set_player_cards(player_cards);
 
                 std::array<uint8_t, 8> moves;
                 uint8_t num_moves = game_state.get_legal_moves(moves);
-
-                auto start = std::chrono::high_resolution_clock::now();
-                auto end = std::chrono::high_resolution_clock::now();
-                std::chrono::duration<double> duration = end - start;
-
-                std::unordered_map<uint8_t, double> votes;
-
-                while (duration.count() < 0.1) {
-                    for (size_t i = 0; i < num_moves; i++) {
-                        uint8_t card = moves[i];
-                        game_state.make_move(card);
-                        votes[card] += minimax(game_state, 2, 0, 130, game_state.current_player() % 2 == 0, game_state.num_of_played_cards());
-                        game_state.undo_move();
+                
+                uint8_t move;
+                if (num_moves == 1) {
+                    move = moves[0];
+                } else {
+                    for (uint8_t t = 1; t <= std::ceil((double) (32 - game_state.num_of_played_cards()) / 4) - 1; t++) {
+                        minimax(game_state, t, 0, 130, false, 0);
                     }
 
-                    end = std::chrono::high_resolution_clock::now();
-                    duration = end - start;
-                    sample_id++;
-
-                    sg_arr[game_state.current_player()].generate_sample(sample);
-                    game_state.set_player_cards(sample);
+                    move = pv_table[0][0];
                 }
-
-                std::vector<std::pair<uint8_t, double>> sorted_votes;
-                sorted_votes.reserve(votes.size());
-
-                for (auto& kv : votes) {
-                    sorted_votes.push_back(kv);
-                }
-
-                if (game_state.current_player() == 0 || game_state.current_player() == 2) std::sort(sorted_votes.begin(), sorted_votes.end(),
-                        [](const auto& a, const auto& b) {
-                            return a.second > b.second;
-                        });
-                else std::sort(sorted_votes.begin(), sorted_votes.end(),
-                        [](const auto& a, const auto& b) {
-                            return a.second < b.second;
-                        });
 
                 for (size_t i = 0; i < 4; i++) {
-                    sg_arr[i].play_card(sorted_votes[0].first, game_state.current_player());
+                    sg_arr[i].play_card(move, game_state.current_player());
                     ismcts_arr[i].set_player_cards(player_cards);
-                    ismcts_arr[i].play_card(sorted_votes[0].first, game_state.current_player());
+                    ismcts_arr[i].play_card(move, game_state.current_player());
                 }
-                std::cout << "Player " << +game_state.current_player() << ": " << RANK_NAMES[get_rank(sorted_votes[0].first)] << SUIT_SYMBOLS[get_suit(sorted_votes[0].first)] << std::endl;
-                for (uint8_t& card : player_cards[game_state.current_player()]) if (card == sorted_votes[0].first) card = NO_CARD;
-                game_state.make_move(sorted_votes[0].first);
+                std::cout << "Player " << +game_state.current_player() << ": " << RANK_NAMES[get_rank(move)] << SUIT_SYMBOLS[get_suit(move)] << std::endl;
+                for (uint8_t& card : player_cards[game_state.current_player()]) if (card == move) card = NO_CARD;
+                game_state.make_move(move);
             }
             if (game_state.num_of_played_cards() % 4 == 0) std::cout << "\n";
         }

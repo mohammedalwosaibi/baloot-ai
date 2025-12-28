@@ -98,7 +98,7 @@ void ISMCTS::run(double max_duration) {
     std::chrono::duration<double> duration = end - start;
 
     while (duration.count() < max_duration) {
-        randomize_cards();
+        if (game_state_.current_player() % 2 == 1) randomize_cards();
 
         std::vector<uint32_t> path = {0};
         GameState state_copy = game_state_;
@@ -160,9 +160,9 @@ void ISMCTS::run(double max_duration) {
 
                     uint8_t bucket = epic_key(state_copy);
 
-                    uint8_t chosen = pick_rollout_move(state_copy.current_player(), bucket, moves, num_moves);
-                    // std::shuffle(moves.begin(), moves.begin() + num_moves, rng_);
-                    // uint8_t chosen = moves[0];
+                    // uint8_t chosen = pick_rollout_move(state_copy.current_player(), bucket, moves, num_moves);
+                    std::shuffle(moves.begin(), moves.begin() + num_moves, rng_);
+                    uint8_t chosen = moves[0];
                     rollout_moves.push_back(chosen);
                     rollout_buckets.push_back(bucket);
                     rollout_players.push_back(state_copy.current_player());

@@ -30,10 +30,10 @@ public:
     uint8_t best_move();
     void set_player_cards(std::array<std::array<uint8_t, 8>, 4>& sample);
     void set_current_player(uint8_t player_id);
+    GameState game_state_;
 private:
     std::array<uint8_t, 8> current_player_cards_;
     std::vector<Node> nodes_;
-    GameState game_state_;
     SampleGenerator sample_generator_;
     std::mt19937 rng_;
     std::array<std::array<std::array<uint32_t, 52>, 4>, 16> mast_visits;
