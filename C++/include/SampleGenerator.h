@@ -8,7 +8,7 @@
 class SampleGenerator {
 public:
     SampleGenerator(const std::array<uint8_t, 8>& current_player_cards, uint8_t player_id);
-    bool generate_sample(std::array<std::array<uint8_t, 8>, 4>& sample);
+    void generate_sample(std::array<std::array<uint8_t, 8>, 4>& sample);
     void play_card(uint8_t card, uint8_t player_id);
 
 private:

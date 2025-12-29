@@ -15,24 +15,24 @@ static constexpr std::array<uint8_t, 52> INDEX_52_TO_32 = {
 
 static constexpr double C_MAST = 184.0;
 
-ISMCTS::ISMCTS(const std::array<uint8_t, 8>& current_player_cards, uint8_t player_id) :
+ISMCTS::ISMCTS(const std::array<uint8_t, 8>& current_player_cards, uint8_t player_id, std::array<std::array<uint8_t, 8>, 4>& cards) :
 current_player_cards_(current_player_cards),
+player_id_(player_id),
 nodes_{},
-game_state_({}),
+game_state_(cards),
+state_copy_(cards),
 sample_generator_(current_player_cards_, player_id),
+belief_manager_(current_player_cards_, player_id),
 rng_(std::random_device{}()),
 mast_visits{},
 mast_total_score{}
 {}
 
-void ISMCTS::randomize_cards() {
+uint16_t ISMCTS::randomize_cards() {
     std::array<std::array<uint8_t, 8>, 4> sample;
     sample_generator_.generate_sample(sample);
-    game_state_.set_player_cards(sample);
-}
-
-void ISMCTS::set_player_cards(std::array<std::array<uint8_t, 8>, 4>& sample) {
-    game_state_.set_player_cards(sample);
+    state_copy_.set_player_cards(sample);
+    return 1;
 }
 
 void ISMCTS::set_current_player(uint8_t player_id) {
@@ -40,8 +40,8 @@ void ISMCTS::set_current_player(uint8_t player_id) {
 }
 
 void ISMCTS::play_card(uint8_t card, uint8_t player_id) {
-    game_state_.make_move(card);
     sample_generator_.play_card(card, player_id);
+    game_state_.make_move(card);
 }
 
 uint8_t ISMCTS::pick_rollout_move(uint8_t acting_player, uint8_t bucket, const std::array<uint8_t,8>& moves, uint8_t num_moves) {
@@ -93,24 +93,27 @@ void ISMCTS::run(double max_duration) {
             mast_visits[b][i].fill(0);
         }
     }
+    root_stats_.clear();
     auto start = std::chrono::high_resolution_clock::now();
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> duration = end - start;
 
     while (duration.count() < max_duration) {
-        if (game_state_.current_player() % 2 == 1) randomize_cards();
+        state_copy_ = game_state_;
+
+        uint16_t determinization_idx;
+        if (game_state_.current_player() % 2 == 1) determinization_idx = randomize_cards();
 
         std::vector<uint32_t> path = {0};
-        GameState state_copy = game_state_;
-        std::vector<uint8_t> path_players = {state_copy.current_player()};
+        std::vector<uint8_t> path_players = {state_copy_.current_player()};
         uint32_t current_idx = 0;
         std::vector<uint8_t> rollout_moves;
         std::vector<uint8_t> rollout_players;
         std::vector<uint8_t> rollout_buckets;
 
-        while (state_copy.num_of_played_cards() != 32) {
+        while (state_copy_.num_of_played_cards() != 32) {
             std::array<uint8_t, 8> moves;
-            uint8_t num_moves = state_copy.get_legal_moves(moves);
+            uint8_t num_moves = state_copy_.get_legal_moves(moves);
 
             std::shuffle(moves.begin(), moves.begin() + num_moves, rng_);
 
@@ -146,33 +149,38 @@ void ISMCTS::run(double max_duration) {
                 nodes_[idx].availability++;
             }
 
+            if (current_idx == 0 && state_copy_.current_player() != player_id_ && state_copy_.current_player() % 2 == 1) {
+                root_stats_.C_a[best_move]++;
+                root_stats_.C_ad[best_move][determinization_idx]++;
+                root_stats_.total_iters++;
+            }
+
             path.push_back(best_idx);
-            path_players.push_back(state_copy.current_player());
+            path_players.push_back(state_copy_.current_player());
             rollout_moves.push_back(best_move);
-            rollout_buckets.push_back(epic_key(state_copy));
-            rollout_players.push_back(state_copy.current_player());
-            state_copy.make_move(best_move);
+            rollout_buckets.push_back(epic_key(state_copy_));
+            rollout_players.push_back(state_copy_.current_player());
+            state_copy_.make_move(best_move);
             current_idx = best_idx;
 
             if (expanded) {
-                while (state_copy.num_of_played_cards() != 32) {
-                    num_moves = state_copy.get_legal_moves(moves);
+                while (state_copy_.num_of_played_cards() != 32) {
+                    num_moves = state_copy_.get_legal_moves(moves);
 
-                    uint8_t bucket = epic_key(state_copy);
+                    uint8_t bucket = epic_key(state_copy_);
 
-                    // uint8_t chosen = pick_rollout_move(state_copy.current_player(), bucket, moves, num_moves);
-                    std::shuffle(moves.begin(), moves.begin() + num_moves, rng_);
-                    uint8_t chosen = moves[0];
+                    uint8_t chosen = pick_rollout_move(state_copy_.current_player(), bucket, moves, num_moves);
                     rollout_moves.push_back(chosen);
                     rollout_buckets.push_back(bucket);
-                    rollout_players.push_back(state_copy.current_player());
-                    state_copy.make_move(chosen);
+                    rollout_players.push_back(state_copy_.current_player());
+
+                    state_copy_.make_move(chosen);
                 }
                 break;
             }
         }
 
-        int home_score = state_copy.evaluate();
+        int home_score = state_copy_.evaluate();
         int away_score = 130 - home_score;
 
         for (uint8_t i = 0; i < path.size(); i++) {

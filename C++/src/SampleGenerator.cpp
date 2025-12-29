@@ -23,7 +23,7 @@ rng_(std::random_device{}())
     }
 }
 
-bool SampleGenerator::generate_sample(std::array<std::array<uint8_t, 8>, 4>& sample) {
+void SampleGenerator::generate_sample(std::array<std::array<uint8_t, 8>, 4>& sample) {
     for (auto& row : sample) row.fill(NO_CARD);
     uint8_t tricks_completed = num_of_played_cards_ / 4;
     uint8_t cards_in_current_trick = num_of_played_cards_ % 4;
@@ -88,7 +88,7 @@ bool SampleGenerator::generate_sample(std::array<std::array<uint8_t, 8>, 4>& sam
         return false;
     };
 
-    return assign(0);
+    assign(0);
 }
 
 void SampleGenerator::play_card(uint8_t card, uint8_t player_id) {

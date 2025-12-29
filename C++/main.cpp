@@ -96,19 +96,12 @@ int main() {
                     return SUIT_SYMBOLS[get_suit(a)] != SUIT_SYMBOLS[get_suit(b)] ? SUIT_SYMBOLS[get_suit(a)] > SUIT_SYMBOLS[get_suit(b)] : RANK_ORDER[get_rank(a)] > RANK_ORDER[get_rank(b)];
                 });
 
-        ISMCTS player_0_ismcts(player_cards[0], 0);
-        ISMCTS player_1_ismcts(player_cards[1], 1);
-        ISMCTS player_2_ismcts(player_cards[2], 2);
-        ISMCTS player_3_ismcts(player_cards[3], 3);
+        ISMCTS player_0_ismcts(player_cards[0], 0, player_cards);
+        ISMCTS player_1_ismcts(player_cards[1], 1, player_cards);
+        ISMCTS player_2_ismcts(player_cards[2], 2, player_cards);
+        ISMCTS player_3_ismcts(player_cards[3], 3, player_cards);
 
         std::array<ISMCTS, 4> ismcts_arr = {player_0_ismcts, player_1_ismcts, player_2_ismcts, player_3_ismcts};
-
-        SampleGenerator player_0_sg(player_cards[0], 0);
-        SampleGenerator player_1_sg(player_cards[1], 1);
-        SampleGenerator player_2_sg(player_cards[2], 2);
-        SampleGenerator player_3_sg(player_cards[3], 3);
-
-        std::array<SampleGenerator, 4> sg_arr = {player_0_sg, player_1_sg, player_2_sg, player_3_sg};
 
         GameState game_state(player_cards);
         
@@ -120,13 +113,9 @@ int main() {
 
         while (game_state.num_of_played_cards() != 32) {
             if (game_state.current_player() % 2 == 0) {
-                game_state.set_player_cards(player_cards);
-                ismcts_arr[game_state.current_player()].game_state_.set_player_cards(player_cards);
                 ismcts_arr[game_state.current_player()].run(0.1);
                 uint8_t move = ismcts_arr[game_state.current_player()].best_move();
                 for (size_t i = 0; i < 4; i++) {
-                    sg_arr[i].play_card(move, game_state.current_player());
-                    ismcts_arr[i].set_player_cards(player_cards);
                     ismcts_arr[i].play_card(move, game_state.current_player());
                 }
                 std::cout << "Player " << +game_state.current_player() << ": " << RANK_NAMES[get_rank(move)] << SUIT_SYMBOLS[get_suit(move)] << std::endl;
@@ -134,29 +123,14 @@ int main() {
 
                 game_state.make_move(move);
             } else {
-                game_state.set_player_cards(player_cards);
-
-                std::array<uint8_t, 8> moves;
-                uint8_t num_moves = game_state.get_legal_moves(moves);
-                
-                uint8_t move;
-                if (num_moves == 1) {
-                    move = moves[0];
-                } else {
-                    for (uint8_t t = 1; t <= std::ceil((double) (32 - game_state.num_of_played_cards()) / 4) - 1; t++) {
-                        minimax(game_state, t, 0, 130, false, 0);
-                    }
-
-                    move = pv_table[0][0];
-                }
-
+                ismcts_arr[game_state.current_player()].run(0.1);
+                uint8_t move = ismcts_arr[game_state.current_player()].best_move();
                 for (size_t i = 0; i < 4; i++) {
-                    sg_arr[i].play_card(move, game_state.current_player());
-                    ismcts_arr[i].set_player_cards(player_cards);
                     ismcts_arr[i].play_card(move, game_state.current_player());
                 }
                 std::cout << "Player " << +game_state.current_player() << ": " << RANK_NAMES[get_rank(move)] << SUIT_SYMBOLS[get_suit(move)] << std::endl;
                 for (uint8_t& card : player_cards[game_state.current_player()]) if (card == move) card = NO_CARD;
+
                 game_state.make_move(move);
             }
             if (game_state.num_of_played_cards() % 4 == 0) std::cout << "\n";
