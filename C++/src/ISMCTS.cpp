@@ -13,26 +13,23 @@ static constexpr std::array<uint8_t, 52> INDEX_52_TO_32 = {
     24, 255, 255, 255, 255, 255, 25, 26, 27, 28, 29, 30, 31
 };
 
-static constexpr double C_MAST = 184.0;
+static constexpr double C_MAST = 130.0;
 
-ISMCTS::ISMCTS(const std::array<uint8_t, 8>& current_player_cards, uint8_t player_id, std::array<std::array<uint8_t, 8>, 4>& cards) :
+ISMCTS::ISMCTS(const std::array<uint8_t, 8>& current_player_cards, uint8_t player_id, std::array<std::array<uint8_t, 8>, 4> cards) :
 current_player_cards_(current_player_cards),
-player_id_(player_id),
 nodes_{},
 game_state_(cards),
 state_copy_(cards),
 sample_generator_(current_player_cards_, player_id),
-belief_manager_(current_player_cards_, player_id),
 rng_(std::random_device{}()),
 mast_visits{},
 mast_total_score{}
 {}
 
-uint16_t ISMCTS::randomize_cards() {
+void ISMCTS::randomize_cards() {
     std::array<std::array<uint8_t, 8>, 4> sample;
     sample_generator_.generate_sample(sample);
     state_copy_.set_player_cards(sample);
-    return 1;
 }
 
 void ISMCTS::set_current_player(uint8_t player_id) {
@@ -44,13 +41,28 @@ void ISMCTS::play_card(uint8_t card, uint8_t player_id) {
     game_state_.make_move(card);
 }
 
-uint8_t ISMCTS::pick_rollout_move(uint8_t acting_player, uint8_t bucket, const std::array<uint8_t,8>& moves, uint8_t num_moves) {
+uint8_t ISMCTS::pick_rollout_move(uint8_t acting_player, size_t bucket, const std::array<uint8_t,8>& moves, uint8_t num_moves) {
     uint32_t N = 0;
-    for (size_t c = 0; c < 52; c++) N += mast_visits[bucket][acting_player][c];
+    for (uint8_t i = 0; i < num_moves; i++) N += mast_visits[bucket][acting_player][moves[i]];
     if (N == 0) N = 1;
 
     double best_ucb = -std::numeric_limits<double>::infinity();
     uint8_t best = moves[0];
+
+    int pos = state_copy_.num_of_played_cards() % 4;
+    int cur_winner = state_copy_.currently_winning();
+    int has_suit = state_copy_.current_has_suit() ? 1 : 0;
+    int can_win = state_copy_.current_can_win() ? 1 : 0;
+
+    if (pos > 1 && has_suit && !can_win && cur_winner != acting_player % 2) {
+        for (size_t i = 1; i < num_moves; i++) {
+            if (RANK_ORDER[get_rank(moves[i])] < RANK_ORDER[get_rank(best)]) {
+                best = moves[i];
+            }
+        }
+        
+        return best;
+    }
 
     std::uniform_real_distribution<float> uni01(0.0f, 1.0f);
 
@@ -63,7 +75,7 @@ uint8_t ISMCTS::pick_rollout_move(uint8_t acting_player, uint8_t bucket, const s
             ucb = std::numeric_limits<double>::infinity();
         } else {
             double mean = (double) mast_total_score[bucket][acting_player][m] / (double) n;
-            double bonus = C_MAST * std::sqrt(std::log((double) N) / (double) n);
+            double bonus = C_MAST * ((32 - state_copy_.num_of_played_cards()) / 32) * std::sqrt(std::log((double) N) / (double) n);
             ucb = mean + bonus;
         }
 
@@ -78,38 +90,38 @@ uint8_t ISMCTS::pick_rollout_move(uint8_t acting_player, uint8_t bucket, const s
     return best;
 }
 
-static uint8_t epic_key(const GameState& s) {
-    uint8_t trick = s.num_of_played_cards() / 4;
-    uint8_t leader = (s.num_of_played_cards() % 4 == 0) ? 1 : 0;
-    return (trick << 1) | leader;
+static size_t epic_key(const GameState& s) {
+    int pos = s.num_of_played_cards() % 4;
+    int cur_winner = s.currently_winning();
+    int has_suit = s.current_has_suit() ? 1 : 0;
+    int can_win = s.current_can_win() ? 1 : 0;
+
+    return static_cast<size_t>((pos << 3) | (can_win << 2) | (has_suit << 1) | cur_winner);
 }
 
 void ISMCTS::run(double max_duration) {
     nodes_.clear();
     nodes_.emplace_back();
-    for (size_t b = 0; b < 16; b++) {
+    for (size_t b = 0; b < MAX_BUCKETS; b++) {
         for (size_t i = 0; i < 4; i++) {
             mast_total_score[b][i].fill(0);
             mast_visits[b][i].fill(0);
         }
     }
-    root_stats_.clear();
     auto start = std::chrono::high_resolution_clock::now();
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> duration = end - start;
 
     while (duration.count() < max_duration) {
         state_copy_ = game_state_;
-
-        uint16_t determinization_idx;
-        if (game_state_.current_player() % 2 == 1) determinization_idx = randomize_cards();
+        randomize_cards();
 
         std::vector<uint32_t> path = {0};
         std::vector<uint8_t> path_players = {state_copy_.current_player()};
         uint32_t current_idx = 0;
         std::vector<uint8_t> rollout_moves;
         std::vector<uint8_t> rollout_players;
-        std::vector<uint8_t> rollout_buckets;
+        std::vector<size_t> rollout_buckets;
 
         while (state_copy_.num_of_played_cards() != 32) {
             std::array<uint8_t, 8> moves;
@@ -118,9 +130,8 @@ void ISMCTS::run(double max_duration) {
             std::shuffle(moves.begin(), moves.begin() + num_moves, rng_);
 
             float best_ucb1 = -std::numeric_limits<float>::infinity();
-            uint8_t best_move = 255;
+            uint8_t best_move = moves[0];
             uint32_t best_idx = 0;
-            bool expanded = false;
 
             for (uint8_t i = 0; i < num_moves; i++) {
                 
@@ -136,10 +147,8 @@ void ISMCTS::run(double max_duration) {
 
                     best_ucb1 = std::numeric_limits<float>::infinity();
                     best_move = move_52;
-                    expanded = true;
                 } else {
-                    float child_ucb1 = nodes_[idx].ucb1();
-                    if (nodes_[idx].visits == 0) expanded = true;
+                    float child_ucb1 = nodes_[idx].ucb1(32 - state_copy_.num_of_played_cards());
                     if (child_ucb1 > best_ucb1) {
                         best_ucb1 = child_ucb1;
                         best_move = move_52;
@@ -149,10 +158,19 @@ void ISMCTS::run(double max_duration) {
                 nodes_[idx].availability++;
             }
 
-            if (current_idx == 0 && state_copy_.current_player() != player_id_ && state_copy_.current_player() % 2 == 1) {
-                root_stats_.C_a[best_move]++;
-                root_stats_.C_ad[best_move][determinization_idx]++;
-                root_stats_.total_iters++;
+            int pos = state_copy_.num_of_played_cards() % 4;
+            int cur_winner = state_copy_.currently_winning();
+            int has_suit = state_copy_.current_has_suit() ? 1 : 0;
+            int can_win = state_copy_.current_can_win() ? 1 : 0;
+
+            if (pos > 1 && has_suit && !can_win && cur_winner != state_copy_.current_player() % 2) {
+                for (size_t i = 0; i < num_moves; i++) {
+                    if (RANK_ORDER[get_rank(moves[i])] < RANK_ORDER[get_rank(best_move)]) {
+                        best_move = moves[i];
+                        best_idx = nodes_[current_idx].child_indices[INDEX_52_TO_32[best_move]];
+                        assert(best_idx != 0);
+                    }
+                }
             }
 
             path.push_back(best_idx);
@@ -163,11 +181,11 @@ void ISMCTS::run(double max_duration) {
             state_copy_.make_move(best_move);
             current_idx = best_idx;
 
-            if (expanded) {
+            if (nodes_[best_idx].visits == 0) {
                 while (state_copy_.num_of_played_cards() != 32) {
                     num_moves = state_copy_.get_legal_moves(moves);
 
-                    uint8_t bucket = epic_key(state_copy_);
+                    size_t bucket = epic_key(state_copy_);
 
                     uint8_t chosen = pick_rollout_move(state_copy_.current_player(), bucket, moves, num_moves);
                     rollout_moves.push_back(chosen);
@@ -193,7 +211,7 @@ void ISMCTS::run(double max_duration) {
 
         for (uint8_t i = 0; i < rollout_moves.size(); i++) {
             uint8_t acting_player = rollout_players[i];
-            uint8_t bucket = rollout_buckets[i];
+            size_t bucket = rollout_buckets[i];
             uint8_t move = rollout_moves[i];
             mast_visits[bucket][acting_player][move]++;
             int final_score = acting_player % 2 == 0 ? home_score : away_score;

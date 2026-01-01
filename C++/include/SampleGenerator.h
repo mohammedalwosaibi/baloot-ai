@@ -15,6 +15,7 @@ private:
     std::array<uint8_t, 8> current_player_cards_;
     std::array<uint8_t, 52> allowed_players_;
     std::array<uint8_t, 32> played_cards_;
+    std::array<uint8_t, 4> played_count_;
     std::vector<uint8_t> remaining_cards_;
     uint8_t player_id_;
     uint8_t num_of_played_cards_;

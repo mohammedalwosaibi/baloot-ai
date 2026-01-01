@@ -20,6 +20,10 @@ public:
     std::array<uint8_t, 4> last_trick() const;
     void set_player_cards(std::array<std::array<uint8_t, 8>, 4>& sample);
     void set_current_player(uint8_t player_id);
+    uint8_t last_card() const;
+    uint8_t currently_winning() const;
+    bool current_has_suit() const;
+    bool current_can_win() const;
 
 private:
     std::array<std::array<uint8_t, 8>, 4> player_cards_;

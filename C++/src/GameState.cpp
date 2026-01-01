@@ -206,3 +206,50 @@ std::array<uint8_t, 13> GameState::home_ranks() const { return home_ranks_; };
 
 std::array<uint8_t, 4> GameState::last_trick() const { return last_trick_; };
 
+uint8_t GameState::last_card() const {
+    if (num_of_played_cards_ % 4 == 0) return 52;
+    else return played_cards_[num_of_played_cards_ - 1];
+}
+
+uint8_t GameState::currently_winning() const {
+    uint8_t k = num_of_played_cards_ % 4;
+    if (k == 0) return current_player_ % 2;
+    uint8_t trick_leader_idx = num_of_played_cards_ - k;
+    uint8_t trick_suit = get_suit(played_cards_[trick_leader_idx]);
+    uint8_t max_rank = get_rank(played_cards_[trick_leader_idx]);
+    uint8_t cur_winner = player_indices_[trick_leader_idx];
+    for (uint8_t i = trick_leader_idx + 1; i < trick_leader_idx + k; i++) {
+        uint8_t card = played_cards_[i];
+        if (card != NO_CARD && get_suit(card) == trick_suit && RANK_ORDER[get_rank(card)] > RANK_ORDER[max_rank]) {
+            cur_winner = player_indices_[i];
+            max_rank = get_rank(card);
+        }
+    }
+    return cur_winner % 2; // 0 for home team winning; 1 for away team winning
+}
+
+bool GameState::current_has_suit() const {
+    uint8_t k = num_of_played_cards_ % 4;
+    if (k == 0) return true;
+    uint8_t trick_leader_idx = num_of_played_cards_ - k;
+    uint8_t trick_suit = get_suit(played_cards_[trick_leader_idx]);
+    return has_suit(player_cards_[current_player_], trick_suit);
+}
+
+bool GameState::current_can_win() const {
+    uint8_t k = num_of_played_cards_ % 4;
+    if (!current_has_suit()) return false;
+    if (k == 0) return true;
+
+    uint8_t trick_leader_idx = num_of_played_cards_ - k;
+    uint8_t trick_suit = get_suit(played_cards_[trick_leader_idx]);
+    uint8_t max_rank = get_rank(played_cards_[trick_leader_idx]);
+    for (uint8_t i = trick_leader_idx + 1; i < trick_leader_idx + k; i++) {
+        uint8_t card = played_cards_[i];
+        if (card != NO_CARD && get_suit(card) == trick_suit && RANK_ORDER[get_rank(card)] > RANK_ORDER[max_rank]) {
+            max_rank = get_rank(card);
+        }
+    }
+    for (uint8_t card : player_cards_[current_player_]) if (card != NO_CARD && get_suit(card) == trick_suit && RANK_ORDER[get_rank(card)] > RANK_ORDER[max_rank]) return true;
+    return false;
+}

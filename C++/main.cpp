@@ -56,7 +56,7 @@ int main() {
     // std::cout << "Player 0: " << RANK_NAMES[get_rank(best_move)] << SUIT_SYMBOLS[get_suit(best_move)] << std::endl;
 
     std::random_device rd;
-    std::mt19937 gen(rd());
+    std::mt19937 gen(12);
 
     std::array<uint8_t, 32> deck = {
         0, 6, 7, 8, 9, 10, 11, 12,
@@ -68,7 +68,9 @@ int main() {
     int home_score = 0;
     int away_score = 0;
 
-    uint8_t starting_player = 0;
+    uint8_t starting_player = 255;
+
+    int games = 0;
     
     while (true) {
         for (auto& e : transposition_table) {
@@ -96,51 +98,70 @@ int main() {
                     return SUIT_SYMBOLS[get_suit(a)] != SUIT_SYMBOLS[get_suit(b)] ? SUIT_SYMBOLS[get_suit(a)] > SUIT_SYMBOLS[get_suit(b)] : RANK_ORDER[get_rank(a)] > RANK_ORDER[get_rank(b)];
                 });
 
-        ISMCTS player_0_ismcts(player_cards[0], 0, player_cards);
-        ISMCTS player_1_ismcts(player_cards[1], 1, player_cards);
-        ISMCTS player_2_ismcts(player_cards[2], 2, player_cards);
-        ISMCTS player_3_ismcts(player_cards[3], 3, player_cards);
-
-        std::array<ISMCTS, 4> ismcts_arr = {player_0_ismcts, player_1_ismcts, player_2_ismcts, player_3_ismcts};
-
-        GameState game_state(player_cards);
-        
-        game_state.view_player_cards();
-
-        game_state.set_current_player(starting_player);
-        for (size_t i = 0; i < 4; i++) ismcts_arr[i].set_current_player(starting_player);
         starting_player = (starting_player + 1) % 4;
 
-        while (game_state.num_of_played_cards() != 32) {
-            if (game_state.current_player() % 2 == 0) {
-                ismcts_arr[game_state.current_player()].run(0.1);
-                uint8_t move = ismcts_arr[game_state.current_player()].best_move();
-                for (size_t i = 0; i < 4; i++) {
-                    ismcts_arr[i].play_card(move, game_state.current_player());
-                }
-                std::cout << "Player " << +game_state.current_player() << ": " << RANK_NAMES[get_rank(move)] << SUIT_SYMBOLS[get_suit(move)] << std::endl;
-                for (uint8_t& card : player_cards[game_state.current_player()]) if (card == move) card = NO_CARD;
+        for (int trial = 0; trial < 2; trial++) {
+            std::array<std::array<uint8_t, 8>, 4> player_cards_copy = player_cards;
 
-                game_state.make_move(move);
-            } else {
-                ismcts_arr[game_state.current_player()].run(0.1);
-                uint8_t move = ismcts_arr[game_state.current_player()].best_move();
-                for (size_t i = 0; i < 4; i++) {
-                    ismcts_arr[i].play_card(move, game_state.current_player());
-                }
-                std::cout << "Player " << +game_state.current_player() << ": " << RANK_NAMES[get_rank(move)] << SUIT_SYMBOLS[get_suit(move)] << std::endl;
-                for (uint8_t& card : player_cards[game_state.current_player()]) if (card == move) card = NO_CARD;
-
-                game_state.make_move(move);
+            if (trial == 1) {
+                player_cards_copy = {player_cards_copy[3], player_cards_copy[0], player_cards_copy[1], player_cards_copy[2]};
             }
-            if (game_state.num_of_played_cards() % 4 == 0) std::cout << "\n";
-        }
 
-        std::cout << "Score: " << +game_state.evaluate() << std::endl;
-        home_score += game_state.evaluate();
-        away_score += (130 - game_state.evaluate());
-        std::cout << "Home Score: " << home_score << std::endl;
-        std::cout << "Away Score: " << away_score << std::endl;
+            ISMCTS player_0_ismcts(player_cards_copy[0], 0, player_cards_copy);
+            ISMCTS player_1_ismcts(player_cards_copy[1], 1, player_cards_copy);
+            ISMCTS player_2_ismcts(player_cards_copy[2], 2, player_cards_copy);
+            ISMCTS player_3_ismcts(player_cards_copy[3], 3, player_cards_copy);
+
+            std::array<ISMCTS, 4> ismcts_arr = {player_0_ismcts, player_1_ismcts, player_2_ismcts, player_3_ismcts};
+
+            GameState game_state(player_cards_copy);
+            
+            game_state.view_player_cards();
+
+            uint8_t start = static_cast<uint8_t>((starting_player + trial) % 4);
+
+            game_state.set_current_player(start);
+            for (size_t i = 0; i < 4; i++) ismcts_arr[i].set_current_player(start);
+
+            while (game_state.num_of_played_cards() != 32) {
+                if (game_state.current_player() == 0) {
+                    ismcts_arr[game_state.current_player()].run(3);
+                    uint8_t move = ismcts_arr[game_state.current_player()].best_move();
+                    for (size_t i = 0; i < 4; i++) {
+                        ismcts_arr[i].play_card(move, game_state.current_player());
+                    }
+                    std::cout << "Player " << +game_state.current_player() << ": " << RANK_NAMES[get_rank(move)] << SUIT_SYMBOLS[get_suit(move)] << std::endl;
+                    for (uint8_t& card : player_cards_copy[game_state.current_player()]) if (card == move) card = NO_CARD;
+
+                    game_state.make_move(move);
+                } else {
+                    ismcts_arr[game_state.current_player()].run(3);
+                    uint8_t move = ismcts_arr[game_state.current_player()].best_move();
+                    for (size_t i = 0; i < 4; i++) {
+                        ismcts_arr[i].play_card(move, game_state.current_player());
+                    }
+                    std::cout << "Player " << +game_state.current_player() << ": " << RANK_NAMES[get_rank(move)] << SUIT_SYMBOLS[get_suit(move)] << std::endl;
+                    for (uint8_t& card : player_cards_copy[game_state.current_player()]) if (card == move) card = NO_CARD;
+
+                    game_state.make_move(move);
+                }
+                if (game_state.num_of_played_cards() % 4 == 0) std::cout << "\n";
+            }
+
+            int cur_home = game_state.evaluate();
+            int cur_away = 130 - cur_home;
+
+            std::cout << "Round Score: " << cur_home << std::endl;
+            home_score += cur_home;
+            away_score += cur_away;
+            std::cout << "Home Score: " << home_score << std::endl;
+            std::cout << "Away Score: " << away_score << std::endl;
+            std::cout << std::fixed << std::setprecision(2);
+            std::cout << "Win Rate: " << home_score * 100.0f / (home_score + away_score) << std::endl;
+            games++;
+            std::cout << "Games: " << games << std::endl;
+
+        }
     }
 
     return 0;

@@ -5,7 +5,7 @@
 #include <string_view>
 
 inline constexpr uint8_t NO_CARD = 255;
-inline constexpr size_t TABLE_SIZE = 1 << 20;
+inline constexpr size_t TABLE_SIZE = 1 << 21;
 
 inline constexpr std::array<uint8_t, 13> RANK_VALUES = {11, 0, 0, 0, 0, 0, 0, 0, 0, 10, 2, 3, 4};
 inline constexpr std::array<uint8_t, 13> RANK_ORDER = {7, 0, 0, 0, 0, 0, 0, 1, 2, 6, 3, 4, 5};
