@@ -3,6 +3,8 @@
 #include "constants.h"
 #include <iostream>
 
+static constexpr std::array<uint8_t, 8> RANKS_DESC = {0, 9, 12, 11, 10, 8, 7, 6};
+
 GameState::GameState(const std::array<std::array<uint8_t, 8>, 4>& player_cards) :
 player_cards_(player_cards),
 played_cards_{},
@@ -11,6 +13,8 @@ card_indices_{},
 trick_scores_{},
 home_ranks_{},
 last_trick_{},
+played_rank_mask_per_suit_{},
+highest_remaining_rank_per_suit_{},
 current_player_(0),
 num_of_played_cards_(0),
 home_score_(0),
@@ -20,6 +24,10 @@ hash_(0)
     init_hashes();
     hash_ ^= PLAYER_KEY[current_player_];
     hash_ ^= SCORE_KEY[home_score_];
+    played_cards_.fill(NO_CARD);
+
+    played_rank_mask_per_suit_.fill(0);
+    for (int s = 0; s < 4; ++s) highest_remaining_rank_per_suit_[s] = RANKS_DESC[0];
 
     for (size_t i = 0; i < 4; i++) {
         for (size_t j = 0; j < 8; j++) {
@@ -49,6 +57,20 @@ void GameState::make_move(uint8_t card) {
     for (size_t i = 0; i < 8; i++) {
         uint8_t curr = current_player_cards[i];
         if (curr == card) {
+            uint8_t suit = get_suit(card);
+            uint8_t rank = get_rank(card);
+
+            played_rank_mask_per_suit_[suit] |= (uint16_t)(1u << rank);
+
+            if (highest_remaining_rank_per_suit_[suit] == rank) {
+                uint16_t mask = played_rank_mask_per_suit_[suit];
+                uint8_t new_hi = -1;
+                for (uint8_t r : RANKS_DESC) {
+                    if ((mask & (1u << r)) == 0) { new_hi = r; break; }
+                }
+                highest_remaining_rank_per_suit_[suit] = new_hi;
+            }
+
             found = true;
             if (current_player_ == 0 || current_player_ == 2) home_ranks_[get_rank(card)]--;
 
@@ -105,6 +127,7 @@ void GameState::undo_move() {
     hash_ ^= PLAYER_KEY[current_player_];
 
     if (current_player_ == 0 || current_player_ == 2) home_ranks_[get_rank(played_cards_[num_of_played_cards_])]++;
+    played_cards_[num_of_played_cards_] = NO_CARD;
 }
 
 uint8_t GameState::get_legal_moves(std::array<uint8_t, 8>& moves) {
@@ -251,5 +274,36 @@ bool GameState::current_can_win() const {
         }
     }
     for (uint8_t card : player_cards_[current_player_]) if (card != NO_CARD && get_suit(card) == trick_suit && RANK_ORDER[get_rank(card)] > RANK_ORDER[max_rank]) return true;
+    return false;
+}
+
+bool GameState::guaranteed_winner() const {
+    uint8_t k = num_of_played_cards_ % 4;
+    if (k == 0) return false;
+
+    uint8_t leader_idx = num_of_played_cards_ - k;
+    uint8_t suit = get_suit(played_cards_[leader_idx]);
+
+    uint16_t mask_before = played_rank_mask_per_suit_[suit];
+    for (uint8_t i = leader_idx; i < leader_idx + k; i++) {
+        uint8_t card = played_cards_[i];
+        if (get_suit(card) == suit) {
+            mask_before &= (uint16_t) ~(1u << get_rank(card));
+        }
+    }
+
+    int8_t highest_before = -1;
+    for (uint8_t r : RANKS_DESC) {
+        if ((mask_before & (1u << r)) == 0) {
+            highest_before = r;
+            break;
+        }
+    }
+    if (highest_before == -1) return false;
+
+    for (uint8_t i = leader_idx; i < leader_idx + k; i++) {
+        uint8_t card = played_cards_[i];
+        if (get_suit(card) == suit && get_rank(card) == highest_before) return true;
+    }
     return false;
 }

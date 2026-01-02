@@ -56,7 +56,7 @@ int main() {
     // std::cout << "Player 0: " << RANK_NAMES[get_rank(best_move)] << SUIT_SYMBOLS[get_suit(best_move)] << std::endl;
 
     std::random_device rd;
-    std::mt19937 gen(12);
+    std::mt19937 gen(100);
 
     std::array<uint8_t, 32> deck = {
         0, 6, 7, 8, 9, 10, 11, 12,
@@ -124,9 +124,22 @@ int main() {
             for (size_t i = 0; i < 4; i++) ismcts_arr[i].set_current_player(start);
 
             while (game_state.num_of_played_cards() != 32) {
-                if (game_state.current_player() == 0) {
-                    ismcts_arr[game_state.current_player()].run(3);
-                    uint8_t move = ismcts_arr[game_state.current_player()].best_move();
+                if (game_state.num_of_played_cards() < 16 || game_state.current_player() % 2 == 0) {
+                    
+                    std::array<uint8_t, 8> moves;
+                    uint8_t num_moves = game_state.get_legal_moves(moves);
+
+                    uint8_t move;
+                    if (num_moves == 1) {
+                        move = moves[0];
+                    } else {
+                        for (uint8_t t = 1; t <= std::ceil((double) (32 - game_state.num_of_played_cards()) / 4) - 1; t++) {
+                            minimax(game_state, t, 0, 130, game_state.current_player() % 2 == 0, 0);
+                        }
+
+                        move = pv_table[0][0];
+                    }
+
                     for (size_t i = 0; i < 4; i++) {
                         ismcts_arr[i].play_card(move, game_state.current_player());
                     }
@@ -135,7 +148,7 @@ int main() {
 
                     game_state.make_move(move);
                 } else {
-                    ismcts_arr[game_state.current_player()].run(3);
+                    ismcts_arr[game_state.current_player()].run(1);
                     uint8_t move = ismcts_arr[game_state.current_player()].best_move();
                     for (size_t i = 0; i < 4; i++) {
                         ismcts_arr[i].play_card(move, game_state.current_player());
@@ -160,7 +173,6 @@ int main() {
             std::cout << "Win Rate: " << home_score * 100.0f / (home_score + away_score) << std::endl;
             games++;
             std::cout << "Games: " << games << std::endl;
-
         }
     }
 

@@ -24,6 +24,7 @@ public:
     uint8_t currently_winning() const;
     bool current_has_suit() const;
     bool current_can_win() const;
+    bool guaranteed_winner() const;
 
 private:
     std::array<std::array<uint8_t, 8>, 4> player_cards_;
@@ -33,6 +34,8 @@ private:
     std::array<uint8_t, 8> trick_scores_;
     std::array<uint8_t, 13> home_ranks_;
     std::array<uint8_t, 4> last_trick_;
+    std::array<uint16_t, 4> played_rank_mask_per_suit_;
+    std::array<int8_t, 4> highest_remaining_rank_per_suit_;
     
     uint8_t current_player_;
     uint8_t num_of_played_cards_;
